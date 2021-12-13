@@ -4,11 +4,13 @@
 
 |      | 描述                                         | url                                                          |
 | ---- | -------------------------------------------- | ------------------------------------------------------------ |
+|      | k8s+监控                                     | [主要是运维视角介绍k8s+监控](https://cloud.tencent.com/developer/user/5908455) |
 |      | 石臻臻:滴滴kafka专家                         | [kafka运维脚本,kafka源码分析](https://www.szzdzhp.com/kafka/)<br />[滴滴kafka知识星球](https://wx.zsxq.com/dweb2/index/group/28855282812811) |
 |      | 运维相关组件基础文档，以及配置文件参数描述等 | https://wiki.eryajf.net/ops/#%E5%86%99%E4%BD%9C%E6%84%9F%E6%80%80 |
+|      | 有些es集群和灾备的文章,看下是否可以          | [es集群和灾备的文章](https://cloud.tencent.com/developer/user/6583491)<br />[es](https://cloud.tencent.com/developer/column/4008)<br />[es](https://cloud.tencent.com/developer/column/90442/tag-10307)<br />[es-运维](https://cloud.tencent.com/developer/column/84934/tag-10307) |
 |      | 运维文档，还有frpc内网穿透等文档             | https://www.fenghong.tech/blog/ops/frp-get-realip/           |
 |      | 徐亚松:监控,k8s原理                          | http://www.xuyasong.com/?paged=2&P=1717                      |
-|      | prometheus的配置参数详解                     | [prometheus.ymal参数详解](https://www.cnblogs.com/rexcheny/p/10675891.html) |
+|      | prometheus                                   | [prometheus.ymal参数详解](https://www.cnblogs.com/rexcheny/p/10675891.html)<br />[prometheus](https://cloud.tencent.com/developer/user/7471804) |
 |      | apollo                                       | [apollo官方文档](https://www.apolloconfig.com/#/zh/README)   |
 |      | k8s+云原生教程                               | [k8s+云原生教程](https://jimmysong.io/kubernetes-handbook/guide/kubelet-authentication-authorization.html) |
 |      | Elastic中文社区教程                          | [ES教程](https://elasticstack.blog.csdn.net/article/details/102728604) |

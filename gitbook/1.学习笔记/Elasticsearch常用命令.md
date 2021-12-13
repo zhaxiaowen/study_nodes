@@ -2,6 +2,8 @@
 
 #### [elasticsearch运维指南](https://cloud.tencent.com/developer/article/1836799)
 
+[es集群运维常用命令](https://cloud.tencent.com/developer/article/1910980)
+
 ## 一、CRUD
 
 #### 常用查询指令
@@ -451,4 +453,5 @@ PUT /index-name/_settings  {"index":{"refresh_interval" : "30s"}} #调整索引r
 PUT /index-name/_settings  {"index":{"translog.durability" : "async","translog.flush_threshold_size":"1gb"}}  #调整索引translog flush策略
 ```
 
-#### 
+
+
