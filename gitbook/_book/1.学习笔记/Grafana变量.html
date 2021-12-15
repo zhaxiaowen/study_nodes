@@ -1,0 +1,1460 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Grafana变量 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="FileBeat.html" />
+    
+    
+    <link rel="prev" href="PromQL语句.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    1.学习笔记
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="总结.html">
+            
+                <a href="总结.html">
+            
+                    
+                    总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="好的blog和git记录.html">
+            
+                <a href="好的blog和git记录.html">
+            
+                    
+                    好的blog和git记录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="常用指令.html">
+            
+                <a href="常用指令.html">
+            
+                    
+                    常用指令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="k8s.html">
+            
+                <a href="k8s.html">
+            
+                    
+                    k8s
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="Elasticsearch.html">
+            
+                <a href="Elasticsearch.html">
+            
+                    
+                    Elasticsearch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="Elasticsearch常用命令.html">
+            
+                <a href="Elasticsearch常用命令.html">
+            
+                    
+                    Elasticsearch常用命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="Nginx.html">
+            
+                <a href="Nginx.html">
+            
+                    
+                    Nginx常见用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="Nginx原理.html">
+            
+                <a href="Nginx原理.html">
+            
+                    
+                    Nginx原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="Kafka.html">
+            
+                <a href="Kafka.html">
+            
+                    
+                    Kafka概念和参数描述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="Kafka常用命令.html">
+            
+                <a href="Kafka常用命令.html">
+            
+                    
+                    Kafka常用命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="Redis.html">
+            
+                <a href="Redis.html">
+            
+                    
+                    Redis
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="Redis常用命令.html">
+            
+                <a href="Redis常用命令.html">
+            
+                    
+                    Redis常用命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.13" data-path="RabbitMQ.html">
+            
+                <a href="RabbitMQ.html">
+            
+                    
+                    RabbitMQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.14" data-path="JAVA.html">
+            
+                <a href="JAVA.html">
+            
+                    
+                    JAVA
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.15" data-path="Ansible.html">
+            
+                <a href="Ansible.html">
+            
+                    
+                    Ansible
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.16" data-path="Zookeeper.html">
+            
+                <a href="Zookeeper.html">
+            
+                    
+                    Zookeeper
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.17" data-path="etcd.html">
+            
+                <a href="etcd.html">
+            
+                    
+                    ETCD入门指南
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.18" data-path="Apollo.html">
+            
+                <a href="Apollo.html">
+            
+                    
+                    Apollo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.19" data-path="Prometheus + Grafana + AlertManager + cAdvisor.html">
+            
+                <a href="Prometheus + Grafana + AlertManager + cAdvisor.html">
+            
+                    
+                    Prometheus + Grafana + AlertManager + cAdvisor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.20" data-path="PromQL语句.html">
+            
+                <a href="PromQL语句.html">
+            
+                    
+                    PromQL语句
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.21" data-path="Grafana变量.html">
+            
+                <a href="Grafana变量.html">
+            
+                    
+                    Grafana变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.22" data-path="FileBeat.html">
+            
+                <a href="FileBeat.html">
+            
+                    
+                    FileBeat
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.23" data-path="Keepalived.html">
+            
+                <a href="Keepalived.html">
+            
+                    
+                    Keepalived
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.24" data-path="监控.html">
+            
+                <a href="监控.html">
+            
+                    
+                    监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.25" data-path="Consul.html">
+            
+                <a href="Consul.html">
+            
+                    
+                    Consul
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.26" data-path="Gitbook.html">
+            
+                <a href="Gitbook.html">
+            
+                    
+                    Gitbook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.27" data-path="Git.html">
+            
+                <a href="Git.html">
+            
+                    
+                    Git
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../2.故障处理方法/">
+            
+                <a href="../2.故障处理方法/">
+            
+                    
+                    2.故障处理方法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../2.故障处理方法/常用问题定位工具总结.html">
+            
+                <a href="../2.故障处理方法/常用问题定位工具总结.html">
+            
+                    
+                    常用问题定位工具总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../2.故障处理方法/磁盘问题定位.html">
+            
+                <a href="../2.故障处理方法/磁盘问题定位.html">
+            
+                    
+                    磁盘问题定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../2.故障处理方法/JAVA问题定位.html">
+            
+                <a href="../2.故障处理方法/JAVA问题定位.html">
+            
+                    
+                    JAVA问题定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../2.故障处理方法/网络问题定位.html">
+            
+                <a href="../2.故障处理方法/网络问题定位.html">
+            
+                    
+                    网络问题定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../2.故障处理方法/CPU问题定位.html">
+            
+                <a href="../2.故障处理方法/CPU问题定位.html">
+            
+                    
+                    CPU问题定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../3.现网案例/">
+            
+                <a href="../3.现网案例/">
+            
+                    
+                    3.现网案例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../3.现网案例/Cassandra.html">
+            
+                <a href="../3.现网案例/Cassandra.html">
+            
+                    
+                    Cassandra
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../3.现网案例/mq用错插件.html">
+            
+                <a href="../3.现网案例/mq用错插件.html">
+            
+                    
+                    mq用错插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../3.现网案例/Kafka故障排查.html">
+            
+                <a href="../3.现网案例/Kafka故障排查.html">
+            
+                    
+                    Kafka故障排查
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../3.现网案例/Kafka堆积.html">
+            
+                <a href="../3.现网案例/Kafka堆积.html">
+            
+                    
+                    Kafka堆积
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../3.现网案例/Kafka扩容节点.html">
+            
+                <a href="../3.现网案例/Kafka扩容节点.html">
+            
+                    
+                    Kafka扩容节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../3.现网案例/Kafka分区leader迁移案例.html">
+            
+                <a href="../3.现网案例/Kafka分区leader迁移案例.html">
+            
+                    
+                    Kafka分区leader迁移案例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../3.现网案例/ES集群主分片未分配.html">
+            
+                <a href="../3.现网案例/ES集群主分片未分配.html">
+            
+                    
+                    ES集群主分片未分配
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../3.现网案例/ES hot_thread.html">
+            
+                <a href="../3.现网案例/ES hot_thread.html">
+            
+                    
+                    ES hot_thread
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../3.现网案例/es+kafka堆积.html">
+            
+                <a href="../3.现网案例/es+kafka堆积.html">
+            
+                    
+                    es+kafka堆积
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../3.现网案例/kibana监控数据断点问题.html">
+            
+                <a href="../3.现网案例/kibana监控数据断点问题.html">
+            
+                    
+                    kibana监控数据断点问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../3.现网案例/redis-cluster扩容,时延变高.html">
+            
+                <a href="../3.现网案例/redis-cluster扩容,时延变高.html">
+            
+                    
+                    redis-cluster扩容,时延变高
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../3.现网案例/redis雪崩.html">
+            
+                <a href="../3.现网案例/redis雪崩.html">
+            
+                    
+                    redis雪崩
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.13" data-path="../3.现网案例/tcpdump分析redis读超时.html">
+            
+                <a href="../3.现网案例/tcpdump分析redis读超时.html">
+            
+                    
+                    tcpdump分析redis读超时
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.14" data-path="../3.现网案例/Nginx报499,5xx.html">
+            
+                <a href="../3.现网案例/Nginx报499,5xx.html">
+            
+                    
+                    Nginx报499,5xx
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.15" data-path="../3.现网案例/部署APM监控agent故障.html">
+            
+                <a href="../3.现网案例/部署APM监控agent故障.html">
+            
+                    
+                    部署APM监控agent故障
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.16" data-path="../3.现网案例/大量close_wait,服务无法访问.html">
+            
+                <a href="../3.现网案例/大量close_wait,服务无法访问.html">
+            
+                    
+                    大量close_wait,服务无法访问
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.17" data-path="../3.现网案例/应用报大量read timeout.html">
+            
+                <a href="../3.现网案例/应用报大量read timeout.html">
+            
+                    
+                    应用报大量read timeout
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.18" data-path="../3.现网案例/nslookup ok but ping fail.html">
+            
+                <a href="../3.现网案例/nslookup ok but ping fail.html">
+            
+                    
+                    nslookup ok but ping fail
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.19" data-path="../3.现网案例/测试环境迁移到k8s.html">
+            
+                <a href="../3.现网案例/测试环境迁移到k8s.html">
+            
+                    
+                    测试环境迁移到k8s
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../4.面试问题总结/">
+            
+                <a href="../4.面试问题总结/">
+            
+                    
+                    4.面试问题总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../5.组件部署/">
+            
+                <a href="../5.组件部署/">
+            
+                    
+                    5.组件部署
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../5.组件部署/Prometheus和Grafana.html">
+            
+                <a href="../5.组件部署/Prometheus和Grafana.html">
+            
+                    
+                    Prometheus和Grafana
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../5.组件部署/K8s部署Prometheus.html">
+            
+                <a href="../5.组件部署/K8s部署Prometheus.html">
+            
+                    
+                    K8s部署Prometheus
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../5.组件部署/K8S部署redis-cluster.html">
+            
+                <a href="../5.组件部署/K8S部署redis-cluster.html">
+            
+                    
+                    K8S部署redis-cluster
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../5.组件部署/K8s部署EFK.html">
+            
+                <a href="../5.组件部署/K8s部署EFK.html">
+            
+                    
+                    K8s部署EFK
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../5.组件部署/Prometheus监控K8s.html">
+            
+                <a href="../5.组件部署/Prometheus监控K8s.html">
+            
+                    
+                    Prometheus监控K8s
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../5.组件部署/部署K8s1.21.html">
+            
+                <a href="../5.组件部署/部署K8s1.21.html">
+            
+                    
+                    部署K8s1.21
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../5.组件部署/ES集群部署.html">
+            
+                <a href="../5.组件部署/ES集群部署.html">
+            
+                    
+                    ES集群部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Grafana变量</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <table>
+<thead>
+<tr>
+<th><strong>key</strong></th>
+<th><strong>value</strong></th>
+<th><strong>desicrible</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>&#x4E3B;&#x673A;&#x57FA;&#x7840;&#x76D1;&#x63A7;</td>
+<td>&#x6A21;&#x677F;&#x540D;</td>
+</tr>
+<tr>
+<td>description</td>
+<td>&#x5305;&#x542B;&#xFF1A;CPU &#x5185;&#x5B58; &#x78C1;&#x76D8; IO &#x7F51;&#x7EDC; &#x7B49;&#x76D1;&#x63A7;&#x6307;&#x6807;</td>
+<td>&#x63CF;&#x8FF0;&#x6A21;&#x677F;&#x7684;&#x5C55;&#x793A;&#x9879;</td>
+</tr>
+<tr>
+<td>Tags</td>
+<td>Prometheus</td>
+<td>&#x8BBE;&#x7F6E;&#x6807;&#x7B7E;</td>
+</tr>
+<tr>
+<td>Timezone</td>
+<td>Local browser time</td>
+<td>&#x672C;&#x5730;&#x6D4F;&#x89C8;&#x5668;&#x65F6;&#x95F4;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="&#x53D8;&#x91CF;">&#x53D8;&#x91CF;</h4>
+<h4 id="job">$job</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>key</strong></th>
+<th style="text-align:left"><strong>value</strong></th>
+<th style="text-align:left"><strong>desicrible</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Name</td>
+<td style="text-align:left">job</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Type</td>
+<td style="text-align:left">Query</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Label</td>
+<td style="text-align:left">&#x5206;&#x7EC4;&#x540D;&#x79F0;</td>
+<td style="text-align:left">&#x663E;&#x793A;&#x5728;&#x5DE6;&#x4E0A;&#x89D2;&#x7684;&#x5206;&#x7EC4;&#x4FE1;&#x606F;&#xFF0C;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x6570;&#x636E;&#x6E90;</td>
+</tr>
+<tr>
+<td style="text-align:left">Data source</td>
+<td style="text-align:left">Prometheus</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Refresh</td>
+<td style="text-align:left">On Dashboard Load</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">Query</td>
+<td style="text-align:left">label_values(up,job)</td>
+<td style="text-align:left">job&#x5BF9;&#x5E94;&#x7684;prometheus&#x91CC;&#x4E0D;&#x540C;&#x7684;&#x76D1;&#x63A7;&#x4EFB;&#x52A1;&#xFF0C;redis/kafka&#x7B49;</td>
+</tr>
+</tbody>
+</table>
+<h4 id="node">$node</h4>
+<table>
+<thead>
+<tr>
+<th><strong>key</strong></th>
+<th><strong>value</strong></th>
+<th><strong>desicrible</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>node</td>
+<td></td>
+</tr>
+<tr>
+<td>Label</td>
+<td>IP&#x5730;&#x5740;</td>
+<td>&#x663E;&#x793A;&#x5728;&#x5DE6;&#x4E0A;&#x89D2;&#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x5BF9;&#x5E94;node&#x8282;&#x70B9;</td>
+</tr>
+<tr>
+<td>Refresh</td>
+<td>On Dashboard Load</td>
+<td></td>
+</tr>
+<tr>
+<td>Query</td>
+<td>label_values(up{job=&quot;$job&quot;},instance)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="hostname">$hostname</h4>
+<table>
+<thead>
+<tr>
+<th><strong>key</strong></th>
+<th><strong>value</strong></th>
+<th><strong>desicrible</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>hostname</td>
+<td>&#x4E3B;&#x673A;&#x540D;</td>
+</tr>
+<tr>
+<td>Label</td>
+<td>&#x4E3B;&#x673A;&#x540D;</td>
+<td></td>
+</tr>
+<tr>
+<td>Query</td>
+<td>label_values(node_uname_info{job=~&quot;$job&quot;},nodename)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="maxmount">$maxmount</h4>
+<table>
+<thead>
+<tr>
+<th><strong>key</strong></th>
+<th style="text-align:left"><strong>value</strong></th>
+<th><strong>desicrible</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td style="text-align:left">maxmount</td>
+<td></td>
+</tr>
+<tr>
+<td>Type</td>
+<td style="text-align:left">Query</td>
+<td></td>
+</tr>
+<tr>
+<td>Query</td>
+<td style="text-align:left">query_result(topk(1,sort_desc (max(node_filesystem_size_bytes{instance=~&apos;$node&apos;,fstype=~&quot;ext4\</td>
+<td>xfs&quot;}) by (mountpoint))))</td>
+<td></td>
+</tr>
+<tr>
+<td>Regex</td>
+<td style="text-align:left">/.<em>\&quot;(.</em>)\&quot;.*/</td>
+<td></td>
+</tr>
+<tr>
+<td>Sort</td>
+<td style="text-align:left">Disabled</td>
+</tr>
+</tbody>
+</table>
+<h4 id="interval">$interval</h4>
+<table>
+<thead>
+<tr>
+<th><strong>key</strong></th>
+<th><strong>value</strong></th>
+<th><strong>desicrible</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>interval</td>
+<td></td>
+</tr>
+<tr>
+<td>Label</td>
+<td>&#x65F6;&#x95F4;&#x95F4;&#x9694;</td>
+<td></td>
+</tr>
+<tr>
+<td>Values</td>
+<td>30s,1m,2m,3m,5m,10m,30m</td>
+</tr>
+</tbody>
+</table>
+<h4 id="device">$device</h4>
+<table>
+<thead>
+<tr>
+<th><strong>key</strong></th>
+<th><strong>value</strong></th>
+<th><strong>desicrible</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>device</td>
+<td></td>
+</tr>
+<tr>
+<td>Label</td>
+<td>&#x7F51;&#x5361;</td>
+<td></td>
+</tr>
+<tr>
+<td>Query</td>
+<td>label_values(node_network_info{origin_prometheus=~&quot;$origin_prometheus&quot;,device!~&apos;tap.*\</td>
+<td>veth.*\</td>
+<td>br.*\</td>
+<td>docker.*\</td>
+<td>virbr.*\</td>
+<td>lo.*\</td>
+<td>cni.*&apos;},device)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="nic">$nic</h4>
+<table>
+<thead>
+<tr>
+<th><strong>key</strong></th>
+<th><strong>value</strong></th>
+<th><strong>desicrible</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>nic</td>
+<td></td>
+</tr>
+<tr>
+<td>Type</td>
+<td>Query</td>
+<td></td>
+</tr>
+<tr>
+<td>Label</td>
+<td>&#x7F51;&#x5361;</td>
+<td></td>
+</tr>
+<tr>
+<td>Hide</td>
+<td>Variable</td>
+<td></td>
+</tr>
+<tr>
+<td>Query</td>
+<td>query_result(node_network_up{interface=&quot;eth0&quot;})</td>
+<td></td>
+</tr>
+<tr>
+<td>Regex</td>
+<td>/interface=&quot;(\S*)&quot;,job/</td>
+<td></td>
+</tr>
+<tr>
+<td>Sort</td>
+<td>Disabled</td>
+</tr>
+</tbody>
+</table>
+<h4 id="dashboard&#x586B;&#x5199;&#x53C2;&#x6570;">Dashboard&#x586B;&#x5199;&#x53C2;&#x6570;</h4>
+<table>
+<thead>
+<tr>
+<th>&#x53C2;&#x6570;</th>
+<th>value</th>
+<th>desicrible</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Query</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Metrics</td>
+<td></td>
+<td>&#x67E5;&#x8BE2;&#x8BED;&#x53E5;</td>
+</tr>
+<tr>
+<td>Legend</td>
+<td></td>
+<td>&#x56FE;&#x4F8B;</td>
+</tr>
+<tr>
+<td>Min step</td>
+<td></td>
+<td>&#x6700;&#x5C0F;&#x6B65;&#x957F;</td>
+</tr>
+<tr>
+<td>Resolution</td>
+<td>1/1  1/2</td>
+<td>&#x89E3;&#x6790;&#x5EA6;(&#x6570;&#x636E;&#x663E;&#x793A;&#x7CBE;&#x7EC6;&#x5EA6;)</td>
+</tr>
+<tr>
+<td>Format</td>
+<td>time series&#xFF08;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#xFF09; Heatmap(&#x70ED;&#x56FE;)</td>
+<td></td>
+</tr>
+<tr>
+<td>Instance</td>
+<td>open/close</td>
+<td></td>
+</tr>
+<tr>
+<td>Min time interval</td>
+<td></td>
+<td>&#x6700;&#x5C0F;&#x65F6;&#x95F4;&#x95F4;&#x9694;</td>
+</tr>
+<tr>
+<td>Relative time</td>
+<td></td>
+<td>&#x76F8;&#x5BF9;&#x65F6;&#x95F4;</td>
+</tr>
+<tr>
+<td>Time shift</td>
+<td></td>
+<td>&#x65F6;&#x95F4;&#x504F;&#x79FB;</td>
+</tr>
+<tr>
+<td><strong>Visualization</strong></td>
+<td>Graph(&#x56FE;&#x5F62;)Singlestat(&#x5355;&#x6001;)Gauge(&#x6D4B;&#x91CF;)Bar Gauge(&#x6761;&#x89C4;)Table(&#x8868;&#x683C;)Text(&#x6587;&#x672C;)Heatmap(&#x70ED;&#x56FE;)Alert List(&#x8B66;&#x62A5;&#x5217;&#x8868;)Dashboard list(&#x4EEA;&#x8868;&#x76D8;&#x5217;&#x8868;)Logs(&#x65E5;&#x5FD7;)Plugin list(&#x63D2;&#x4EF6;&#x5217;&#x8868;)</td>
+<td></td>
+</tr>
+<tr>
+<td>Show</td>
+<td>current minmax</td>
+<td></td>
+</tr>
+<tr>
+<td>Prefix</td>
+<td></td>
+<td>&#x5B57;&#x9996;</td>
+</tr>
+<tr>
+<td>Postfix</td>
+<td></td>
+<td>&#x540E;&#x7F00;</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td></td>
+<td>&#x5355;&#x5143;</td>
+</tr>
+<tr>
+<td>Font size</td>
+<td></td>
+<td>&#x5B57;&#x4F53;&#x5927;&#x5C0F;</td>
+</tr>
+<tr>
+<td>Type</td>
+<td>value to textrange to text</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>General</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Title</td>
+<td>&#x7CFB;&#x7EDF;&#x8FD0;&#x884C;&#x65F6;&#x95F4;</td>
+<td>dashboard&#x540D;&#x79F0;</td>
+</tr>
+<tr>
+<td>Repeat</td>
+<td></td>
+<td>&#x91CD;&#x590D;</td>
+</tr>
+</tbody>
+</table>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="PromQL语句.html" class="navigation navigation-prev " aria-label="Previous page: PromQL语句">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="FileBeat.html" class="navigation navigation-next " aria-label="Next page: FileBeat">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Grafana变量","level":"1.2.21","depth":2,"next":{"title":"FileBeat","level":"1.2.22","depth":2,"path":"1.学习笔记/FileBeat.md","ref":"1.学习笔记/FileBeat.md","articles":[]},"previous":{"title":"PromQL语句","level":"1.2.20","depth":2,"path":"1.学习笔记/PromQL语句.md","ref":"1.学习笔记/PromQL语句.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"1.学习笔记/Grafana变量.md","mtime":"2021-12-08T08:06:41.649Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-15T06:21:43.883Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

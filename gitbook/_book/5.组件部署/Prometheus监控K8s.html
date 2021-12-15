@@ -1,0 +1,1330 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Prometheus监控K8s · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="部署K8s1.21.html" />
+    
+    
+    <link rel="prev" href="K8s部署EFK.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../1.学习笔记/">
+            
+                <a href="../1.学习笔记/">
+            
+                    
+                    1.学习笔记
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../1.学习笔记/总结.html">
+            
+                <a href="../1.学习笔记/总结.html">
+            
+                    
+                    总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../1.学习笔记/好的blog和git记录.html">
+            
+                <a href="../1.学习笔记/好的blog和git记录.html">
+            
+                    
+                    好的blog和git记录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../1.学习笔记/常用指令.html">
+            
+                <a href="../1.学习笔记/常用指令.html">
+            
+                    
+                    常用指令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../1.学习笔记/k8s.html">
+            
+                <a href="../1.学习笔记/k8s.html">
+            
+                    
+                    k8s
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../1.学习笔记/Elasticsearch.html">
+            
+                <a href="../1.学习笔记/Elasticsearch.html">
+            
+                    
+                    Elasticsearch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="../1.学习笔记/Elasticsearch常用命令.html">
+            
+                <a href="../1.学习笔记/Elasticsearch常用命令.html">
+            
+                    
+                    Elasticsearch常用命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="../1.学习笔记/Nginx.html">
+            
+                <a href="../1.学习笔记/Nginx.html">
+            
+                    
+                    Nginx常见用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="../1.学习笔记/Nginx原理.html">
+            
+                <a href="../1.学习笔记/Nginx原理.html">
+            
+                    
+                    Nginx原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="../1.学习笔记/Kafka.html">
+            
+                <a href="../1.学习笔记/Kafka.html">
+            
+                    
+                    Kafka概念和参数描述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="../1.学习笔记/Kafka常用命令.html">
+            
+                <a href="../1.学习笔记/Kafka常用命令.html">
+            
+                    
+                    Kafka常用命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="../1.学习笔记/Redis.html">
+            
+                <a href="../1.学习笔记/Redis.html">
+            
+                    
+                    Redis
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="../1.学习笔记/Redis常用命令.html">
+            
+                <a href="../1.学习笔记/Redis常用命令.html">
+            
+                    
+                    Redis常用命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.13" data-path="../1.学习笔记/RabbitMQ.html">
+            
+                <a href="../1.学习笔记/RabbitMQ.html">
+            
+                    
+                    RabbitMQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.14" data-path="../1.学习笔记/JAVA.html">
+            
+                <a href="../1.学习笔记/JAVA.html">
+            
+                    
+                    JAVA
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.15" data-path="../1.学习笔记/Ansible.html">
+            
+                <a href="../1.学习笔记/Ansible.html">
+            
+                    
+                    Ansible
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.16" data-path="../1.学习笔记/Zookeeper.html">
+            
+                <a href="../1.学习笔记/Zookeeper.html">
+            
+                    
+                    Zookeeper
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.17" data-path="../1.学习笔记/etcd.html">
+            
+                <a href="../1.学习笔记/etcd.html">
+            
+                    
+                    ETCD入门指南
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.18" data-path="../1.学习笔记/Apollo.html">
+            
+                <a href="../1.学习笔记/Apollo.html">
+            
+                    
+                    Apollo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.19" data-path="../1.学习笔记/Prometheus + Grafana + AlertManager + cAdvisor.html">
+            
+                <a href="../1.学习笔记/Prometheus + Grafana + AlertManager + cAdvisor.html">
+            
+                    
+                    Prometheus + Grafana + AlertManager + cAdvisor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.20" data-path="../1.学习笔记/PromQL语句.html">
+            
+                <a href="../1.学习笔记/PromQL语句.html">
+            
+                    
+                    PromQL语句
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.21" data-path="../1.学习笔记/Grafana变量.html">
+            
+                <a href="../1.学习笔记/Grafana变量.html">
+            
+                    
+                    Grafana变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.22" data-path="../1.学习笔记/FileBeat.html">
+            
+                <a href="../1.学习笔记/FileBeat.html">
+            
+                    
+                    FileBeat
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.23" data-path="../1.学习笔记/Keepalived.html">
+            
+                <a href="../1.学习笔记/Keepalived.html">
+            
+                    
+                    Keepalived
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.24" data-path="../1.学习笔记/监控.html">
+            
+                <a href="../1.学习笔记/监控.html">
+            
+                    
+                    监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.25" data-path="../1.学习笔记/Consul.html">
+            
+                <a href="../1.学习笔记/Consul.html">
+            
+                    
+                    Consul
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.26" data-path="../1.学习笔记/Gitbook.html">
+            
+                <a href="../1.学习笔记/Gitbook.html">
+            
+                    
+                    Gitbook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.27" data-path="../1.学习笔记/Git.html">
+            
+                <a href="../1.学习笔记/Git.html">
+            
+                    
+                    Git
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../2.故障处理方法/">
+            
+                <a href="../2.故障处理方法/">
+            
+                    
+                    2.故障处理方法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../2.故障处理方法/常用问题定位工具总结.html">
+            
+                <a href="../2.故障处理方法/常用问题定位工具总结.html">
+            
+                    
+                    常用问题定位工具总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../2.故障处理方法/磁盘问题定位.html">
+            
+                <a href="../2.故障处理方法/磁盘问题定位.html">
+            
+                    
+                    磁盘问题定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../2.故障处理方法/JAVA问题定位.html">
+            
+                <a href="../2.故障处理方法/JAVA问题定位.html">
+            
+                    
+                    JAVA问题定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../2.故障处理方法/网络问题定位.html">
+            
+                <a href="../2.故障处理方法/网络问题定位.html">
+            
+                    
+                    网络问题定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../2.故障处理方法/CPU问题定位.html">
+            
+                <a href="../2.故障处理方法/CPU问题定位.html">
+            
+                    
+                    CPU问题定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../3.现网案例/">
+            
+                <a href="../3.现网案例/">
+            
+                    
+                    3.现网案例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../3.现网案例/Cassandra.html">
+            
+                <a href="../3.现网案例/Cassandra.html">
+            
+                    
+                    Cassandra
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../3.现网案例/mq用错插件.html">
+            
+                <a href="../3.现网案例/mq用错插件.html">
+            
+                    
+                    mq用错插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../3.现网案例/Kafka故障排查.html">
+            
+                <a href="../3.现网案例/Kafka故障排查.html">
+            
+                    
+                    Kafka故障排查
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../3.现网案例/Kafka堆积.html">
+            
+                <a href="../3.现网案例/Kafka堆积.html">
+            
+                    
+                    Kafka堆积
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../3.现网案例/Kafka扩容节点.html">
+            
+                <a href="../3.现网案例/Kafka扩容节点.html">
+            
+                    
+                    Kafka扩容节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../3.现网案例/Kafka分区leader迁移案例.html">
+            
+                <a href="../3.现网案例/Kafka分区leader迁移案例.html">
+            
+                    
+                    Kafka分区leader迁移案例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../3.现网案例/ES集群主分片未分配.html">
+            
+                <a href="../3.现网案例/ES集群主分片未分配.html">
+            
+                    
+                    ES集群主分片未分配
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../3.现网案例/ES hot_thread.html">
+            
+                <a href="../3.现网案例/ES hot_thread.html">
+            
+                    
+                    ES hot_thread
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../3.现网案例/es+kafka堆积.html">
+            
+                <a href="../3.现网案例/es+kafka堆积.html">
+            
+                    
+                    es+kafka堆积
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../3.现网案例/kibana监控数据断点问题.html">
+            
+                <a href="../3.现网案例/kibana监控数据断点问题.html">
+            
+                    
+                    kibana监控数据断点问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../3.现网案例/redis-cluster扩容,时延变高.html">
+            
+                <a href="../3.现网案例/redis-cluster扩容,时延变高.html">
+            
+                    
+                    redis-cluster扩容,时延变高
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../3.现网案例/redis雪崩.html">
+            
+                <a href="../3.现网案例/redis雪崩.html">
+            
+                    
+                    redis雪崩
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.13" data-path="../3.现网案例/tcpdump分析redis读超时.html">
+            
+                <a href="../3.现网案例/tcpdump分析redis读超时.html">
+            
+                    
+                    tcpdump分析redis读超时
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.14" data-path="../3.现网案例/Nginx报499,5xx.html">
+            
+                <a href="../3.现网案例/Nginx报499,5xx.html">
+            
+                    
+                    Nginx报499,5xx
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.15" data-path="../3.现网案例/部署APM监控agent故障.html">
+            
+                <a href="../3.现网案例/部署APM监控agent故障.html">
+            
+                    
+                    部署APM监控agent故障
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.16" data-path="../3.现网案例/大量close_wait,服务无法访问.html">
+            
+                <a href="../3.现网案例/大量close_wait,服务无法访问.html">
+            
+                    
+                    大量close_wait,服务无法访问
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.17" data-path="../3.现网案例/应用报大量read timeout.html">
+            
+                <a href="../3.现网案例/应用报大量read timeout.html">
+            
+                    
+                    应用报大量read timeout
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.18" data-path="../3.现网案例/nslookup ok but ping fail.html">
+            
+                <a href="../3.现网案例/nslookup ok but ping fail.html">
+            
+                    
+                    nslookup ok but ping fail
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.19" data-path="../3.现网案例/测试环境迁移到k8s.html">
+            
+                <a href="../3.现网案例/测试环境迁移到k8s.html">
+            
+                    
+                    测试环境迁移到k8s
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../4.面试问题总结/">
+            
+                <a href="../4.面试问题总结/">
+            
+                    
+                    4.面试问题总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    5.组件部署
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="Prometheus和Grafana.html">
+            
+                <a href="Prometheus和Grafana.html">
+            
+                    
+                    Prometheus和Grafana
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="K8s部署Prometheus.html">
+            
+                <a href="K8s部署Prometheus.html">
+            
+                    
+                    K8s部署Prometheus
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="K8S部署redis-cluster.html">
+            
+                <a href="K8S部署redis-cluster.html">
+            
+                    
+                    K8S部署redis-cluster
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="K8s部署EFK.html">
+            
+                <a href="K8s部署EFK.html">
+            
+                    
+                    K8s部署EFK
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6.5" data-path="Prometheus监控K8s.html">
+            
+                <a href="Prometheus监控K8s.html">
+            
+                    
+                    Prometheus监控K8s
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="部署K8s1.21.html">
+            
+                <a href="部署K8s1.21.html">
+            
+                    
+                    部署K8s1.21
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="ES集群部署.html">
+            
+                <a href="ES集群部署.html">
+            
+                    
+                    ES集群部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Prometheus监控K8s</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="prometheus&#x76D1;&#x63A7;k8s">Prometheus&#x76D1;&#x63A7;K8s</h1>
+<h4 id="1&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8D85;&#x7EA7;&#x7BA1;&#x7406;&#x5458;">1.&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8D85;&#x7EA7;&#x7BA1;&#x7406;&#x5458;</h4>
+<pre><code class="lang-yaml">adm_account=<span class="hljs-string">&quot;k8s-dash-admin&quot;</span>
+kubectl create serviceaccount ${adm_account} -n kube-system
+kubectl create clusterrolebinding ${adm_account} --clusterrole=cluster-admin --serviceaccount=kube-system:${adm_account}
+kubectl -n kube-system describe secrets $(kubectl -n kube-system get secret | grep ${adm_account} | awk <span class="hljs-string">&apos;{print $1}&apos;</span>)
+<span class="hljs-comment"># &#x83B7;&#x53D6;token&#x503C;</span>
+kubectl -n kube-system get secret `kubectl -n kube-system get secret|grep <span class="hljs-string">&quot;k8s-dash-admin&quot;</span>|awk <span class="hljs-string">&apos;{print $1}&apos;</span>` -o jsonpath={.data.token} | base64 -d
+</code></pre>
+<h4 id="2&#x90E8;&#x7F72;blackboxexporter&#x9ED1;&#x6CB3;&#x76D1;&#x6D4B;">2.&#x90E8;&#x7F72;Blackbox_exporter(&#x9ED1;&#x6CB3;&#x76D1;&#x6D4B;)</h4>
+<blockquote>
+<p><a href="https://www.cnblogs.com/xiao987334176/p/12022482.html" target="_blank">&#x90E8;&#x7F72;Blackbox_exporter</a></p>
+<p>&#x76D1;&#x6D4B;k8s&#x7684;services&#x9700;&#x8981;&#x7528;&#x5230;&#x8FD9;&#x4E2A;&#x7EC4;&#x4EF6;</p>
+</blockquote>
+<pre><code>blackbox_exporter&#x662F;Prometheus &#x5B98;&#x65B9;&#x63D0;&#x4F9B;&#x7684; exporter &#x4E4B;&#x4E00;&#xFF0C;&#x53EF;&#x4EE5;&#x63D0;&#x4F9B; http&#x3001;dns&#x3001;tcp&#x3001;icmp &#x7684;&#x76D1;&#x63A7;&#x6570;&#x636E;&#x91C7;&#x96C6;&#x3002;
+Blackbox_exporter &#x5E94;&#x7528;&#x573A;&#x666F;
+    HTTP &#x6D4B;&#x8BD5;
+          &#x5B9A;&#x4E49; Request Header &#x4FE1;&#x606F;
+          &#x5224;&#x65AD; Http status / Http Respones Header / Http Body &#x5185;&#x5BB9;
+    TCP &#x6D4B;&#x8BD5;
+          &#x4E1A;&#x52A1;&#x7EC4;&#x4EF6;&#x7AEF;&#x53E3;&#x72B6;&#x6001;&#x76D1;&#x542C;
+           &#x5E94;&#x7528;&#x5C42;&#x534F;&#x8BAE;&#x5B9A;&#x4E49;&#x4E0E;&#x76D1;&#x542C;
+    ICMP &#x6D4B;&#x8BD5;
+           &#x4E3B;&#x673A;&#x63A2;&#x6D3B;&#x673A;&#x5236;
+    POST &#x6D4B;&#x8BD5;
+          &#x63A5;&#x53E3;&#x8054;&#x901A;&#x6027;
+    SSL &#x8BC1;&#x4E66;&#x8FC7;&#x671F;&#x65F6;&#x95F4;
+</code></pre><pre><code>      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape] 
+        action: keep
+        regex: true
+  #&#x5982;&#x679C;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x6CA1;&#x6709;&#x8BBE;&#x7F6E;:
+    template:
+    metadata:
+      labels:
+        app: prometheus
+      annotations:
+        prometheus.io/scrape: &apos;true&apos;
+prometheus&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x5982;&#x679C;&#x5199;&#x4E86;&#x8FD9;&#x4E2A;source_labels,&#x4F1A;&#x628A;&#x6CA1;&#x6709;prometheus.io/scrape: &apos;true&apos;&#x7684;&#x5168;&#x90E8;&#x8FC7;&#x6EE4;keep&#x6389;,&#x6240;&#x4EE5;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6253;prometheus.io/scrape: &#x6807;&#x7B7E;,&#x53EF;&#x4EE5;&#x628A;prometheus&#x91CC;&#x7684;source_labels:[__meta_kubernetes_pod_annotation_prometheus_io_scrape]&#x5220;&#x6389;
+</code></pre><h4 id="&#x6B63;&#x5F0F;&#x7248;">&#x6B63;&#x5F0F;&#x7248;</h4>
+<pre><code>```
+</code></pre><ul>
+<li><p>job_name: &apos;kubernetes-apiservers&apos;
+honor_timestamps: true
+scrape_interval: 30s
+scrape_timeout: 10s
+metrics_path: /metrics
+scheme: https
+kubernetes_sd_configs:</p>
+<ul>
+<li>api_server: <a href="https://192.168.50.100:6443" target="_blank">https://192.168.50.100:6443</a>
+role: endpoints
+bearer_token_file: /root/dashboard/test/cluster.token
+tls_config:
+  insecure_skip_verify: true
+bearer_token_file: /root/dashboard/test/cluster.token
+tls_config:
+insecure_skip_verify: true
+relabel_configs:</li>
+<li>source_labels: [<strong>meta_kubernetes_namespace, </strong>meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+action: keep
+regex: default;kubernetes;https</li>
+</ul>
+</li>
+<li><p>job_name: &apos;kubernetes-cadvisor&apos;
+honor_timestamps: true
+scrape_interval: 30s
+scrape_timeout: 10s
+metrics_path: /metrics
+scheme: https
+kubernetes_sd_configs:</p>
+<ul>
+<li>api_server: <a href="https://192.168.50.100:6443" target="_blank">https://192.168.50.100:6443</a>
+role: node
+bearer_token_file: /root/dashboard/test/cluster.token
+tls_config:
+  insecure_skip_verify: true
+bearer_token_file: /root/dashboard/test/cluster.token
+tls_config:
+insecure_skip_verify: true
+relabel_configs:</li>
+<li>action: labelmap
+regex: <em>_meta_kubernetes_node_label</em>(.+)</li>
+<li>target<em>label: <em>_address</em></em>
+replacement: 192.168.50.100:6443</li>
+<li>source<em>labels: [<strong>meta_kubernetes_node_name]
+regex: (.+)
+target_label: </strong>metrics<em>path</em></em>
+replacement: /api/v1/nodes/${1}/proxy/metrics/cadvisor<h1 id="&#x8FD9;&#x4E2A;&#x662F;&#x76D1;&#x63A7;&#x6240;&#x6709;pod&#x5BF9;&#x5E94;&#x7684;&#x8BBF;&#x95EE;&#x5730;&#x5740;&#x548C;&#x7AEF;&#x53E3;">&#x8FD9;&#x4E2A;&#x662F;&#x76D1;&#x63A7;&#x6240;&#x6709;pod&#x5BF9;&#x5E94;&#x7684;&#x8BBF;&#x95EE;&#x5730;&#x5740;&#x548C;&#x7AEF;&#x53E3;</h1>
+</li>
+</ul>
+</li>
+<li>job_name: &apos;kubernetes-service-endpoints&apos;
+honor_timestamps: true
+scrape_interval: 30s
+scrape_timeout: 10s
+metrics_path: /metrics
+scheme: http
+kubernetes_sd_configs:<ul>
+<li>api_server: <a href="https://192.168.50.100:6443" target="_blank">https://192.168.50.100:6443</a>
+role: endpoints
+bearer_token_file: /root/dashboard/test/cluster.token
+tls_config:
+  insecure_skip_verify: true
+bearer_token_file: /root/dashboard/test/cluster.token
+tls_config:
+insecure_skip_verify: true
+relabel_configs:</li>
+<li>source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
+action: keep
+regex: true</li>
+<li>source<em>labels: [<strong>meta_kubernetes_service_annotation_prometheus_io_scheme]
+action: replace
+target_label: </strong>scheme_</em>
+regex: (https?)</li>
+<li>source<em>labels: [<strong>meta_kubernetes_service_annotation_prometheus_io_path]
+action: replace
+target_label: </strong>metrics<em>path</em></em>
+regex: (.+)</li>
+<li>source<em>labels: [<strong>address</strong>, <strong>meta_kubernetes_service_annotation_prometheus_io_port]
+action: replace
+target_label: </strong>address_</em>
+regex: (<sup><a href="#fn_:" id="reffn_:">:</a></sup>+)(?::\d+)?;(\d+)
+replacement: $1:$2</li>
+<li>action: labelmap
+regex: <em>_meta_kubernetes_service_label</em>(.+)</li>
+<li>source_labels: [__meta_kubernetes_namespace]
+action: replace
+target_label: kubernetes_namespace</li>
+<li>source_labels: [__meta_kubernetes_service_name]
+action: replace
+target_label: kubernetes_name<h1 id="&#x8FD9;&#x4E2A;&#x5C31;&#x662F;kubectl-get-svc---all-namespaces&#x663E;&#x793A;&#x7684;svc">&#x8FD9;&#x4E2A;&#x5C31;&#x662F;kubectl get svc --all-namespaces&#x663E;&#x793A;&#x7684;svc</h1>
+</li>
+</ul>
+</li>
+<li>job_name: &apos;kubernetes-services&apos;
+honor_timestamps: true
+scrape_interval: 30s
+scrape_timeout: 10s
+metrics_path: /probe
+kubernetes_sd_configs:<ul>
+<li>api_server: <a href="https://192.168.50.100:6443" target="_blank">https://192.168.50.100:6443</a>
+role: service
+bearer_token_file: /root/dashboard/test/cluster.token
+tls_config:
+  insecure_skip_verify: true
+bearer_token_file: /root/dashboard/test/cluster.token
+tls_config:
+insecure_skip_verify: true
+params:
+module: [http_2xx]
+relabel_configs:</li>
+<li>source<em>labels: [<em>_address</em></em>]
+target_label: __param_target</li>
+<li>target<em>label: <em>_address</em></em>
+replacement: 192.168.50.100:9115</li>
+<li>source_labels: [__param_target]
+target_label: instance</li>
+<li>action: labelmap
+regex: <em>_meta_kubernetes_service_label</em>(.+)</li>
+<li>source_labels: [__meta_kubernetes_namespace]
+target_label: kubernetes_namespace</li>
+<li>source_labels: [__meta_kubernetes_service_name]
+target_label: kubernetes_name
+```</li>
+</ul>
+</li>
+</ul>
+<h4 id="&#x76D1;&#x63A7;redisexporter&#x5B8C;&#x6210;&#x7248;">&#x76D1;&#x63A7;redis_exporter(&#x5B8C;&#x6210;&#x7248;)</h4>
+<pre><code>  - job_name: &apos;kubernetes-pods&apos;
+    honor_timestamps: true
+    scrape_interval: 30s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    kubernetes_sd_configs:
+    - api_server: https://192.168.50.100:6443
+      role: pod
+      bearer_token_file: /root/dashboard/test/cluster.token
+      tls_config:
+        insecure_skip_verify: true
+    bearer_token_file: /root/dashboard/test/cluster.token
+    tls_config:
+      insecure_skip_verify: true
+    relabel_configs:
+    - source_labels: [__meta_kubernetes_pod_container_name]
+      action: keep
+      regex: &quot;redis-exporter&quot;
+    - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+      action: replace
+      target_label: __metrics_path__
+      regex: (.+)
+    - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+      action: replace
+      regex: ([^:]+)(?::\d+)?;(\d+)
+      replacement: $1:$2
+      target_label: __address__
+    - action: labelmap
+      regex: __meta_kubernetes_pod_label_(.+)
+    - source_labels: [__meta_kubernetes_namespace]
+      action: replace
+      target_label: kubernetes_namespace
+    - source_labels: [__meta_kubernetes_pod_name]
+      action: replace
+      target_label: kubernetes_pod_name
+
+
+## TODO,&#x4E0B;&#x9762;&#x7684;&#x8FD9;&#x4E2A;&#x53EF;&#x4EE5;&#x66FF;&#x6362;,&#x7B2C;&#x4E00;&#x4E2A;&#x662F;&#x8FC7;&#x6EE4;contianer_name,&#x7B2C;&#x4E8C;&#x4E2A;&#x662F;&#x8FC7;&#x6EE4;&#x7AEF;&#x53E3;
+    - source_labels: [__meta_kubernetes_pod_container_name]
+      action: keep
+      regex: &quot;redis-exporter&quot;
+---
+    - source_labels: [__address__]
+      regex: &apos;(.*):(9121)&apos;
+      action: keep
+</code></pre><h4 id="blackboxexporter&#x68C0;&#x6D4B;&#x670D;&#x52A1;&#x5728;&#x7EBF;&#x72B6;&#x6001;&#x8FD8;&#x6709;&#x5F85;&#x4F18;&#x5316;">Blackbox_exporter&#x68C0;&#x6D4B;&#x670D;&#x52A1;&#x5728;&#x7EBF;&#x72B6;&#x6001;(&#x8FD8;&#x6709;&#x5F85;&#x4F18;&#x5316;)</h4>
+<pre><code>  - job_name: &apos;blackbox_tcp_pod_probe&apos;
+    honor_timestamps: true
+    scrape_interval: 30s
+    scrape_timeout: 10s
+    metrics_path: /probe
+    kubernetes_sd_configs:
+    - api_server: https://192.168.50.100:6443
+      role: service
+      bearer_token_file: /root/dashboard/test/cluster.token
+      tls_config:
+        insecure_skip_verify: true
+    bearer_token_file: /root/dashboard/test/cluster.token
+    tls_config:
+      insecure_skip_verify: true
+    params:
+      module: [http_2xx]
+    relabel_configs:
+    # 
+    #- source_labels: [__meta_kubernetes_ingress_annotation_prometheus_io_http_probe]
+    - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_http_probe]
+      action: keep
+      regex: true
+    - source_labels: [__address__,__meta_kubernetes_service_cluster_ip]
+      action: replace
+      separator: &quot; &quot;
+      regex: (?:.*?:)(\d+)\s(.*)
+      replacement: $2:$1
+      target_label: __address__
+    - source_labels: [__address__]
+      target_label: __param_target
+    - target_label: __address__
+      replacement: 192.168.50.100:9115
+    - source_labels: [__param_target]
+      target_label: instance
+    - action: labelmap
+      regex: __meta_kubernetes_service_label_(.+)
+    - source_labels: [__meta_kubernetes_namespace]
+      target_label: kubernetes_namespace
+    - source_labels: [__meta_kubernetes_service_name]
+      target_label: kubernetes_name
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="K8s部署EFK.html" class="navigation navigation-prev " aria-label="Previous page: K8s部署EFK">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="部署K8s1.21.html" class="navigation navigation-next " aria-label="Next page: 部署K8s1.21">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Prometheus监控K8s","level":"1.6.5","depth":2,"next":{"title":"部署K8s1.21","level":"1.6.6","depth":2,"path":"5.组件部署/部署K8s1.21.md","ref":"5.组件部署/部署K8s1.21.md","articles":[]},"previous":{"title":"K8s部署EFK","level":"1.6.4","depth":2,"path":"5.组件部署/K8s部署EFK.md","ref":"5.组件部署/K8s部署EFK.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"5.组件部署/Prometheus监控K8s.md","mtime":"2021-12-13T09:50:52.503Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-15T06:21:43.883Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

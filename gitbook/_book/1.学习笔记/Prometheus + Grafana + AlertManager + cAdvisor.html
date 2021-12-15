@@ -1,0 +1,1368 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Prometheus + Grafana + AlertManager + cAdvisor · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="PromQL语句.html" />
+    
+    
+    <link rel="prev" href="Apollo.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    概述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    1.学习笔记
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="总结.html">
+            
+                <a href="总结.html">
+            
+                    
+                    总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="好的blog和git记录.html">
+            
+                <a href="好的blog和git记录.html">
+            
+                    
+                    好的blog和git记录
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="常用指令.html">
+            
+                <a href="常用指令.html">
+            
+                    
+                    常用指令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="k8s.html">
+            
+                <a href="k8s.html">
+            
+                    
+                    k8s
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="Elasticsearch.html">
+            
+                <a href="Elasticsearch.html">
+            
+                    
+                    Elasticsearch
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="Elasticsearch常用命令.html">
+            
+                <a href="Elasticsearch常用命令.html">
+            
+                    
+                    Elasticsearch常用命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="Nginx.html">
+            
+                <a href="Nginx.html">
+            
+                    
+                    Nginx常见用法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="Nginx原理.html">
+            
+                <a href="Nginx原理.html">
+            
+                    
+                    Nginx原理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.9" data-path="Kafka.html">
+            
+                <a href="Kafka.html">
+            
+                    
+                    Kafka概念和参数描述
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.10" data-path="Kafka常用命令.html">
+            
+                <a href="Kafka常用命令.html">
+            
+                    
+                    Kafka常用命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.11" data-path="Redis.html">
+            
+                <a href="Redis.html">
+            
+                    
+                    Redis
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.12" data-path="Redis常用命令.html">
+            
+                <a href="Redis常用命令.html">
+            
+                    
+                    Redis常用命令
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.13" data-path="RabbitMQ.html">
+            
+                <a href="RabbitMQ.html">
+            
+                    
+                    RabbitMQ
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.14" data-path="JAVA.html">
+            
+                <a href="JAVA.html">
+            
+                    
+                    JAVA
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.15" data-path="Ansible.html">
+            
+                <a href="Ansible.html">
+            
+                    
+                    Ansible
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.16" data-path="Zookeeper.html">
+            
+                <a href="Zookeeper.html">
+            
+                    
+                    Zookeeper
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.17" data-path="etcd.html">
+            
+                <a href="etcd.html">
+            
+                    
+                    ETCD入门指南
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.18" data-path="Apollo.html">
+            
+                <a href="Apollo.html">
+            
+                    
+                    Apollo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.19" data-path="Prometheus + Grafana + AlertManager + cAdvisor.html">
+            
+                <a href="Prometheus + Grafana + AlertManager + cAdvisor.html">
+            
+                    
+                    Prometheus + Grafana + AlertManager + cAdvisor
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.20" data-path="PromQL语句.html">
+            
+                <a href="PromQL语句.html">
+            
+                    
+                    PromQL语句
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.21" data-path="Grafana变量.html">
+            
+                <a href="Grafana变量.html">
+            
+                    
+                    Grafana变量
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.22" data-path="FileBeat.html">
+            
+                <a href="FileBeat.html">
+            
+                    
+                    FileBeat
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.23" data-path="Keepalived.html">
+            
+                <a href="Keepalived.html">
+            
+                    
+                    Keepalived
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.24" data-path="监控.html">
+            
+                <a href="监控.html">
+            
+                    
+                    监控
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.25" data-path="Consul.html">
+            
+                <a href="Consul.html">
+            
+                    
+                    Consul
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.26" data-path="Gitbook.html">
+            
+                <a href="Gitbook.html">
+            
+                    
+                    Gitbook
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.27" data-path="Git.html">
+            
+                <a href="Git.html">
+            
+                    
+                    Git
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../2.故障处理方法/">
+            
+                <a href="../2.故障处理方法/">
+            
+                    
+                    2.故障处理方法
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../2.故障处理方法/常用问题定位工具总结.html">
+            
+                <a href="../2.故障处理方法/常用问题定位工具总结.html">
+            
+                    
+                    常用问题定位工具总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../2.故障处理方法/磁盘问题定位.html">
+            
+                <a href="../2.故障处理方法/磁盘问题定位.html">
+            
+                    
+                    磁盘问题定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../2.故障处理方法/JAVA问题定位.html">
+            
+                <a href="../2.故障处理方法/JAVA问题定位.html">
+            
+                    
+                    JAVA问题定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../2.故障处理方法/网络问题定位.html">
+            
+                <a href="../2.故障处理方法/网络问题定位.html">
+            
+                    
+                    网络问题定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../2.故障处理方法/CPU问题定位.html">
+            
+                <a href="../2.故障处理方法/CPU问题定位.html">
+            
+                    
+                    CPU问题定位
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../3.现网案例/">
+            
+                <a href="../3.现网案例/">
+            
+                    
+                    3.现网案例
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../3.现网案例/Cassandra.html">
+            
+                <a href="../3.现网案例/Cassandra.html">
+            
+                    
+                    Cassandra
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../3.现网案例/mq用错插件.html">
+            
+                <a href="../3.现网案例/mq用错插件.html">
+            
+                    
+                    mq用错插件
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../3.现网案例/Kafka故障排查.html">
+            
+                <a href="../3.现网案例/Kafka故障排查.html">
+            
+                    
+                    Kafka故障排查
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../3.现网案例/Kafka堆积.html">
+            
+                <a href="../3.现网案例/Kafka堆积.html">
+            
+                    
+                    Kafka堆积
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="../3.现网案例/Kafka扩容节点.html">
+            
+                <a href="../3.现网案例/Kafka扩容节点.html">
+            
+                    
+                    Kafka扩容节点
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="../3.现网案例/Kafka分区leader迁移案例.html">
+            
+                <a href="../3.现网案例/Kafka分区leader迁移案例.html">
+            
+                    
+                    Kafka分区leader迁移案例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.7" data-path="../3.现网案例/ES集群主分片未分配.html">
+            
+                <a href="../3.现网案例/ES集群主分片未分配.html">
+            
+                    
+                    ES集群主分片未分配
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.8" data-path="../3.现网案例/ES hot_thread.html">
+            
+                <a href="../3.现网案例/ES hot_thread.html">
+            
+                    
+                    ES hot_thread
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.9" data-path="../3.现网案例/es+kafka堆积.html">
+            
+                <a href="../3.现网案例/es+kafka堆积.html">
+            
+                    
+                    es+kafka堆积
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.10" data-path="../3.现网案例/kibana监控数据断点问题.html">
+            
+                <a href="../3.现网案例/kibana监控数据断点问题.html">
+            
+                    
+                    kibana监控数据断点问题
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.11" data-path="../3.现网案例/redis-cluster扩容,时延变高.html">
+            
+                <a href="../3.现网案例/redis-cluster扩容,时延变高.html">
+            
+                    
+                    redis-cluster扩容,时延变高
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.12" data-path="../3.现网案例/redis雪崩.html">
+            
+                <a href="../3.现网案例/redis雪崩.html">
+            
+                    
+                    redis雪崩
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.13" data-path="../3.现网案例/tcpdump分析redis读超时.html">
+            
+                <a href="../3.现网案例/tcpdump分析redis读超时.html">
+            
+                    
+                    tcpdump分析redis读超时
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.14" data-path="../3.现网案例/Nginx报499,5xx.html">
+            
+                <a href="../3.现网案例/Nginx报499,5xx.html">
+            
+                    
+                    Nginx报499,5xx
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.15" data-path="../3.现网案例/部署APM监控agent故障.html">
+            
+                <a href="../3.现网案例/部署APM监控agent故障.html">
+            
+                    
+                    部署APM监控agent故障
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.16" data-path="../3.现网案例/大量close_wait,服务无法访问.html">
+            
+                <a href="../3.现网案例/大量close_wait,服务无法访问.html">
+            
+                    
+                    大量close_wait,服务无法访问
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.17" data-path="../3.现网案例/应用报大量read timeout.html">
+            
+                <a href="../3.现网案例/应用报大量read timeout.html">
+            
+                    
+                    应用报大量read timeout
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.18" data-path="../3.现网案例/nslookup ok but ping fail.html">
+            
+                <a href="../3.现网案例/nslookup ok but ping fail.html">
+            
+                    
+                    nslookup ok but ping fail
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.19" data-path="../3.现网案例/测试环境迁移到k8s.html">
+            
+                <a href="../3.现网案例/测试环境迁移到k8s.html">
+            
+                    
+                    测试环境迁移到k8s
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../4.面试问题总结/">
+            
+                <a href="../4.面试问题总结/">
+            
+                    
+                    4.面试问题总结
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../5.组件部署/">
+            
+                <a href="../5.组件部署/">
+            
+                    
+                    5.组件部署
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../5.组件部署/Prometheus和Grafana.html">
+            
+                <a href="../5.组件部署/Prometheus和Grafana.html">
+            
+                    
+                    Prometheus和Grafana
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../5.组件部署/K8s部署Prometheus.html">
+            
+                <a href="../5.组件部署/K8s部署Prometheus.html">
+            
+                    
+                    K8s部署Prometheus
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../5.组件部署/K8S部署redis-cluster.html">
+            
+                <a href="../5.组件部署/K8S部署redis-cluster.html">
+            
+                    
+                    K8S部署redis-cluster
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.4" data-path="../5.组件部署/K8s部署EFK.html">
+            
+                <a href="../5.组件部署/K8s部署EFK.html">
+            
+                    
+                    K8s部署EFK
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.5" data-path="../5.组件部署/Prometheus监控K8s.html">
+            
+                <a href="../5.组件部署/Prometheus监控K8s.html">
+            
+                    
+                    Prometheus监控K8s
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.6" data-path="../5.组件部署/部署K8s1.21.html">
+            
+                <a href="../5.组件部署/部署K8s1.21.html">
+            
+                    
+                    部署K8s1.21
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.7" data-path="../5.组件部署/ES集群部署.html">
+            
+                <a href="../5.组件部署/ES集群部署.html">
+            
+                    
+                    ES集群部署
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Prometheus + Grafana + AlertManager + cAdvisor</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="prometheus--grafana--alertmanager--cadvisor">Prometheus + Grafana + AlertManager + cAdvisor</h1>
+<h3 id="1grafana&#x6A21;&#x677F;">1.Grafana&#x6A21;&#x677F;</h3>
+<pre><code class="lang-yaml"><span class="hljs-attr">redis:</span> <span class="hljs-number">763</span> / <span class="hljs-number">11835</span> / <span class="hljs-number">14615</span>(pod)
+linux&#x4E3B;&#x673A;&#xFF1A;<span class="hljs-number">8919</span> / <span class="hljs-number">9276</span>
+<span class="hljs-attr">k8snode:</span> <span class="hljs-number">315</span>
+<span class="hljs-attr">kafka:</span> <span class="hljs-number">721</span>
+<span class="hljs-attr">docker:</span> <span class="hljs-number">10566</span>
+</code></pre>
+<h3 id="2prometheus&#x5E38;&#x7528;&#x6307;&#x4EE4;">2.Prometheus&#x5E38;&#x7528;&#x6307;&#x4EE4;</h3>
+<pre><code class="lang-yaml"><span class="hljs-comment"># prometheus&#x9ED8;&#x8BA4;&#x7AEF;&#x53E3;&#x4E3A;9090,&#x6B64;&#x6B21;&#x5199;&#x7684;&#x662F;30003</span>
+curl -XGET http://<span class="hljs-number">192.168</span><span class="hljs-number">.50</span><span class="hljs-number">.100</span>:<span class="hljs-number">30003</span>/-/healthy  <span class="hljs-comment">#&#x68C0;&#x67E5;prometheus&#x5065;&#x5EB7;&#x72B6;&#x51B5;</span>
+curl -XGET http://<span class="hljs-number">192.168</span><span class="hljs-number">.50</span><span class="hljs-number">.100</span>:<span class="hljs-number">30003</span>/-/ready    <span class="hljs-comment">#&#x5C31;&#x7EEA;&#x68C0;&#x67E5;</span>
+curl -XPOST http://<span class="hljs-number">192.168</span><span class="hljs-number">.50</span><span class="hljs-number">.100</span>:<span class="hljs-number">30003</span>/-/reload  <span class="hljs-comment">#&#x70ED;&#x52A0;&#x8F7D;</span>
+</code></pre>
+<h3 id="3&#x5185;&#x7F6E;&#x51FD;&#x6570;">3.&#x5185;&#x7F6E;&#x51FD;&#x6570;</h3>
+<pre><code class="lang-yaml">irate() <span class="hljs-comment">#&#x7528;&#x4E8E;&#x8BA1;&#x7B97;&#x533A;&#x95F4;&#x5411;&#x91CF;&#x4E2D;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x6BCF;&#x79D2;&#x7684;&#x5373;&#x65F6;&#x589E;&#x957F;&#x7387; irate(node_cpu[2m])</span>
+
+increase(node_cpu[<span class="hljs-number">2</span>m]) / <span class="hljs-number">120</span>  <span class="hljs-comment">#&#x83B7;&#x53D6;&#x6700;&#x8FD1;2&#x5206;&#x949F;&#x7684;&#x6837;&#x672C;&#xFF0C;&#x8BA1;&#x7B97;&#x51FA;2&#x5206;&#x949F;&#x589E;&#x957F;&#x91CF;&#xFF0C;&#x9664;&#x4EE5;120s,&#x5F97;&#x5230;node_cpu&#x6837;&#x672C;&#x5728;&#x6700;&#x8FD1;2&#x5206;&#x949F;&#x7684;&#x5E73;&#x5747;&#x589E;&#x957F;&#x7387;</span>
+
+rate(node_cpu[<span class="hljs-number">2</span>m]) <span class="hljs-comment">#&#x76F4;&#x63A5;&#x8BA1;&#x7B97;&#x533A;&#x95F4;&#x5411;&#x91CF;&#x5728;2m&#x5185;&#x5E73;&#x5747;&#x589E;&#x957F;&#x901F;&#x7387;&#xFF0C;&#x8DDF;increase&#x7ED3;&#x679C;&#x76F8;&#x540C;</span>
+    increase/rate&#x8BA1;&#x7B97;&#x5E73;&#x5747;&#x589E;&#x957F;&#x901F;&#x7387;&#xFF0C;&#x65E0;&#x6CD5;&#x53CD;&#x5E94;&#x5728;&#x65F6;&#x95F4;&#x7A97;&#x53E3;&#x5185;&#x6837;&#x672C;&#x6570;&#x636E;&#x7684;&#x7A81;&#x53D1;&#x53D8;&#x5316;&#xFF1B;&#x9002;&#x5408;&#x957F;&#x671F;&#x8D8B;&#x52BF;&#x5206;&#x6790;&#x6216;&#x544A;&#x8B66;
+    irate&#x76F8;&#x6BD4;rate&#xFF0C;&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x9AD8;&#x7684;&#x7075;&#x654F;&#x5EA6;&#xFF0C;&#x4E0D;&#x8FC7;&#x4E0D;&#x9002;&#x5408;&#x957F;&#x671F;&#x8D8B;&#x52BF;&#x5206;&#x6790;
+
+predict_linear(v range-vector, t scalar) <span class="hljs-comment">#&#x53EF;&#x4EE5;&#x9884;&#x6D4B;&#x65F6;&#x95F4;&#x5E8F;&#x5217;v&#x5728;t&#x79D2;&#x540E;&#x7684;&#x503C;,&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x76D1;&#x63A7;&#x67D0;&#x4E9B;&#x4E1A;&#x52A1;&#x589E;&#x957F;&#x7387;&#x63D0;&#x5347;&#x8FC7;&#x5FEB;&#x7684;&#x60C5;&#x51B5;</span>
+predict_linear(node_filesystem_free{job=<span class="hljs-string">&quot;node&quot;</span>}[<span class="hljs-number">2</span>h],<span class="hljs-number">4</span> * <span class="hljs-number">3600</span>) &lt; <span class="hljs-number">0</span>  <span class="hljs-comment">#&#x57FA;&#x4E8E;2&#x5C0F;&#x65F6;&#x7684;&#x6837;&#x672C;&#x6570;&#x636E;&#xFF0C;&#x6765;&#x9884;&#x6D4B;&#x4E3B;&#x673A;&#x53EF;&#x7528;&#x78C1;&#x76D8;&#x7A7A;&#x95F4;&#x7684;&#x662F;&#x5426;&#x5728;4&#x4E2A;&#x5C0F;&#x65F6;&#x5019;&#x88AB;&#x5360;&#x6EE1;</span>
+
+label_replace(v instant-vector, dst_label string, replacement string, src_label string, regex string) <span class="hljs-comment">#&#x4E3A;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x6DFB;&#x52A0;&#x989D;&#x5916;&#x7684;&#x6807;&#x7B7E;    </span>
+     label_replace(up, <span class="hljs-string">&quot;host&quot;</span>, <span class="hljs-string">&quot;$1&quot;</span>, <span class="hljs-string">&quot;instance&quot;</span>,  <span class="hljs-string">&quot;(.*):.*&quot;</span>)  <span class="hljs-comment">#&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x5C06;&#x5305;&#x542B;&#x4E00;&#x4E2A;host&#x6807;&#x7B7E;&#xFF0C;host&#x6807;&#x7B7E;&#x7684;&#x503C;&#x4E3A;Exporter&#x5B9E;&#x4F8B;&#x7684;IP&#x5730;&#x5740;</span>
+</code></pre>
+<h4 id="&#x805A;&#x5408;&#x51FD;&#x6570;">&#x805A;&#x5408;&#x51FD;&#x6570;</h4>
+<pre><code class="lang-yaml"><span class="hljs-comment">#&#x4F5C;&#x7528;&#x57DF;&#x4E3A;&#x77AC;&#x65F6;&#x5411;&#x91CF;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x77AC;&#x65F6;&#x8868;&#x8FBE;&#x5F0F;&#x8FD4;&#x56DE;&#x7684;&#x6837;&#x672C;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x805A;&#x5408;&#xFF0C;&#x5F62;&#x6210;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x65F6;&#x95F4;&#x5E8F;&#x5217;</span>
+&lt;aggr-op&gt;([parameter,] &lt;vector expression&gt;) [without|by (&lt;label list&gt;)]
+    without (label):&#x4ECE;&#x8BA1;&#x7B97;&#x7ED3;&#x679C;&#x4E2D;&#x79FB;&#x9664;&#x5217;&#x4E3E;&#x7684;&#x6807;&#x7B7E;
+  by (label):&#x53EA;&#x4FDD;&#x7559;&#x5217;&#x51FA;&#x7684;&#x6807;&#x7B7E;&#xFF0C;&#x5176;&#x4F59;&#x6807;&#x7B7E;&#x79FB;&#x9664;
+
+sum (&#x6C42;&#x548C;)
+min (&#x6700;&#x5C0F;&#x503C;)
+max (&#x6700;&#x5927;&#x503C;)
+avg (&#x5E73;&#x5747;&#x503C;)
+stddev (&#x6807;&#x51C6;&#x5DEE;)
+stdvar (&#x6807;&#x51C6;&#x65B9;&#x5DEE;)
+count (&#x8BA1;&#x6570;)
+count_values (&#x5BF9;value&#x8FDB;&#x884C;&#x8BA1;&#x6570;)
+bottomk (&#x540E;n&#x6761;&#x65F6;&#x5E8F;)
+topk (&#x524D;n&#x6761;&#x65F6;&#x5E8F;)
+quantile (&#x5206;&#x4F4D;&#x6570;)
+
+count_values(&#x5BF9;value&#x8FDB;&#x884C;&#x8BA1;&#x6570;) count_values(<span class="hljs-string">&quot;count&quot;</span>, http_requests_total)
+
+topk&#x548C;bottomk:&#x7528;&#x4E8E;&#x5BF9;&#x6837;&#x672C;&#x503C;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#xFF0C;&#x8FD4;&#x56DE;&#x524D;n&#x4F4D;&#x6216;&#x540E;n&#x4F4D;&#x7684;&#x65F6;&#x95F4;&#x5E8F;&#x5217;    topk(<span class="hljs-number">5</span>, http_requests_total)
+
+<span class="hljs-attr">quantile:</span>&#x8BA1;&#x7B97;&#x5F53;&#x524D;&#x6837;&#x672C;&#x6570;&#x636E;&#x503C;&#x7684;&#x5206;&#x5E03;&#x60C5;&#x51B5;
+    topk(<span class="hljs-number">5</span>, http_requests_total)   <span class="hljs-comment">#&#x3C6;&#x4E3A;0.5&#x65F6;&#xFF0C;&#x627E;&#x5230;&#x5F53;&#x524D;&#x6837;&#x672C;&#x6570;&#x636E;&#x4E2D;&#x7684;&#x4E2D;&#x4F4D;&#x6570;</span>
+</code></pre>
+<h3 id="grafana&#x91CC;&#x7684;prometheus&#x67E5;&#x8BE2;&#x8BED;&#x6CD5;">Grafana&#x91CC;&#x7684;prometheus&#x67E5;&#x8BE2;&#x8BED;&#x6CD5;</h3>
+<table>
+<thead>
+<tr>
+<th>&#x540D;&#x79F0;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label_values(label)</td>
+<td>&#x8FD4;&#x56DE;label&#x6BCF;&#x4E2A;&#x6307;&#x6807;&#x4E2D;&#x7684;&#x6807;&#x7B7E;&#x503C;&#x5217;&#x8868;&#x3002;</td>
+</tr>
+<tr>
+<td>label_values(metric, label)</td>
+<td>&#x8FD4;&#x56DE;label&#x6307;&#x5B9A;&#x5EA6;&#x91CF;&#x6807;&#x51C6;&#x4E2D;&#x7684;&#x6807;&#x7B7E;&#x503C;&#x5217;&#x8868;&#x3002;</td>
+</tr>
+<tr>
+<td>metrics(metric)</td>
+<td>&#x8FD4;&#x56DE;&#x4E0E;&#x6307;&#x5B9A;metric&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x5339;&#x914D;&#x7684;&#x5EA6;&#x91CF;&#x6807;&#x51C6;&#x5217;&#x8868;&#x3002;</td>
+</tr>
+<tr>
+<td>query_result(query)</td>
+<td>&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;Prometheus&#x67E5;&#x8BE2;&#x7ED3;&#x679C;&#x5217;&#x8868;query&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4grafana&#x505A;&#x4E00;&#x4E2A;dashboard">4.Grafana&#x505A;&#x4E00;&#x4E2A;Dashboard</h3>
+<ol>
+<li>&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;Dashboard</li>
+<li>&#x8FDB;&#x5165;&#x65B0;&#x5EFA;&#x7684;Dashboard,&#x9009;&#x62E9;&#x53F3;&#x4E0A;&#x89D2;&#x7684;Dashboard settings</li>
+<li>&#x914D;&#x7F6E;General</li>
+<li>Add Panel:Convert to row,&#x589E;&#x52A0;&#x4E00;&#x4E2A;&#x6807;&#x7B7E;&#x680F;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;dashboard&#x653E;&#x5165;</li>
+<li>&#x914D;&#x7F6E;Variables</li>
+<li>&#x521B;&#x5EFA;dashboard</li>
+</ol>
+<h3 id="5&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BE6;&#x89E3;">5.&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x8BE6;&#x89E3;</h3>
+<h4 id="1prometheus&#x914D;&#x7F6E;&#x6587;&#x4EF6;">1.prometheus&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h4>
+<p> <a href="https://blog.csdn.net/weixin_46837396/article/details/120075294" target="_blank">https://blog.csdn.net/weixin_46837396/article/details/120075294</a></p>
+<p><a href="https://www.modb.pro/db/50726" target="_blank">relabel_configs&#x8BE6;&#x89E3;</a></p>
+<p><a href="https://www.cnblogs.com/weifeng1463/p/12846459.html" target="_blank">relabel_configs&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x5217;&#x4E3E;</a></p>
+<pre><code class="lang-yaml"><span class="hljs-comment"># &#x5168;&#x5C40;&#x914D;&#x7F6E;</span>
+<span class="hljs-attr">global:</span>
+<span class="hljs-attr">  scrape_interval:</span>     <span class="hljs-number">15</span>s <span class="hljs-comment"># &#x6570;&#x636E;&#x6536;&#x96C6;&#x9891;&#x7387;</span>
+<span class="hljs-attr">  evaluation_interval:</span> <span class="hljs-number">15</span>s <span class="hljs-comment"># &#x591A;&#x4E45;&#x8BC4;&#x4F30;&#x4E00;&#x6B21;&#x89C4;&#x5219;</span>
+<span class="hljs-attr">  scrape_timeout:</span> <span class="hljs-number">10</span>s  <span class="hljs-comment"># &#x6536;&#x96C6;&#x6570;&#x636E;&#x7684;&#x8D85;&#x65F6;&#x65F6;&#x95F4;</span>
+
+<span class="hljs-comment">#####Alertmanager&#x914D;&#x7F6E;&#x6A21;&#x5757;</span>
+
+<span class="hljs-comment"># Alertmanager configuration</span>
+<span class="hljs-attr">alerting:</span>
+<span class="hljs-attr">  alertmanagers:</span>
+<span class="hljs-attr">    - static_configs:</span>
+<span class="hljs-attr">      - targets:</span>
+<span class="hljs-bullet">        -</span> [<span class="hljs-string">&apos;127.0.0.1:9093&apos;</span>] <span class="hljs-comment">#&#x914D;&#x7F6E;&#x544A;&#x8B66;&#x4FE1;&#x606F;&#x63A5;&#x6536;&#x7AEF;&#x53E3;</span>
+
+<span class="hljs-comment"># ###&#x89C4;&#x5219;&#x6587;&#x4EF6;&#xFF0C;&#x652F;&#x6301;&#x901A;&#x914D;&#x7B26;</span>
+<span class="hljs-attr">rule_files:</span>
+  <span class="hljs-comment"># - &quot;first_rules.yml&quot;</span>
+  <span class="hljs-comment"># - &quot;second_rules.yml&quot;</span>
+  <span class="hljs-comment"># - &quot;rules/*.rules&quot;</span>
+  <span class="hljs-comment"># - &quot;*.rules&quot;</span>
+
+
+<span class="hljs-comment"># A scrape configuration containing exactly one endpoint to scrape:</span>
+<span class="hljs-comment"># Here it&apos;s Prometheus itself.</span>
+<span class="hljs-attr">scrape_configs:</span>
+  <span class="hljs-comment"># The job name is added as a label `job=&lt;job_name&gt;` to any timeseries scraped from this config.</span>
+<span class="hljs-attr">  - job_name:</span> <span class="hljs-string">&apos;prometheus&apos;</span>    <span class="hljs-comment"># &#x88AB;&#x76D1;&#x63A7;&#x8D44;&#x6E90;&#x7EC4;&#x7684;&#x540D;&#x79F0;</span>
+
+    <span class="hljs-comment"># metrics_path defaults to &apos;/metrics&apos; #&#x8BE5;&#x884C;&#x53EF;&#x4E0D;&#x5199;&#xFF0C;&#x83B7;&#x53D6;&#x6570;&#x636E;URI&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;/metrics</span>
+    <span class="hljs-comment"># scheme defaults to &apos;http&apos;.          # #&#x9ED8;&#x8BA4;http&#x65B9;&#x5F0F;&#x91C7;&#x96C6;</span>
+
+<span class="hljs-attr">    static_configs:</span>           <span class="hljs-comment">##&#x8282;&#x70B9;&#x5730;&#x5740;&#x4E0E;&#x83B7;&#x53D6;Metrics&#x6570;&#x636E;&#x7AEF;&#x53E3;&#xFF0C;&#x591A;&#x4E2A;&#x5730;&#x5740;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5199;&#x591A;&#x884C;</span>
+<span class="hljs-attr">    - targets:</span> [<span class="hljs-string">&apos;localhost:9090&apos;</span>]
+   <span class="hljs-comment">#- targets: [&apos;localhost:9090&apos;,&apos;192.168.1.100:9100&apos;]</span>
+     <span class="hljs-comment">#- 192.168.1.101:9100</span>
+     <span class="hljs-comment">#- 192.168.1.102:9100</span>
+     <span class="hljs-comment">#- 192.168.1.103:9100</span>
+<span class="hljs-attr">global:</span>  <span class="hljs-comment">#&#x5168;&#x5C40;&#x914D;&#x7F6E;&#xFF0C;&#x8FD9;&#x91CC;&#x7684;&#x914D;&#x7F6E;&#x9879;&#x53EF;&#x4EE5;&#x5355;&#x72EC;&#x914D;&#x7F6E;&#x5728;&#x67D0;&#x4E2A;job&#x4E2D;</span>
+<span class="hljs-attr">  scrape_interval:</span> <span class="hljs-number">15</span>s  <span class="hljs-comment">#&#x91C7;&#x96C6;&#x6570;&#x636E;&#x95F4;&#x9694;&#xFF0C;&#x9ED8;&#x8BA4;15&#x79D2;</span>
+<span class="hljs-attr">  evaluation_interval:</span> <span class="hljs-number">15</span>s  <span class="hljs-comment">#&#x544A;&#x8B66;&#x89C4;&#x5219;&#x76D1;&#x6D4B;&#x9891;&#x7387;&#xFF0C;&#x6BD4;&#x5982;&#x5DF2;&#x7ECF;&#x8BBE;&#x7F6E;&#x4E86;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x5927;&#x4E8E;70%&#x5C31;&#x544A;&#x8B66;&#x7684;&#x89C4;&#x5219;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x4F1A;&#x6BCF;15&#x79D2;&#x6267;&#x884C;&#x4E00;&#x6B21;&#x544A;&#x8B66;&#x89C4;&#x5219;</span>
+<span class="hljs-attr">  scrape_timeout:</span> <span class="hljs-number">10</span>s   <span class="hljs-comment">#&#x91C7;&#x96C6;&#x8D85;&#x65F6;&#x65F6;&#x95F4;</span>
+
+<span class="hljs-attr">scrape_configs:</span>
+<span class="hljs-attr">  - job_name:</span> <span class="hljs-string">&apos;prometheus-server&apos;</span>  <span class="hljs-comment">#&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x76D1;&#x63A7;&#x7EC4;&#x540D;&#x79F0;</span>
+    metrics_path defaults to <span class="hljs-string">&apos;/metrics&apos;</span>  <span class="hljs-comment">#&#x83B7;&#x53D6;&#x6570;&#x636E;URI&#x9ED8;&#x8BA4;&#x4E3A;/metrics</span>
+    scheme defaults to <span class="hljs-string">&apos;http&apos;</span>  <span class="hljs-comment">#&#x9ED8;&#x8BA4;http&#x65B9;&#x5F0F;&#x91C7;&#x96C6;</span>
+<span class="hljs-attr">    static_configs:</span>
+<span class="hljs-attr">    - targets:</span> [<span class="hljs-string">&apos;localhost:9090&apos;</span>,<span class="hljs-string">&apos;192.168.1.100:9100&apos;</span>]  <span class="hljs-comment">#&#x8282;&#x70B9;&#x5730;&#x5740;&#x4E0E;&#x83B7;&#x53D6;Metrics&#x6570;&#x636E;&#x7AEF;&#x53E3;&#xFF0C;&#x591A;&#x4E2A;&#x5730;&#x5740;&#x7528;&#x9017;&#x53F7;&#x5206;&#x9694;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5199;&#x591A;&#x884C;&#x3002;</span>
+
+<span class="hljs-attr">  - job_name:</span> <span class="hljs-string">&apos;web_node&apos;</span>  <span class="hljs-comment">#&#x5B9A;&#x4E49;&#x53E6;&#x4E00;&#x4E2A;&#x76D1;&#x63A7;&#x7EC4;</span>
+    metrics_path defaults to <span class="hljs-string">&apos;/metrics&apos;</span>  <span class="hljs-comment">#&#x83B7;&#x53D6;&#x6570;&#x636E;URI&#x9ED8;&#x8BA4;&#x4E3A;/metrics</span>
+    scheme defaults to <span class="hljs-string">&apos;http&apos;</span>  <span class="hljs-comment">#&#x9ED8;&#x8BA4;http&#x65B9;&#x5F0F;&#x91C7;&#x96C6;</span>
+<span class="hljs-attr">    static_configs:</span>
+<span class="hljs-attr">    - targets:</span> [<span class="hljs-string">&apos;10.160.2.107:9100&apos;</span>,<span class="hljs-string">&apos;192.168.1.100:9100&apos;</span>]  <span class="hljs-comment">#&#x7EC4;&#x5185;&#x591A;&#x4E2A;&#x88AB;&#x76D1;&#x63A7;&#x4E3B;&#x673A;</span>
+<span class="hljs-attr">      labels:</span>  <span class="hljs-comment">#&#x81EA;&#x5B9A;&#x4E49;&#x6807;&#x7B7E;&#xFF0C;&#x901A;&#x8FC7;&#x6807;&#x7B7E;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x67E5;&#x8BE2;&#x8FC7;&#x6EE4;</span>
+<span class="hljs-attr">        server:</span> nginx  <span class="hljs-comment">#&#x5C06;&#x4E0A;&#x9762;2&#x4E2A;&#x4E3B;&#x673A;&#x6253;&#x4E0A;server&#x6807;&#x7B7E;&#xFF0C;&#x503C;&#x4E3A;nginx</span>
+
+<span class="hljs-attr">  - job_name:</span> <span class="hljs-string">&apos;mysql_node&apos;</span>
+<span class="hljs-attr">    static_configs:</span>
+<span class="hljs-attr">    - targets:</span> [<span class="hljs-string">&apos;10.160.2.110:9100&apos;</span>,<span class="hljs-string">&apos;192.168.1.111:9100&apos;</span>]
+<span class="hljs-attr">    metric_relable_configs:</span>   <span class="hljs-comment">#&#x58F0;&#x660E;&#x8981;&#x91CD;&#x547D;&#x540D;&#x6807;&#x7B7E;</span>
+<span class="hljs-attr">    - action:</span> replace  <span class="hljs-comment">#&#x6307;&#x5B9A;&#x52A8;&#x4F5C;&#xFF0C;replace&#x4EE3;&#x8868;&#x66FF;&#x6362;&#x6807;&#x7B7E;&#xFF0C;&#x4E5F;&#x662F;&#x9ED8;&#x8BA4;&#x52A8;&#x4F5C;</span>
+<span class="hljs-attr">      source_labels:</span> [<span class="hljs-string">&apos;job&apos;</span>]  <span class="hljs-comment">#&#x6307;&#x5B9A;&#x9700;&#x8981;&#x88AB;action&#x6240;&#x64CD;&#x4F5C;&#x7684;&#x539F;&#x6807;&#x7B7E;</span>
+<span class="hljs-attr">      regex:</span> (.*)  <span class="hljs-comment">#&#x539F;&#x6807;&#x7B7E;&#x91CC;&#x7684;&#x5339;&#x914D;&#x6761;&#x4EF6;&#xFF0C;&#x7B26;&#x5408;&#x6761;&#x4EF6;&#x7684;&#x539F;&#x6807;&#x7B7E;&#x624D;&#x4F1A;&#x88AB;&#x5339;&#x914D;&#xFF0C;&#x652F;&#x6301;&#x6B63;&#x5219;</span>
+<span class="hljs-attr">      replacement:</span> $<span class="hljs-number">1</span>  <span class="hljs-comment">#&#x539F;&#x6807;&#x7B7E;&#x9700;&#x8981;&#x88AB;&#x66FF;&#x6362;&#x7684;&#x90E8;&#x5206;&#xFF0C;$1&#x4EE3;&#x8868;regex&#x6B63;&#x5219;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5206;&#x7EC4;</span>
+<span class="hljs-attr">      target_label:</span> idc  <span class="hljs-comment">#&#x5C06;$1&#x5185;&#x5BB9;&#x8D4B;&#x503C;&#x7ED9;idc&#x6807;&#x7B7E;</span>
+
+<span class="hljs-attr">    - action:</span> drop  <span class="hljs-comment">#&#x6B63;&#x5219;&#x5220;&#x9664;&#x6807;&#x7B7E;&#x793A;&#x4F8B;</span>
+<span class="hljs-attr">      regex:</span> <span class="hljs-string">&quot;192.168.100.*&quot;</span>  <span class="hljs-comment">#&#x6B63;&#x5219;&#x5339;&#x914D;&#x6807;&#x7B7E;&#x503C;</span>
+<span class="hljs-attr">      source_labels:</span> [<span class="hljs-string">&quot;__address__&quot;</span>]  <span class="hljs-comment">#&#x9700;&#x8981;&#x8FDB;&#x884C;&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684;&#x539F;&#x6807;&#x7B7E;</span>
+
+<span class="hljs-attr">    - action:</span> labeldrop  <span class="hljs-comment">#&#x76F4;&#x63A5;&#x5220;&#x9664;&#x6807;&#x7B7E;&#x793A;&#x4F8B;</span>
+<span class="hljs-attr">      regex:</span> <span class="hljs-string">&quot;job&quot;</span>  <span class="hljs-comment">#&#x76F4;&#x63A5;&#x5199;&#x6807;&#x7B7E;&#x540D;&#x5373;&#x53EF;</span>
+</code></pre>
+<h5 id="kubernetessdconfigs">kubernetes_sd_configs</h5>
+<pre><code># &#x5339;&#x914D;node_name
+source_labels: [__meta_kubernetes_node_name]
+regex: (.+)
+${1}  # $1&#x7684;&#x503C;&#x5C31;&#x662F;node&#x7684;&#x540D;&#x79F0;
+</code></pre><h4 id="2altermanageryml">2.altermanager.yml</h4>
+<pre><code class="lang-yaml"><span class="hljs-comment"># route&#x7528;&#x6765;&#x8BBE;&#x7F6E;&#x62A5;&#x8B66;&#x7684;&#x5206;&#x53D1;&#x7B56;&#x7565;&#xFF0C;&#x662F;&#x4E2A;&#x91CD;&#x70B9;&#xFF0C;&#x544A;&#x8B66;&#x5185;&#x5BB9;&#x4ECE;&#x8FD9;&#x91CC;&#x8FDB;&#x5165;&#xFF0C;&#x5BFB;&#x627E;&#x81EA;&#x5DF1;&#x5E94;&#x8BE5;&#x7528;&#x90A3;&#x79CD;&#x7B56;&#x7565;&#x53D1;&#x9001;&#x51FA;&#x53BB;</span>
+<span class="hljs-attr">route:</span>
+  <span class="hljs-comment"># &#x544A;&#x8B66;&#x5E94;&#x8BE5;&#x6839;&#x636E;&#x90A3;&#x4E9B;&#x6807;&#x7B7E;&#x8FDB;&#x884C;&#x5206;&#x7EC4;</span>
+<span class="hljs-attr">  group_by:</span> [<span class="hljs-string">&apos;job&apos;</span>, <span class="hljs-string">&apos;altername&apos;</span>, <span class="hljs-string">&apos;cluster&apos;</span>, <span class="hljs-string">&apos;service&apos;</span>,<span class="hljs-string">&apos;severity&apos;</span>]
+
+  <span class="hljs-comment"># &#x540C;&#x4E00;&#x7EC4;&#x7684;&#x544A;&#x8B66;&#x53D1;&#x51FA;&#x524D;&#x8981;&#x7B49;&#x5F85;&#x591A;&#x5C11;&#x79D2;&#xFF0C;&#x8FD9;&#x4E2A;&#x662F;&#x4E3A;&#x4E86;&#x628A;&#x66F4;&#x591A;&#x7684;&#x544A;&#x8B66;&#x4E00;&#x4E2A;&#x6279;&#x6B21;&#x53D1;&#x51FA;&#x53BB;</span>
+<span class="hljs-attr">  group_wait:</span> <span class="hljs-number">30</span>s
+
+  <span class="hljs-comment">#&#x540C;&#x4E00;&#x7EC4;&#x7684;&#x591A;&#x6279;&#x6B21;&#x544A;&#x8B66;&#x95F4;&#x9694;&#x591A;&#x5C11;&#x79D2;&#x540E;&#xFF0C;&#x624D;&#x80FD;&#x53D1;&#x51FA;</span>
+<span class="hljs-attr">  group_interval:</span> <span class="hljs-number">5</span>m
+
+  <span class="hljs-comment"># &#x91CD;&#x590D;&#x7684;&#x544A;&#x8B66;&#x8981;&#x7B49;&#x5F85;&#x591A;&#x4E45;&#x540E;&#x624D;&#x80FD;&#x518D;&#x6B21;&#x53D1;&#x51FA;&#x53BB;</span>
+<span class="hljs-attr">  repeat_interval:</span> <span class="hljs-number">12</span>h
+
+  <span class="hljs-comment"># &#x4E00;&#x7EA7;&#x7684;receiver&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x9ED8;&#x8BA4;&#x7684;receiver&#xFF0C;&#x5F53;&#x544A;&#x8B66;&#x8FDB;&#x6765;&#x540E;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x4EFB;&#x4F55;&#x5B50;&#x8282;&#x70B9;&#x548C;&#x81EA;&#x5DF1;&#x5339;&#x914D;&#xFF0C;&#x5C31;&#x7528;&#x8FD9;&#x4E2A;receiver</span>
+<span class="hljs-attr">  receiver:</span> <span class="hljs-string">&apos;wechat&apos;</span>
+
+  <span class="hljs-comment"># &#x4E0A;&#x8FF0;route&#x7684;&#x914D;&#x7F6E;&#x4F1A;&#x88AB;&#x4F20;&#x9012;&#x7ED9;&#x5B50;&#x8DEF;&#x7531;&#x8282;&#x70B9;&#xFF0C;&#x5B50;&#x8DEF;&#x7531;&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x91CD;&#x65B0;&#x914D;&#x7F6E;&#x624D;&#x4F1A;&#x88AB;&#x8986;&#x76D6;</span>
+  <span class="hljs-comment"># &#x5B50;&#x8DEF;&#x7531;&#x6811;</span>
+<span class="hljs-attr">  routes:</span>
+
+  <span class="hljs-comment"># &#x7528;&#x4E8E;&#x5339;&#x914D;label&#x3002;&#x6B64;&#x5904;&#x5217;&#x51FA;&#x7684;&#x6240;&#x6709;label&#x90FD;&#x5339;&#x914D;&#x5230;&#x624D;&#x7B97;&#x5339;&#x914D;</span>
+<span class="hljs-attr">  - match_re:</span>
+<span class="hljs-attr">      service:</span> ^(foo1|foo2|baz)$
+<span class="hljs-attr">    receiver:</span> <span class="hljs-string">&apos;wechat&apos;</span>
+
+    <span class="hljs-comment"># &#x5728;&#x5E26;&#x6709;service&#x6807;&#x7B7E;&#x7684;&#x544A;&#x8B66;&#x540C;&#x65F6;&#x6709;severity&#x6807;&#x7B7E;&#x65F6;&#xFF0C;&#x4ED6;&#x53EF;&#x4EE5;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x5B50;&#x8DEF;&#x7531;&#xFF0C;&#x540C;&#x65F6;&#x5177;&#x6709;severity != critical&#x7684;&#x544A;&#x8B66;&#x5219;&#x88AB;&#x53D1;&#x9001;&#x7ED9;&#x63A5;&#x6536;&#x8005;team-ops-mails,&#x5BF9;severity == critical&#x7684;&#x544A;&#x8B66;&#x5219;&#x88AB;&#x53D1;&#x9001;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x63A5;&#x6536;&#x8005;&#x5373;team-ops-pager</span>
+<span class="hljs-attr">    routes:</span>
+<span class="hljs-attr">    - match:</span>
+<span class="hljs-attr">        severity:</span> critical
+<span class="hljs-attr">      receiver:</span> <span class="hljs-string">&apos;wechat&apos;</span>
+
+  <span class="hljs-comment"># &#x6BD4;&#x5982;&#x5173;&#x4E8E;&#x6570;&#x636E;&#x5E93;&#x670D;&#x52A1;&#x7684;&#x544A;&#x8B66;&#xFF0C;&#x5982;&#x679C;&#x5B50;&#x8DEF;&#x7531;&#x6CA1;&#x6709;&#x5339;&#x914D;&#x5230;&#x76F8;&#x5E94;&#x7684;owner&#x6807;&#x7B7E;&#xFF0C;&#x5219;&#x90FD;&#x9ED8;&#x8BA4;&#x7531;team-DB-pager&#x63A5;&#x6536;</span>
+<span class="hljs-attr">  - match:</span>
+<span class="hljs-attr">      service:</span> database
+<span class="hljs-attr">    receiver:</span> <span class="hljs-string">&apos;wechat&apos;</span>
+
+  <span class="hljs-comment"># &#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x5148;&#x6839;&#x636E;&#x6807;&#x7B7E;service:database&#x5C06;&#x6570;&#x636E;&#x5E93;&#x670D;&#x52A1;&#x544A;&#x8B66;&#x8FC7;&#x6EE4;&#x51FA;&#x6765;&#xFF0C;&#x7136;&#x540E;&#x8FDB;&#x4E00;&#x6B65;&#x5C06;&#x6240;&#x6709;&#x540C;&#x65F6;&#x5E26;labelkey&#x4E3A;database</span>
+<span class="hljs-attr">  - match:</span>
+<span class="hljs-attr">      severity:</span> critical
+<span class="hljs-attr">    receiver:</span> <span class="hljs-string">&apos;wechat&apos;</span>
+
+<span class="hljs-comment"># &#x6291;&#x5236;&#x89C4;&#x5219;&#xFF0C;&#x5F53;&#x51FA;&#x73B0;critical&#x544A;&#x8B66;&#x65F6; &#x5FFD;&#x7565;warning</span>
+<span class="hljs-attr">inhibit_rules:</span>
+<span class="hljs-attr">- source_match:</span>
+<span class="hljs-attr">    severity:</span> <span class="hljs-string">&apos;critical&apos;</span>
+<span class="hljs-attr">  target_match:</span>
+<span class="hljs-attr">    severity:</span> <span class="hljs-string">&apos;warning&apos;</span>
+  <span class="hljs-comment"># Apply inhibition if the alertname is the same.</span>
+  <span class="hljs-comment">#   equal: [&apos;alertname&apos;, &apos;cluster&apos;, &apos;service&apos;]</span>
+</code></pre>
+<h3 id="6cadvisor">6.cAdvisor</h3>
+<p>&#x53EF;&#x4EE5;&#x641C;&#x96C6;&#x4E00;&#x53F0;&#x673A;&#x5668;&#x4E0A;&#x6240;&#x6709;&#x8FD0;&#x884C;&#x7684;&#x5BB9;&#x5668;&#x4FE1;&#x606F;,Go&#x8BED;&#x8A00;&#x5F00;&#x53D1;,&#x5229;&#x7528;Linux&#x7684;cgroups&#x83B7;&#x53D6;&#x5BB9;&#x5668;&#x7684;&#x8D44;&#x6E90;&#x4F7F;&#x7528;&#x4FE1;&#x606F;</p>
+<p>&#x5E38;&#x7528;&#x67E5;&#x8BE2;&#x8BED;&#x6CD5;</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x6B63;&#x5728;&#x8FD0;&#x884C;&#x7684;&#x5BB9;&#x5668;&#x6570;&#x91CF;</td>
+<td>count(rate(container_last_seen{id=~&quot;.+&quot;,$label=~&quot;.+&quot;}[1m])</td>
+<td>$label :&#x6807;&#x7B7E;&#x6761;&#x4EF6;&#xFF0C;&#x6309;&#x7167;&#x62E5;&#x6709;$label&#x6807;&#x7B7E;&#x7684;&#x9879;&#x67E5;&#x8BE2;     .+ &#xFF1A;&#x901A;&#x914D;</td>
+</tr>
+<tr>
+<td>&#x5BB9;&#x5668; CPU&#x76F8;&#x5173;</td>
+<td>sum(rate(container_cpu_system_seconds_total[1m]))    sum(rate(container_cpu_system_seconds_total{name=~&quot;.+&quot;}[1m]))    sum(rate(container_cpu_system_seconds_total{id=&quot;/&quot;}[1m]))    sum(rate(process_cpu_seconds_total[1m])) * 100  sum(rate(container_cpu_system_seconds_total{name=~&quot;.+&quot;}[1m])) + sum(rate(container_cpu_system_seconds_total{id=&quot;/&quot;}[1m])) + sum(rate(process_cpu_seconds_total[1m]))</td>
+<td></td>
+</tr>
+<tr>
+<td>&#x6BCF;&#x4E2A;&#x5BB9;&#x5668;&#x7684;cpu&#x4F7F;&#x7528;&#x7387;</td>
+<td>sum(rate(container_cpu_usage_seconds_total{name=~&quot;.+&quot;}[1m])) by (name) * 100</td>
+<td></td>
+</tr>
+<tr>
+<td>&#x5168;&#x90E8;&#x5BB9;&#x5668;&#x7684;CPU&#x4F7F;&#x7528;&#x7387;&#x603B;&#x548C;&#xFF1A;</td>
+<td>sum(sum(rate(container_cpu_usage_seconds_total{name=~&quot;.+&quot;}[1m])) by (name) * 100)</td>
+<td></td>
+</tr>
+<tr>
+<td>total CPU Usage</td>
+<td>sum(rate(container_cpu_user_seconds_total{image!=&quot;&quot;}[5m]) * 100)</td>
+<td></td>
+</tr>
+<tr>
+<td>CPU Usage per container</td>
+<td>rate(container_cpu_user_seconds_total{image!=&quot;&quot;}[5m]) * 100</td>
+<td></td>
+</tr>
+<tr>
+<td>&#x6240;&#x6709;&#x5BB9;&#x5668;&#x5185;&#x5B58;</td>
+<td>container_memory_rss{name=~&quot;.+&quot;}</td>
+<td></td>
+</tr>
+<tr>
+<td>&#x6240;&#x6709;&#x5BB9;&#x5668;&#x5185;&#x5B58;&#x603B;&#x548C;</td>
+<td>sum(container_memory_rss{name=~&quot;.+&quot;})</td>
+<td></td>
+</tr>
+<tr>
+<td>&#x6240;&#x6709;&#x5BB9;&#x5668;&#x5F53;&#x524D;&#x5185;&#x5B58;&#x4F7F;&#x7528;</td>
+<td>container_memory_usage_bytes{name=~&quot;.+&quot;}</td>
+<td></td>
+</tr>
+<tr>
+<td>&#x6240;&#x6709;&#x5BB9;&#x5668;&#x5F53;&#x524D;&#x5185;&#x5B58;&#x4F7F;&#x7528;&#x603B;&#x548C;</td>
+<td>sum(container_memory_usage_bytes{name=~&quot;.+&quot;})</td>
+</tr>
+</tbody>
+</table>
+<h4 id="blackboxexporter">Blackbox_exporter</h4>
+<p>1.<a href="https://blog.csdn.net/qq_25934401/article/details/84325356" target="_blank">&#x68C0;&#x6D4B;icmp/tcp/http/ssl&#x8BC1;&#x4E66;</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Apollo.html" class="navigation navigation-prev " aria-label="Previous page: Apollo">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="PromQL语句.html" class="navigation navigation-next " aria-label="Next page: PromQL语句">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Prometheus + Grafana + AlertManager + cAdvisor","level":"1.2.19","depth":2,"next":{"title":"PromQL语句","level":"1.2.20","depth":2,"path":"1.学习笔记/PromQL语句.md","ref":"1.学习笔记/PromQL语句.md","articles":[]},"previous":{"title":"Apollo","level":"1.2.18","depth":2,"path":"1.学习笔记/Apollo.md","ref":"1.学习笔记/Apollo.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"1.学习笔记/Prometheus + Grafana + AlertManager + cAdvisor.md","mtime":"2021-12-13T10:07:13.558Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-12-15T06:21:43.883Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

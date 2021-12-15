@@ -5,9 +5,7 @@
 ```yaml
 redis: 763 / 11835 / 14615(pod)
 linux主机：8919 / 9276
-k8snode: 315 / 13824
-state-metrics(k8spod): 13332
-blackbox: 7587
+k8snode: 315
 kafka: 721
 docker: 10566
 ```

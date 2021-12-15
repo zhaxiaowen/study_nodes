@@ -26,19 +26,9 @@ kubectl label node node1  beta.kubernetes.io/fluentd-ds-ready-   #删除
 #### 将本地端口9200转发到es-pod对应的端口
 
 ```
-port-forward: 转发一个本地端口到容器端口
 kubectl port-forward es-0 9200:9200 -n logging
 curl http://localhost:9200/_cluster/state?pretty   # 在另一个端口测试
 ```
-
-#### cp
-
-```
-kubectl cp mysql-478535978-1dnm2:/tmp/message.log message.log  # 将容器内的文件copy到本地
-kubectl cp message.log mysql-478535978-1dnm2:/tmp/message.log  # 将本地文件copy到容器内
-```
-
-
 
 ### [k8s部署应用,故障排查思路](https://www.cnblogs.com/rancherlabs/p/12330916.html)
 

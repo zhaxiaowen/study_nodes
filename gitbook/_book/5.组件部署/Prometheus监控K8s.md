@@ -48,26 +48,16 @@ Blackbox_exporter 应用场景
 prometheus的配置文件中如果写了这个source_labels,会把没有prometheus.io/scrape: 'true'的全部过滤keep掉,所以如果没有打prometheus.io/scrape: 标签,可以把prometheus里的source_labels:[__meta_kubernetes_pod_annotation_prometheus_io_scrape]删掉
 ```
 
-#### 3.k8s - Annotations
 
-##### TODO:可以只在service上加,因为service-endpoints最终也会落到pod上
-
->  kubernetes-pods
-
-* prometheus.io/scrape，为true则会将pod作为监控目标
-* prometheus.io/path，默认为/metrics
-* prometheus.io/port , 端口
-
-> kubernetes-service-endpoints
-
-- prometheus.io/scrape，为true则会将pod作为监控目标
-- prometheus.io/path，默认为/metrics
-- prometheus.io/port , 端口
-- prometheus.io/scheme 默认http，如果为了安全设置了https，此处需要改为https
 
 
 
 #### 正式版
+
+```
+```
+
+
 
 ```
   - job_name: 'kubernetes-apiservers'
