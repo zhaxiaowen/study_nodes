@@ -92,3 +92,19 @@ TeardownNetworkErro
 1. 主要查看service是否与pod绑定:` kubectl describe svc redis-exporter -n wiseco|grep "Endpoints" `
 2. 测试端口:`kubectl port-forward es-0 9200:9200 -n logging`
 
+#### 3.k8s - Annotations
+
+##### TODO:可以只在service上加,因为service-endpoints最终也会落到pod上
+
+>  kubernetes-pods
+
+* prometheus.io/scrape，为true则会将pod作为监控目标
+* prometheus.io/path，默认为/metrics
+* prometheus.io/port , 端口
+
+> kubernetes-service-endpoints
+
+- prometheus.io/scrape，为true则会将pod作为监控目标
+- prometheus.io/path，默认为/metrics
+- prometheus.io/port , 端口
+- prometheus.io/scheme 默认http，如果为了安全设置了https，此处需要改为https

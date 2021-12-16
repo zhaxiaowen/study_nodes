@@ -11,7 +11,7 @@ kubectl -n kube-system describe secrets $(kubectl -n kube-system get secret | gr
 kubectl -n kube-system get secret `kubectl -n kube-system get secret|grep "k8s-dash-admin"|awk '{print $1}'` -o jsonpath={.data.token} | base64 -d
 ```
 
-#### 2.部署Blackbox_exporter(黑河监测)
+#### 2.部署Blackbox_exporter
 
 > [部署Blackbox_exporter](https://www.cnblogs.com/xiao987334176/p/12022482.html)
 >

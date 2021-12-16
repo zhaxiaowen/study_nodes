@@ -62,6 +62,7 @@
     * [K8S部署redis-cluster](5.组件部署/K8S部署redis-cluster.md)
     * [K8s部署EFK](5.组件部署/K8s部署EFK.md)
     * [Prometheus监控K8s](5.组件部署/Prometheus监控K8s.md)
+    * [Prometheus监控redis](5.组件部署/Prometheus监控redis.md)
     * [部署K8s1.21](5.组件部署/部署K8s1.21.md)
     * [ES集群部署](5.组件部署/ES集群部署.md)
 
