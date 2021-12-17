@@ -81,11 +81,15 @@ lsof -p 9085
 
 ```plain
 redis-cli -h 127.0.0.1 -a 123456 cluster info
-redis-cli -h 127.0.0.1 -a 123456 cluster nodes    
+redis-cli -h 127.0.0.1 -a 123456 cluster nodes    #查看节点状态,以及对应的槽位
 redis-cli -h 127.0.0.1 -a 123456 info replication
 redis-cli -h 127.0.0.1 -a 123456 cluster slots    #查看主从节点关系和操作信息；显示当前的集群状态，以数组形式展示
 
 redis-cli -h 127.0.0.1 -p 6379 -a 123456 --stat		#查看某个分片的requests流量均衡情况；一般超过12W需要告警
+
+cluster failover  #手动故障转移,切换主从(只能发给从节点)
+cluster keyslot name  #返回"name"key对应的槽位
+
 ```
 
 #### redis_exporter

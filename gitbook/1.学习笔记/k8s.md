@@ -108,3 +108,10 @@ TeardownNetworkErro
 - prometheus.io/path，默认为/metrics
 - prometheus.io/port , 端口
 - prometheus.io/scheme 默认http，如果为了安全设置了https，此处需要改为https
+
+#### curl命令请求api
+
+```bash
+curl -sX GET -H "Authorization:bearer `cat /root/dashboard/test/cluster.token`" -k https://192.168.50.100:6443/api/v1/nodes/node1/proxy/metrics/cadvisor
+```
+
