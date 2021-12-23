@@ -379,3 +379,5 @@ broker返回给消费者数据的等待时间,默认500ms
 ```yaml
 为broker指定机架信息,会尽可能把每个分区的副本分配到不同机架的broker上
 ```
+
+![es_kafka生产配置](.\picture\es_kafka生产配置.jpg)

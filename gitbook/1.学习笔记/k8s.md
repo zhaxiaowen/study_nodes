@@ -115,3 +115,4 @@ TeardownNetworkErro
 curl -sX GET -H "Authorization:bearer `cat /root/dashboard/test/cluster.token`" -k https://192.168.50.100:6443/api/v1/nodes/node1/proxy/metrics/cadvisor
 ```
 
+![Preview](.\picture\Preview.jpg)

@@ -5,36 +5,39 @@
 ```yaml
 info memory
 info stats
-dbsize:查看key数量
-exists test:检查key是否存在
-get test:
-del test:
-临时调大内存: config set maxmemory 5gb;  config get maxmemory
-config rewrite:将配置持久化到内存
-expire test 10:设置10s过期
-expire test 1520953200:指定过期时间,1520953200为日期时间戳
-ttl test:查询key剩余过期时间  #-1表示没有过期时间;-2表示key不存在
-persist test:清除过期时间
-type test:
-randomkey: 随机返回一个key
+dbsize        	#查看key数量
+exists key    	#检查key是否存在
+get key	      	#查询key
+del key 	 	#删除key
+
+persist key   	#清除键的过期时间
+ttl key			#查看键剩余时间,单位s >=0:剩余的过期时间  -1:未设置过期时间  -2:键不存在
+pttl key		#查看键剩余时间,单位ms >=0:剩余的过期时间  -1:未设置过期时间  -2:键不存在
+
+expire test 10	#设置10s过期
+expire test 1520953200 #指定过期时间,1520953200为日期时间戳
+
+type key		#查看键的数据结构类型
+randomkey 		#随机返回一个key
 数据刷新到磁盘:SAVE,直接调用rdbSve阻塞主线程;BGSAVE,fork子线程,子线程调用rdbSave
 strlen test:判断字符串长度 ; # list--llen , hash--hlen, set--scard, sorted set--zcard;
-redis-cli monitor:查询执行过的指令
+redis-cli monitor #查询执行过的指令
 
-client list:查看当前连接的ip与端口
-client kill ip:port:断开连接
-BGSAVE:手动持久化
+client list 	#查看当前连接的ip与端口
+client kill ip:port #断开连接
+BGSAVE 			#手动持久化
 
 redis-cli -a root -h 10.244.2.46 role  #查看redis节点的角色（master/slave）
 ```
-
-#### 
 
 #### 动态修改配置
 
 ```yaml
 CONFIG SET parameter value  #此命令可以动态调整redis服务器的配置而无需重启
 CONFIG GET parameter #查看所匹配的配置参数
+
+config set maxmemory 5gb;  config get maxmemory   #临时调大内存
+config rewrite:将配置持久化到内存
 例:
 CONFIG SET requirepass 123456
 CONFIG GET requirepass
