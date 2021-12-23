@@ -21,7 +21,7 @@
 |      | 微服务,Spring Cloud组件的概念,背下           | [Spring Cloud组件介绍](http://c.biancheng.net/view/5467.html) |
 |      | 腾讯云开发者手册                             | [nginx](https://cloud.tencent.com/developer/doc/1158)        |
 |      | interview                                    | [interview](https://zyfcodes.blog.csdn.net/article/details/100706167) |
-|      |                                              |                                                              |
+|      | 可以带着问题思考该怎么学k8s                  | [大规模k8s集群管理经验分享](https://mp.weixin.qq.com/s?__biz=Mzg2MDYzNTAxMw==&mid=2247488489&idx=1&sn=0e2f177e24d5162b55294a2d66c3da64&chksm=ce223903f955b015cc8f97370a71b1a718ed6b2c7aa7e9c20d865a98e2c20ef64fc68d68c85b&scene=21#wechat_redirect) |
 |      |                                              |                                                              |
 |      |                                              |                                                              |
 |      |                                              |                                                              |
