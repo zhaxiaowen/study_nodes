@@ -93,3 +93,24 @@
 |      | 128  | 128        | 100GB | 3            | 12                   | 6.4             | >115.2     |      |      |
 |      |      |            |       |              |                      |                 |            |      |      |
 
+### Redis性能优化
+
+#### 1.网络
+
+* 使用multi-key指令合并多个指令,减少请求次数
+* 使用transaction、script合并requests以及response,但是要求涉及的key在同一个Node上
+* 使用pipeline合并response
+
+#### 2.警惕执行时间过长的操作
+
+* keys * ; LRANGE ;hgetall;zrabge;sinter;不使用复杂O(N)及以上的指令
+* transaction、script合并多个command是一个具有原子性的执行过程,也可能占用redis较长时间
+* 不使用DEL、SAVE等会阻塞主线程的指令,使用UNLINKL、bgsave
+* 保证key不会集中过期
+* 频繁的新增会导致内存碎片增多,定期清理内存碎片
+
+#### 3.使用建议
+
+* **string类型控制在10KB以内**，hash、list、set、zset**元素尽量不超过5000**
+* redis事务功能较弱,尽量少用
+* 短连接性能差,推荐使用带有连接池的客户端
