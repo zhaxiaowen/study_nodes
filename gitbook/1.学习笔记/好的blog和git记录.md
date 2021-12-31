@@ -23,8 +23,8 @@
 |      | interview                                    | [interview](https://zyfcodes.blog.csdn.net/article/details/100706167) |
 |      | 可以带着问题思考该怎么学k8s                  | [大规模k8s集群管理经验分享](https://my.oschina.net/erdateam/blog/5336527)(https://my.oschina.net/erdateam/blog/5348560) |
 |      | 华为云服务                                   | [redis不同架构-故障排查-性能优化-迁移,华为云服务都有文档,可以看](https://support.huaweicloud.com/dcs_faq/dcs-faq-0427020.html)<br />[kafka](https://support.huaweicloud.com/bestpractice-kafka/kafka-bp-190605002.html) |
-|      |                                              |                                                              |
-|      |                                              |                                                              |
-|      |                                              |                                                              |
-|      |                                              |                                                              |
+|      | 有面试题                                     | http://www.pomit.cn/index.html<br />https://www.mianshitiba.com/ |
+|      | vivo互联网技术                               | https://www.cnblogs.com/vivotech/tag/%E6%9C%8D%E5%8A%A1%E5%99%A8/ |
+|      | es入门,nginx等,写的相对全,偏向开发应用       | https://www.cnblogs.com/chenyanbin/category/1674225.html     |
+|      | filebeat/logstash                            | https://www.cnblogs.com/cjsblog/category/1272702.html        |
 

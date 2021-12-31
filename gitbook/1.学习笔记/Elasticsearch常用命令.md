@@ -415,6 +415,8 @@ GET _cluster/health?pretty  #查看集群监控状态
 
 ```plain
 GET _cluster/settings?pretty=true  #获取集群配置
+
+auto_create_index: 自动创建索引开关
 ```
 
 #### stats

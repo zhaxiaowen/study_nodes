@@ -381,3 +381,39 @@ broker返回给消费者数据的等待时间,默认500ms
 ```
 
 ![es_kafka生产配置](.\picture\es_kafka生产配置.jpg)
+
+### zookeeper在kafka中的作用
+
+```
+一、概述
+Apache Kafka是一个使用Zookeeper构建的分布式系统。Zookeeper的主要作用是在集群中的不同节点之间建立协调；如果任何节点失败，我们还使用Zookeeper从先前提交的偏移量中恢复，因为它做周期性提交偏移量工作。
+
+二、详解
+2.1 ZooKeeper作用之：Broker注册
+Broker是分布式部署并且相互之间相互独立，但是需要有一个注册系统能够将整个集群中的Broker管理起来，此时就使用到了Zookeeper。在Zookeeper上会有一个专门用来进行Broker服务器列表记录的节点。
+
+2.2 ZooKeeper作用之：Topic注册
+在Kafka中，同一个Topic的消息会被分成多个分区并将其分布在多个Broker上，这些分区信息及与Broker的对应关系也都是由Zookeeper在维护，由专门的节点来记录。
+
+2.3 ZooKeeper作用之：生产者负载均衡
+由于同一个Topic消息会被分区并将其分布在多个Broker上，因此，生产者需要将消息合理地发送到这些分布式的Broker上，那么如何实现生产者的负载均衡，Kafka支持传统的四层负载均衡，也支持Zookeeper方式实现负载均衡。
+
+2.4 ZooKeeper作用之：消费者负载均衡
+与生产者类似，Kafka中的消费者同样需要进行负载均衡来实现多个消费者合理地从对应的Broker服务器上接收消息，每个消费者分组包含若干消费者，每条消息都只会发送给分组中的一个消费者，不同的消费者分组消费自己特定的Topic下面的消息，互不干扰。
+
+2.5 ZooKeeper作用之：分区与消费者的关系
+消费组（Consumer Group）：consumer group下有多个Consumer（消费者），对于每个消费者组 （Consumer Group），Kafka都会为其分配一个全局唯一的Group ID，Group 内部的所有消费者共享该 ID。 订阅的topic下的每个分区只能分配给某个 group 下的一个consumer（当然该分区还可以被分配给其他group）。 同时，Kafka为每个消费者分配一个Consumer ID，通常采用"Hostname:UUID"形式表示。
+
+在Kafka中，规定了每个消息分区 只能被同组的一个消费者进行消费，因此，需要在 Zookeeper 上记录 消息分区 与 Consumer 之间的关系，每个消费者一旦确定了对一个消息分区的消费权力，需要将其Consumer ID 写入到 Zookeeper 对应消息分区的临时节点上。
+
+2.6 ZooKeeper作用之：消费进度Offset记录
+在消费者对指定消息分区进行消息消费的过程中，需要定时地将分区消息的消费进度Offset记录到Zookeeper上，以便在该消费者进行重启或者其他消费者重新接管该消息分区的消息消费后，能够从之前的进度开始继续进行消息消费。Offset在Zookeeper中由一个专门节点进行记录。节点内容是Offset的值。
+
+2.7 ZooKeeper作用之：消费者注册
+每个消费者服务器启动时，都会到Zookeeper的指定节点下创建一个属于自己的消费者节点。
+
+早期版本的Kafka用zk做meta信息存储，consumer的消费状态，group的管理以及offset的值。考虑到zk本身的一些因素以及整个架构较大概率存在单点问题，新版本中确实逐渐弱化了zookeeper的作用。新的consumer使用了kafka内部的group coordination协议，也减少了对zookeeper的依赖。
+
+来源：http://www.mianshitiba.com/kafka/77.html
+```
+

@@ -2,7 +2,14 @@
 
 [kafka运维指令](https://www.szzdzhp.com/kafka/op/op-for-kafka-all.html)
 
-### 常用指令(无zookeeper) 
+### 常用指令
+
+```
+# 查看所有topic详情
+./kafka-topics.sh --zookeeper 192.168.50.100:2181 --describe
+```
+
+
 
 #### kafka-topics.sh
 
