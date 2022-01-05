@@ -12,6 +12,9 @@
 应用方面：
 1._source只存储需要的字段
 2.开启字段store 属性true,会有单独的存储空间为这个字段做存储，这个存储是独立于_source;能提高查询效率
+
+Indexing Buffer:索引缓冲区参数设置
+断路器和fielddata
 ```
 
 #### 遇到性能问题，排查思路
@@ -47,3 +50,71 @@ GET /_cat/thread_pool?v
 如果集群上有大量分片，则可能存在过度分片的问题。
 如果观察到节点上的队列拒绝，但监控发现 CPU 未达到饱和，则磁盘写入速度可能存在问题。
 ```
+
+### Elasticsearch
+
+#### 1.集群角色
+
+* master node:主节点,控制整个集群的元数据处理,比如索引的新增、删除、分片路由分配等
+
+* master-eligible节点:合格节点,该节点可以参加选举主节点,成为master节点
+* data节点:数据节点,es集群的性能取决于该节点
+* coordinate node:协调节点,接收客户端请求,将请求转发给data节点,再把data节点返回的结果进行整合、排序,将最终结果返回给客户端
+* ingest节点:数据前置处理转换节点,致辞pipeline管道设置,可以使用ingest对数据进行过滤、转换等操作
+
+#### 2.写入过程
+
+> 写入过程分为同步过程和异步过程
+
+##### 1.同步过程
+
+1. 将操作记录写到translog中
+2. 根据数据生产相应的数据结构,写入内存buffer
+3. 数据同步到replica shard中.完成后coordinate响应结果
+4. es定期做segment merge,将多个小的segment合并成一个大的segment
+
+##### 2.异步过程
+
+1. 内存buffer --> OS cache,refresh过程
+2. segment file --> 落盘,flush过程,持久化
+
+#### 3.索引分片数修改
+
+> 重建索引,有2种方式,一种是在现有索引上重建,一种是在其他索引上重建
+
+缩减分片有2种方式
+
+1. [通过reindex api重建索引](https://blog.csdn.net/litianxiang_kaola/article/details/103981412)
+2. [通过shrink api重建索引](https://www.cnblogs.com/qingzhongli/p/15566286.html)(效率高,但执行步骤复杂)
+
+##### 使用_alias通过reindex实现不停机重建索引
+
+```
+1.定义mapping
+2.设置别名
+3.操作均通过别名执行
+4.新建索引
+5.reindex api重建索引
+6.切换别名
+```
+
+##### 使用shrink api缩减分片数量
+
+```
+# 前置条件 
+1.索引必须是只读
+2.索引每个主分片必须在同一个节点上
+3.索引的健康状态是绿色
+
+变更
+1.删除副本、分配所有主分片到同一节点、禁止写入。
+2.第一步执行完成后,使用_shrink index API 接口来对索引进行缩减  #缩减后的分片数量必须能让原来整除;可以先将副本设为0,提高效率
+3.缩减完成,设置副本数,删除旧索引,追加别名
+
+```
+
+增加分片数有2种方式
+
+1. 通过reindex api,同上
+2. [通过es split切分主分片数](https://blog.csdn.net/u014646662/article/details/103579425)
+

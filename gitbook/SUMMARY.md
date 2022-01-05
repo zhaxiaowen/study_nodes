@@ -4,6 +4,7 @@
 * [1.学习笔记](1.学习笔记/README.md)
     * [总结](1.学习笔记/总结.md)
     * [好的blog和git记录](1.学习笔记/好的blog和git记录.md)
+    * [单词](1.学习笔记/单词.md)
     * [常用指令](1.学习笔记/常用指令.md)
     * [k8s](1.学习笔记/k8s.md)
     * [Elasticsearch](1.学习笔记/Elasticsearch.md)
