@@ -52,6 +52,7 @@
     * [ES hot_thread](3.现网案例/ES hot_thread.md)
     * [es+kafka堆积](3.现网案例/es+kafka堆积.md)
     * [es上云案例](3.现网案例/es上云案例.md)
+    * [es生产环境索引扩分片](3.现网案例/es生产环境索引扩分片.md)
     * [kibana监控数据断点问题](3.现网案例/kibana监控数据断点问题.md)
     * [redis-cluster扩容,时延变高](3.现网案例/redis-cluster扩容,时延变高.md)
     * [redis时延高导致熔断](3.现网案例/redis时延高导致熔断.md)
