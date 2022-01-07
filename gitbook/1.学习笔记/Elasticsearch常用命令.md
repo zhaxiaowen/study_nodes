@@ -415,8 +415,10 @@ GET _cluster/health?pretty  #查看集群监控状态
 
 ```plain
 GET _cluster/settings?pretty=true  #获取集群配置
-
+# transient:临时调整集群配置,重启后失效
+# persistent:永久调整集群配置
 auto_create_index: 自动创建索引开关
+
 ```
 
 #### stats
@@ -431,6 +433,8 @@ GET _cluster/stats/nodes/<node_id>
 ```yaml
 GET _cluster/state?pretty=true #查看集群完整的状态信息
 GET _cluster/state/index?pretty=true #查看集群"index-name"信息 
+
+GET /_nodes/stats/process? #可以显示每个node的role属于(data/ingest/master),显示open_file_descriptors、max_file_descriptors数量
 ```
 
 ## delete
@@ -453,6 +457,9 @@ https://segmentfault.com/a/1190000037730202 :
 PUT /index-name/_settings  {"index":{"number_of_replicas":1}}   #调整分片索引
 PUT /index-name/_settings  {"index":{"refresh_interval" : "30s"}} #调整索引refresh频率
 PUT /index-name/_settings  {"index":{"translog.durability" : "async","translog.flush_threshold_size":"1gb"}}  #调整索引translog flush策略
+
+
+GET /_cluster/settings?include_defaults&flat_settings   #查看断路器
 ```
 
 

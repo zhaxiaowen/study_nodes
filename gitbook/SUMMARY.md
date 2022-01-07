@@ -9,6 +9,7 @@
     * [k8s](1.学习笔记/k8s.md)
     * [Elasticsearch](1.学习笔记/Elasticsearch.md)
     * [Elasticsearch常用命令](1.学习笔记/Elasticsearch常用命令.md)
+    * [Elasticsearch常见故障处理方法总结](1.学习笔记/Elasticsearch常见故障处理方法总结.md)
     * [Nginx常见用法](1.学习笔记/Nginx.md)
     * [Nginx原理](1.学习笔记/Nginx原理.md)
     * [Kafka概念和参数描述](1.学习笔记/Kafka.md)
