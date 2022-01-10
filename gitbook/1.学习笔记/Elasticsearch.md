@@ -118,3 +118,28 @@ GET /_cat/thread_pool?v
 1. 通过reindex api,同上
 2. [通过es split切分主分片数](https://blog.csdn.net/u014646662/article/details/103579425)
 
+#### unassigned分片问题可能的原因
+
+1）INDEX_CREATED：由于创建索引的API导致未分配。
+
+2）CLUSTER_RECOVERED ：由于完全集群恢复导致未分配。
+
+3）INDEX_REOPENED ：由于打开open或关闭close一个索引导致未分配。
+
+4）DANGLING_INDEX_IMPORTED ：由于导入dangling索引的结果导致未分配。
+
+5）NEW_INDEX_RESTORED ：由于恢复到新索引导致未分配。
+
+6）EXISTING_INDEX_RESTORED ：由于恢复到已关闭的索引导致未分配。
+
+7）REPLICA_ADDED：由于显式添加副本分片导致未分配。
+
+8）ALLOCATION_FAILED ：由于分片分配失败导致未分配。
+
+9）NODE_LEFT ：由于承载该分片的节点离开集群导致未分配。
+
+10）REINITIALIZED ：由于当分片从开始移动到初始化时导致未分配（例如，使用影子shadow副本分片）。
+
+11）REROUTE_CANCELLED ：作为显式取消重新路由命令的结果取消分配。
+
+12）REALLOCATED_REPLICA ：确定更好的副本位置被标定使用，导致现有的副本分配被取消，出现未分配。
