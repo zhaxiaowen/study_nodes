@@ -16,6 +16,14 @@
 >
 > 例:kubectl exec redis-cluster-0 -n wiseco -- hostname -f  # 查看pod的dns 
 
+#### 查看pod/service的yaml文件
+
+```
+kubectl get svc grafana -n kubesphere-monitoring-system  -o yaml
+```
+
+
+
 #### 给node添加/删除标签
 
 ```
