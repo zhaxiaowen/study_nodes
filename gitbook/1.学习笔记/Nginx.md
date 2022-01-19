@@ -8,6 +8,21 @@ https://www.cnblogs.com/lfl17718347843/p/11908543.html
 
 https://www.cnblogs.com/lfl17718347843/p/11908693.html
 
+#### 常用指令
+
+```
+nginx -s stop #快速关闭
+nginx -s reopen #重启
+nginx -s quit #等待工作进程处理完成后关闭
+nginx -T #查看当前nginx最终的配置（所有的server/location）
+
+日志切割：
+1. move access.log backup.log
+2. nginx -s reopen(kill -USR1 master_pid)
+```
+
+
+
 ### Nginx优化
 
 1. accept_mutex on #on为同一时刻一个请求轮流由work进程处理，防止被同时唤醒所有worker进程，默认为off
@@ -42,11 +57,6 @@ https://www.cnblogs.com/lfl17718347843/p/11908693.html
 
 1. kill -USR2 13303(master_pid号)  :
 2. kill -WINCH 13303  :向老的nginx进程发送信号,优雅的关闭所有work进程,此时老的master进程号还在,方便做版本回退
-
-#### 日志切割
-
-1. move access.log backup.log
-2. nginx -s reopen(kill -USR1 master_pid)
 
 ### Nginx语法
 

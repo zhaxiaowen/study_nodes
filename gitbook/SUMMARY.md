@@ -67,6 +67,7 @@
     * [应用报大量read timeout](3.现网案例/应用报大量read timeout.md)
     * [nslookup ok but ping fail](3.现网案例/nslookup ok but ping fail.md)
     * [测试环境迁移到k8s](3.现网案例/测试环境迁移到k8s.md)
+    * [前端代码发布未获得预期效果问题](3.现网案例/前端代码发布未获得预期效果问题.md)
 * [4.面试问题总结](4.面试问题总结/README.md)
 * [5.组件部署](5.组件部署/README.md)
     * [Prometheus和Grafana](5.组件部署/Prometheus和Grafana.md)
