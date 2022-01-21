@@ -50,6 +50,8 @@ kubectl cp message.log mysql-478535978-1dnm2:/tmp/message.log  # 将本地文件
 
 ### [k8s部署应用,故障排查思路](https://www.cnblogs.com/rancherlabs/p/12330916.html)
 
+[k8s故障诊断流程](https://cloud.tencent.com/developer/article/1899950)
+
 1. Deploymenr:创建名为Pods的应用程序副本的方法
 2. Service:内部负载局衡器,将流量路由到Pods
 3. Ingress:将流量从集群外部流向Service
@@ -61,6 +63,14 @@ kubectl cp message.log mysql-478535978-1dnm2:/tmp/message.log  # 将本地文件
 > Service是否将流量路由到Pod
 >
 > 检查Ingress是否正确配置
+
+#### 0.退出状态码
+
+> kubectl describe pod  ;查看State字段,ExitCode即程序退出的状态码,正常退出为0
+
+* 退出状态码必须在0-255之间
+* 外界中断将程序退出的时候状态码在129-255区间(操作系统给程序发送中断信号,例:kill-9等)
+* 程序自身原因导致的异常退出,状态码在1-128区间
 
 #### 1.常见Pod错误
 
@@ -124,3 +134,9 @@ curl -sX GET -H "Authorization:bearer `cat /root/dashboard/test/cluster.token`" 
 ```
 
 ![Preview](.\picture\Preview.jpg)
+
+#### 4.抓包方法
+
+> https://zhuanlan.zhihu.com/p/372567807
+>
+> https://blog.csdn.net/chongdang2813/article/details/100863010
