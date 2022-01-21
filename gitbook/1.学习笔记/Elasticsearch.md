@@ -69,7 +69,7 @@ GET /_cat/thread_pool?v
 ##### 1.同步过程
 
 1. 将操作记录写到translog中
-2. 根据数据生产相应的数据结构,写入内存buffer
+2. 根据数据生成相应的数据结构,写入内存buffer
 3. 数据同步到replica shard中.完成后coordinate响应结果
 4. es定期做segment merge,将多个小的segment合并成一个大的segment
 
@@ -124,7 +124,7 @@ GET /_cat/thread_pool?v
 
 2）CLUSTER_RECOVERED ：由于完全集群恢复导致未分配。
 
-3）INDEX_REOPENED ：由于打开open或关闭close一个索引导致未分配。
+3）INDEX_REOPENED ：由于打开或关闭一个索引导致未分配。
 
 4）DANGLING_INDEX_IMPORTED ：由于导入dangling索引的结果导致未分配。
 
