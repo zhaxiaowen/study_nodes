@@ -1,6 +1,6 @@
 # Kafka
 
-### [kafka概念](https://mp.weixin.qq.com/s/NreJPGiO5NlUBkEdpqHWDA)
+
 
 ### 消费者
 
@@ -29,7 +29,7 @@ Producer和Consumer都只会与Leader角色的分区副本相连
 
 增加分区数可以提高kafka集群的吞吐量,但是集群的总分区数或单台服务器的分区数过多,会增加不可用及延迟的风险
 
-分区leader选举:zookeeper针对每个topic维护一个ISR集合,只有在这个ISR列表李的,才有资格成为leader
+分区leader选举:zookeeper针对每个topic维护一个ISR集合,只有在这个ISR列表里的,才有资格成为leader
 
 ##### 分配策略
 

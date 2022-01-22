@@ -21,3 +21,16 @@ rabbitmqctl cluster_status:查看集群节点
 5.消息积压大于1W
 6.rabbitmq节点打开文件描述符数量大于70%
 ```
+
+
+
+### RocketMQ
+
+```
+#查看cluster信息
+mqadmin clusterList -n 172.17.200.146:9876
+
+#创建topic
+mqadmin updateTopic -c wsWangYueChe-dev3-rocketmq01 -r 4 -w 4 -n 172.17.200.146:9876 -t wangyueche-oalog-inner
+```
+
