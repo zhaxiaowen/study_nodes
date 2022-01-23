@@ -22,9 +22,9 @@
 
 #### Elasticsearch
 
-| *ElasticSearch*搜索引擎*常见*面试题总结                      |      |
+|                                                              |      |
 | ------------------------------------------------------------ | ---- |
-| [使用*ElasticSearch*踩过的坑](https://zhuanlan.zhihu.com/p/24428355) |      |
+|                                                              |      |
 | [*ElasticSearch常见*面试题汇总](https://zhuanlan.zhihu.com/p/429104939) |      |
 | [腾讯万亿级 *Elasticsearch* 技术解密](https://zhuanlan.zhihu.com/p/99184436) |      |
 |                                                              |      |
