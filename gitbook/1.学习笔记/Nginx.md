@@ -4,10 +4,6 @@
 
 https://www.cnblogs.com/lfl17718347843/p/11908543.html
 
-#### HAProxy
-
-https://www.cnblogs.com/lfl17718347843/p/11908693.html
-
 #### 常用指令
 
 ```
