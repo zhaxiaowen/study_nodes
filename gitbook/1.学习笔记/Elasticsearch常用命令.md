@@ -4,6 +4,8 @@
 
 [es集群运维常用命令](https://cloud.tencent.com/developer/article/1910980)
 
+[es运维文档](https://jiangxl.blog.csdn.net/article/details/117066251?spm=1001.2014.3001.5502)
+
 ## 一、CRUD
 
 #### 常用查询指令

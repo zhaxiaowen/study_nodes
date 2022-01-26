@@ -10,27 +10,93 @@
 6. [es1](https://www.cnblogs.com/kevingrace/p/6298022.html)
 6. [es2](https://www.cnblogs.com/kevingrace/p/10682264.html)
 
-#### redis
+# 技能要求:
 
-|      |                   |                                                              |
-| ---- | ----------------- | ------------------------------------------------------------ |
-|      | redis.conf详解    | http://c.biancheng.net/redis/config-summary.html             |
-|      | 华为云redis       | https://support.huaweicloud.com/productdesc-dcs/dcs-pd-200713001.html |
-|      | Redis Cluster原理 | https://blog.csdn.net/xiaofeng10330111/article/details/90384502?ops_request_misc=%7B%22request%5Fid%22%3A%22163653146816780265451858%22%2C%22scm%22%3A%2220140713.130102334.pc%5Fblog.%22%7D&request_id=163653146816780265451858&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_v2~rank_v29-5-90384502.pc_v2_rank_blog_default&utm_term=redis+cluster&spm=1018.2226.3001.4450 |
-|      | 高并发            | <br />                                                       |
-|      |                   | https://codeshellme.github.io/learn-book/                    |
+- redis
+- kafka
+- elk
+- nginx
+- k8s
 
-#### Elasticsearch
+# 加分项
 
-|                                                              |      |
-| ------------------------------------------------------------ | ---- |
-|                                                              |      |
-| [*ElasticSearch常见*面试题汇总](https://zhuanlan.zhihu.com/p/429104939) |      |
-| [腾讯万亿级 *Elasticsearch* 技术解密](https://zhuanlan.zhihu.com/p/99184436) |      |
-|                                                              |      |
-|                                                              |      |
-|                                                              |      |
-|                                                              |      |
-|                                                              |      |
-|                                                              |      |
+- python/shell
+- ansible
+- promtheus
+- CI/CD
 
+# 岗位职责
+
+* 监控:
+  * 全链路监控,skyworking,pinpoint
+  * prometheus
+* 自动化、平台化能力:
+  * 通过Jenkins的自定义Job,实现自动化部署
+  * 监控添加实现自动化
+  * 测试环境apollo配置,通过脚本实现参数自动化创建
+  * 故障分析:redis大key;cassandra数据不一致
+* 运维文档整理:
+  * 工作中常见故障处理方法
+  * 生产故障总结、复盘
+  * 规范的变更文档
+* 保证服务稳定性:
+  * 精细的监控体系
+  * 容灾
+  * 混沌工程,定期做故障演练
+  * 接口、性能优化
+
+* 推动规范、标准落地
+  * 变更规范:减少变更中可能出现的故障的概率
+  * 部署规范:集群名称,hostname等
+
+### SRE
+
+* 如何保证服务稳定性
+
+* 如何做好容量规划
+
+  > 容量规划是以当前的性能作为基线,来决定你需要什么及什么时候需要
+  >
+  > 单台服务器的最大QPS,集群的QPS,需要扩容吗?扩多少?
+
+  * 收集指标:通过测试了解当前服务的数据指标,QPS,时延等
+  * 明确目标:对外承诺的服务质量,比如说3000QPS,响应时间小于200ms
+  * 趋势预测:根据历史数据,判断未来的业务增长速率,是否会达到集群的瓶颈,提前做好准备
+
+* 如何定位问题
+
+### 个人相关
+
+* 职业规划
+* 离职原因
+
+### 生产相关
+
+* 公司架构
+* 遇到过的生产故障
+
+### 系统相关
+
+- uptime命令中load average字段后的3个数字代表什么？如何判断系统整体负载的高低？
+  - 一分钟内,五分钟内,十五分钟内的系统平均负载;
+  - load 是一定时间内计算机有多少个活跃任务,也就是说是计算机的任务执行队列的长度,cpu计算的队列,所以一般认为CPU核数的就是load值的上线。
+- 如何查看某个进程的CPU、内存和负载情况？
+  - 通常我们使用top命令去交互查看系统负载信息。
+- free命令中shared  buff/cache  available 这3个字段是什么意思？
+  - shared 多进程使用的共享内存;
+  - buff/cache 读写缓存内存,这部分内存是当空闲来用的,当free内存不足时,linux内核会将此内存释放;
+  - available 是可以被程序梭使用的物理内存;
+- 描述下在linux中给一个文件授予 644权限是什么意思？
+  - 644 即〔当前用户读和写权限,〔群组用户〕读权限,〔其它〕读权限。
+- linux中如何禁止一个用户通过shell登录？
+  - 使用命令或者通过修改/etc/passwd文件的用户shell部分为/sbin/nologin 即可实现。
+- 如何观察当前系统的网络使用情况？
+  - 使用iftop等工具。
+- 如何追踪A主机到B主机过程中的丢包情况？
+  - traceroute、mtr, 或者其他双端带宽测试工具。
+- linux 系统中ID为0是什么用户？
+  - root
+- 怎么统计当前系统中的活跃连接数？
+  - netstat -na|grep ESTABLISHED|wc -l
+- time_wait 状态处于TCP连接中的那个位置？
+  - 客户端发出FIN请求服务端断连, 服务器未发送ack+fin确认。
