@@ -17,6 +17,7 @@
     * [Kafka概念和参数描述](1.学习笔记/Kafka.md)
     * [Kafka常用命令](1.学习笔记/Kafka常用命令.md)
     * [Kafka常见故障处理](1.学习笔记/Kafka常见故障处理.md)
+    * [Kafka常见变更](1.学习笔记/Kafka变更.md)
     * [Redis](1.学习笔记/Redis.md)
     * [Redis常用命令](1.学习笔记/Redis常用命令.md)
     * [Redis使用规范](1.学习笔记/Redis使用规范.md)
