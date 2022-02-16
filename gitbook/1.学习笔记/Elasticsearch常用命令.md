@@ -6,6 +6,8 @@
 
 [es运维文档](https://jiangxl.blog.csdn.net/article/details/117066251?spm=1001.2014.3001.5502)
 
+[常见故障总结](https://www.cnblogs.com/qcloud1001/p/13755469.html)
+
 ## 一、CRUD
 
 #### 常用查询指令
