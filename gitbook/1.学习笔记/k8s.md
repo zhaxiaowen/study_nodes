@@ -46,6 +46,20 @@ kubectl cp mysql-478535978-1dnm2:/tmp/message.log message.log  # 将容器内的
 kubectl cp message.log mysql-478535978-1dnm2:/tmp/message.log  # 将本地文件copy到容器内
 ```
 
+#### node管理
+
+```
+# 禁止pod调度到该节点
+kubectl cordon node3
+# 取消禁止调度
+kubectl uncordon node3
+
+# 驱逐该节点上的所有pod
+kubectl drain node3
+```
+
+
+
 
 
 ### [k8s部署应用,故障排查思路](https://www.cnblogs.com/rancherlabs/p/12330916.html)
