@@ -39,6 +39,7 @@
     * [性能优化概念](1.学习笔记/性能优化.md)
     * [Jenkins](1.学习笔记/Jenkins.md)
     * [Anaconda常用指令](1.学习笔记/Anaconda常用指令.md)
+    * [systemctl](1.学习笔记/systemctl.md)
 * [2.故障处理方法](2.故障处理方法/README.md)
     * [常用问题定位工具总结](2.故障处理方法/常用问题定位工具总结.md)
     * [磁盘问题定位](2.故障处理方法/磁盘问题定位.md)
@@ -87,4 +88,9 @@
 * [6.工作技巧总结](6.工作技巧总结/README.md)
     * [工作方式](6.工作技巧总结/工作方式.md)
     * [问题总结](6.工作技巧总结/问题总结.md)
+* [7.脚本](7.脚本/README.md)
+    * [paramiko](7.脚本/paramiko.py)
+    * [python3调用ansible](7.脚本/python3调用ansible.md)
+    * [ansible使用总结](7.脚本/ansible.md)
+* [8.跑步](8.跑步/跑步技巧总结.md)
 
