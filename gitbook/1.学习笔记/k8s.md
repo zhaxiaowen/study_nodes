@@ -1,4 +1,4 @@
-# k8s
+# k8s + docker
 
 ### 概念
 
@@ -7,6 +7,32 @@
 > 用来记录一个service对应的所有pod的访问地址,存储在etcd中,就是service关联的pod的ip地址和端口
 >
 > service配置了selector,endpoint controller才会自动创建对应的endpoint对象,否则不会生产endpoint对象
+
+### docker
+
+```
+# 查看容器细节
+docker inspect --format "{{.NetworkSettings.IPAddress}}" <containerid>
+
+# 进入容器的网络命令空间,使用宿主机的命令
+nsenter
+pid=$(docker inspect --format "{{.State.Pid}}") <container>
+nsenter -n -t <pid>
+nsenter -t <pid> -n ip addr #进入某个namespace运行命令
+lsns #查看当前系统的namespace
+lsns -t <type>
+ls -al /proc/<pid>/ns/  #查看某进程的namespace
+nsenter -t <pid> -n <ip addr> #进入某namespace执行命令
+# 不进容器执行命令
+docker exec -it <container> /bin/bash -c "ls"
+
+# cp文件到容器
+docker cp file1 <container>:/root
+```
+
+
+
+
 
 
 

@@ -91,7 +91,7 @@ ansible -i host all -m shell -a "hostname"
 ```
 # 1. vi /data/scripts/test/ansible.cfg
 [defaults]
-inventory      = /data/scripts/test/host
+inventory      = /data/scripts/monitor_add_script/host
 
 # 2. vi /data/scripts/test/host
 [apollo_change]
