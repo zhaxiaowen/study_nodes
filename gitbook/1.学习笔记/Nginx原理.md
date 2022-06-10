@@ -1,5 +1,7 @@
 # Nginx原理
 
+> 服务端就称为nginx的上游 ; 浏览器就称为nginx的下游
+
 master进程的作用:
 
 * 管理worker进程:接收来自外界的信号,向各worker进程发送信号
