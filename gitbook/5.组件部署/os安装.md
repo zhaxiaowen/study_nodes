@@ -74,6 +74,21 @@ xrandr --output default --mode 1920x1080_60.00
 
 
 
+#### Centos安装软件桌面快捷方式
+
+```
+# 以typora为例
+cd /usr/share/applications
+vim typora.desktop
+
+[Desktop Entry]
+Name=Typora
+Exec=/home/soft/typora/Typora %U
+Terminal=false
+Type=Application
+Icon=/home/soft/typora/resources/assets/icon/icon_128x128.png  #图标,不知道位置可以在软件目录下搜索下
+```
+
 
 
 

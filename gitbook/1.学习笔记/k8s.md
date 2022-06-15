@@ -180,3 +180,12 @@ curl -sX GET -H "Authorization:bearer `cat /root/dashboard/test/cluster.token`" 
 > https://zhuanlan.zhihu.com/p/372567807
 >
 > https://blog.csdn.net/chongdang2813/article/details/100863010
+
+
+
+#### 获取kubeconfig,添加lens用
+
+```
+kubectl config view --minify --raw
+```
+
