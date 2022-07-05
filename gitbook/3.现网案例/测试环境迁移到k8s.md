@@ -20,3 +20,9 @@
 4. 查看imp-test5对应Ingress,发现更新转发配置,只有`/api/accountWebImpl/`转发,手动添加`/accountWebImpl`
 5. 请求域名,报404,请求资源不存在.查看imp-test5的ingress配置文件,少了后半截,手动添加`rewrite ^/api/accountWebImpl/(.*) /$1 break;rewrite ^/accountWebImpl/(.*) /$1 break;`
 6. 请求,回复正常
+
+
+
+#### 华为云容器服务
+
+* 监听器个数不够,导致整个容器集群不可用
