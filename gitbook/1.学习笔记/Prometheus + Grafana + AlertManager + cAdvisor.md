@@ -263,3 +263,41 @@ inhibit_rules:
 
 1.[检测icmp/tcp/http/ssl证书](https://blog.csdn.net/qq_25934401/article/details/84325356)
 
+
+
+#### prometheus标签替换
+
+* relabel_configs ： 在采集之前（比如在采集之前重新定义元标签）
+* metric_relabel_configs：在存储之前准备抓取指标数据时，可以使用relabel_configs添加一些标签、也可以只采集特定目标或过滤目标。 已经抓取到指标数据时，可以使用metric_relabel_configs做最后的重新标记和过滤。
+
+```
+    relabel_configs:
+      - source_labels: ['__meta_consul_service_metadata_metric']
+        regex: '.*actuator.*'
+        action: drop
+      - source_labels: ['__meta_consul_service_metadata_project'] #只收集匹配到的标签值
+        regex: 'wsWangYueChe'
+        action: keep
+      - source_labels: ['__metrics_path__']
+        regex: /metrics
+        target_label: __metrics_path__
+        replacement: /prometheus/metrics
+        action: replace
+      - source_labels: ['__meta_consul_tags'] #__meta_consul_tags值=",prod," 
+        action: replace
+        regex: (,+)(.*), #匹配标签的值,用$2的值替换掉原来的标签值
+        replacement: $2
+        target_label: env #替换标签名称
+      - source_labels: ['__meta_consul_service_metadata_project']  #将__meta_consul_service_metadata_project标签名替换成project
+        target_label: project
+      - source_labels: ['__meta_consul_service_metadata_category']
+        target_label: category
+      - source_labels: ['__meta_consul_service_metadata_exporter']
+        target_label: exporter
+      - source_labels: ['__meta_consul_service_metadata_hostname']
+        target_label: hostname
+      - source_labels: ['__meta_consul_service_metadata_appname']
+        target_label: appname
+        
+```
+

@@ -40,6 +40,7 @@
     * [Jenkins](1.学习笔记/Jenkins.md)
     * [Anaconda常用指令](1.学习笔记/Anaconda常用指令.md)
     * [systemctl](1.学习笔记/systemctl.md)
+    * [mvn/](1.学习笔记/mvn.md)
 * [2.故障处理方法](2.故障处理方法/README.md)
     * [常用问题定位工具总结](2.故障处理方法/常用问题定位工具总结.md)
     * [磁盘问题定位](2.故障处理方法/磁盘问题定位.md)
@@ -90,7 +91,8 @@
     * [ES集群部署](5.组件部署/ES集群部署.md)
     * [keepalived+nginx](5.组件部署/keepalived+nginx.md)
     * [os安装](5.组件部署/os安装.md)
-    * [k8s-prometheus监控集群外的nginx](5.组件部署//k8s-prometheus监控集群外的nginx.md)
+    * [k8s-prometheus监控集群外的nginx](5.组件部署/k8s-prometheus监控集群外的nginx.md)
+    * [helm部署](5.组件部署/helm部署.md)
 * [6.工作技巧总结](6.工作技巧总结/README.md)
     * [工作方式](6.工作技巧总结/工作方式.md)
     * [问题总结](6.工作技巧总结/问题总结.md)
@@ -104,4 +106,5 @@
 * [8.跑步](8.跑步/跑步技巧总结.md)
 * [9.购物清单记录](9.购物清单记录/购物清单.md)
 * [10.麦当劳早餐心得](10.麦当劳早餐心得/麦当劳早餐心得.md)
+* [11.投资](11.投资/投资.md)
 

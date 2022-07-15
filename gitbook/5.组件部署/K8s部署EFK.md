@@ -131,7 +131,7 @@ metadata:
 spec:
   ports:
   - port: 5601
-    nodePort: 30010
+    nodePort: 30004
   type: NodePort
   selector:
     app: kibana
@@ -160,9 +160,9 @@ spec:
         image: docker.elastic.co/kibana/kibana:7.6.2
         resources:
           limits:
-            cpu: 1000m
+            cpu: 100m
           requests:
-            cpu: 1000m
+            cpu: 100m
         env:
         - name: ELASTICSEARCH_HOSTS
           value: http://elasticsearch:9200
@@ -234,9 +234,9 @@ spec:
           containerPort: 9300
         resources:
           limits:
-            cpu: 1000m
+            cpu: 100m
           requests:
-            cpu: 1000m
+            cpu: 100m
         volumeMounts:
         - name: data
           mountPath: /usr/share/elasticsearch/data
@@ -267,7 +267,7 @@ spec:
       storageClassName:  course-nfs-storage
       resources:
         requests:
-          storage: 50Gi
+          storage: 10Gi
 ```
 
 #### fluentd-configmap.yaml

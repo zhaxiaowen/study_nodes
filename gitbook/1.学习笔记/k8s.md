@@ -189,3 +189,19 @@ curl -sX GET -H "Authorization:bearer `cat /root/dashboard/test/cluster.token`" 
 kubectl config view --minify --raw
 ```
 
+
+
+#### 镜像导入导出
+
+```
+docker save busybox > busybox.tar
+docker load < busybox.tar
+```
+
+#### 容器导入导出
+
+```
+docker export busybox > busybox.tar
+cat busybox.tar | docker import - busybox:latest
+```
+
