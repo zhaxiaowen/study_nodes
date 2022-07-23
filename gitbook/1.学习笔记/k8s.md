@@ -205,3 +205,18 @@ docker export busybox > busybox.tar
 cat busybox.tar | docker import - busybox:latest
 ```
 
+#### [configMap使用](https://www.bbsmax.com/A/kvJ3NoVwzg/)
+1. items字段使用:
+* 不想以key名作为配置文件名可以引入​​items​​​ 字段，在其中逐个指定要用相对路径​​path​​替换的key
+* 只有items下的key对应的文件会被挂载到容器中
+```
+  volumes:
+    - name: config-volume
+      configMap:
+        name: cm-demo1
+        items:
+        - key: mysql.conf
+          path: path/to/msyql.conf
+```
+2. valueFrom:映射一个key值,与configMapKeyRef搭配使用
+3. envFrom:把ConfigMap的所有键值对都映射到Pod的环境变量中去,与configMapRef搭配使用
