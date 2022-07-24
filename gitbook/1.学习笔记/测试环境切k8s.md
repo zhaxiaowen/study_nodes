@@ -11,3 +11,14 @@
 * `spec`字段:必须提供,用来描述该对象的期望状态,以及关于对象的基本信息 
 
 * Annotation:可以将kubernetes资源对象关联到任意的非标识行元数据
+
+### 常用指令
+
+#### lable selector
+
+```
+kubectl get pod -l tier=frontend
+kubectl get pod -l 'tier in (frontend),env in (production)'
+kubectl get pod -l 'env notin (production)'
+```
+
