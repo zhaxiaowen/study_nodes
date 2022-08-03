@@ -1,6 +1,6 @@
 ### k8s常用指令
 
-![k8s架构图](E:\git-project\gitbook\1.学习笔记\picture\k8s架构图.jpg)
+![k8s架构图](.\picture\k8s架构图.jpg)
 
 
 
@@ -9,6 +9,16 @@
 ```
 kubectl config view --minify --raw
 ```
+
+#### 通过证书请求k8s apiserver
+
+```
+curl https://192.168.122.100:6443/api/ --cacert /etc/kubernetes/pki/ca.crt --cert /etc/kubernetes/pki/apiserver-kubelet-client.crt --key /etc/kubernetes/pki/apiserver-kubelet-client.key
+
+curl https://192.168.122.100:6443/api/v1/nodes --cacert /etc/kubernetes/pki/ca.crt --cert /etc/kubernetes/pki/apiserver-kubelet-client.crt --key /etc/kubernetes/pki/apiserver-kubelet-client.key
+```
+
+
 
 #### DNS解析
 
