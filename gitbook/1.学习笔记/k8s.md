@@ -1,11 +1,5 @@
 # k8s + docker
 
-#### 常用指令
-
-
-
-
-
 ### 概念
 
 1. endpoint
@@ -36,63 +30,23 @@ docker exec -it <container> /bin/bash -c "ls"
 docker cp file1 <container>:/root
 ```
 
+#### DNS解析方式
 
+```
+servicehname.namespace.svc.cluster.local
+```
 
+#### Pod名称格式
 
-
-
+```
+${deployment-name}-${template-hash}-${random-suffix}
+```
 
 ### 常用指令
 
 > StatefulSet中每个Pod的DNS格式为`statefulSetName-{0..N-1}.serviceName.namespace.svc.cluster.local`
 >
 > 例:kubectl exec redis-cluster-0 -n wiseco -- hostname -f  # 查看pod的dns 
-
-#### 查看pod/service的yaml文件
-
-```
-kubectl get svc grafana -n kubesphere-monitoring-system  -o yaml
-```
-
-
-
-#### 给node添加/删除标签
-
-```
-kubectl label nodes node1 beta.kubernetes.io/fluentd-ds-ready=true   #添加
-kubectl label node node1  beta.kubernetes.io/fluentd-ds-ready-   #删除
-```
-
-#### 将本地端口9200转发到es-pod对应的端口
-
-```
-port-forward: 转发一个本地端口到容器端口
-kubectl port-forward es-0 9200:9200 -n logging
-curl http://localhost:9200/_cluster/state?pretty   # 在另一个端口测试
-```
-
-#### cp
-
-```
-kubectl cp mysql-478535978-1dnm2:/tmp/message.log message.log  # 将容器内的文件copy到本地
-kubectl cp message.log mysql-478535978-1dnm2:/tmp/message.log  # 将本地文件copy到容器内
-```
-
-#### node管理
-
-```
-# 禁止pod调度到该节点
-kubectl cordon node3
-# 取消禁止调度
-kubectl uncordon node3
-
-# 驱逐该节点上的所有pod
-kubectl drain node3
-```
-
-
-
-
 
 ### [k8s部署应用,故障排查思路](https://www.cnblogs.com/rancherlabs/p/12330916.html)
 
@@ -187,30 +141,6 @@ curl -sX GET -H "Authorization:bearer `cat /root/dashboard/test/cluster.token`" 
 >
 > https://blog.csdn.net/chongdang2813/article/details/100863010
 
-
-
-#### 获取kubeconfig,添加lens用
-
-```
-kubectl config view --minify --raw
-```
-
-
-
-#### 镜像导入导出
-
-```
-docker save busybox > busybox.tar
-docker load < busybox.tar
-```
-
-#### 容器导入导出
-
-```
-docker export busybox > busybox.tar
-cat busybox.tar | docker import - busybox:latest
-```
-
 #### [configMap使用](https://www.bbsmax.com/A/kvJ3NoVwzg/)
 1. items字段使用:
 * 不想以key名作为配置文件名可以引入​​items​​​ 字段，在其中逐个指定要用相对路径​​path​​替换的key
@@ -226,3 +156,35 @@ cat busybox.tar | docker import - busybox:latest
 ```
 2. valueFrom:映射一个key值,与configMapKeyRef搭配使用
 3. envFrom:把ConfigMap的所有键值对都映射到Pod的环境变量中去,与configMapRef搭配使用
+
+#### k8s中的资源对象
+
+* apiVersion:创建该对象所使用的kubernetes API版本
+* kind:想要创建的对象类型
+* metadata:帮助识别对象唯一性的数据,包括`name` `UID` `namespace`字段
+
+* `spec`字段:必须提供,用来描述该对象的期望状态,以及关于对象的基本信息 
+
+* Annotation:可以将kubernetes资源对象关联到任意的非标识行元数据
+
+#### [容器中获取Pod信息](https://blog.csdn.net/lsx_3/article/details/124399768)(https://www.cnblogs.com/cocowool/p/kubernetes_get_metadata.html)
+
+* 环境变量:将pod或容器信息设置为容器的环境变量
+* volume挂载:将pod或容器信息以文件的形式挂载到容器内部
+
+```
+通过fieldRef设定的元数据如下:
+metadata.name：Pod名称
+metadata.namespace： Pod所在的命名空间名称
+metadata.uid：Pod的UID （Kubernetes 1.8.0 +）
+metadata.labels[‘<KEY>’]：Pod某个Label的值，通过KEY进行引用
+metadata.annotations[‘<KEY>’]：Pod某个Annotation的值，通过KEY进行引用
+
+Pod元数据信息可以设置为容器内的环境变量:
+status.podIP：Pod的IP地址
+spec.serviceAccountName：Pod使用的ServiceAccount名称
+spec.nodeName：Pod所在Node的名称 （Kubernetes 1.4.0 +）
+status.hostIP：Pod所在Node的IP地址 （Kubernetes 1.7.0 +）
+
+```
+

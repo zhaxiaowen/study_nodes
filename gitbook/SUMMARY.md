@@ -8,7 +8,7 @@
     * [常用指令](1.学习笔记/常用指令.md)
     * [常用快捷键](1.学习笔记/常用快捷键.md)
     * [k8s](1.学习笔记/k8s.md)
-    * [k8s-study-note](1.学习笔记/测试环境切k8s.md)
+    * [k8s常用命令](1.学习笔记/测试环境切k8s.md)
     * [Elasticsearch](1.学习笔记/Elasticsearch.md)
     * [Elasticsearch常用命令](1.学习笔记/Elasticsearch常用命令.md)
     * [Elasticsearch常见故障处理方法总结](1.学习笔记/Elasticsearch常见故障处理方法总结.md)

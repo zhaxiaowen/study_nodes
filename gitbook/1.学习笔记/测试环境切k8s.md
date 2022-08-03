@@ -1,16 +1,21 @@
+### k8s常用指令
+
 ![k8s架构图](E:\git-project\gitbook\1.学习笔记\picture\k8s架构图.jpg)
 
 
 
-#### k8s中的资源对象
+#### 获取集群kubeconfig,添加lens用
 
-* apiVersion:创建该对象所使用的kubernetes API版本
-* kind:想要创建的对象类型
-* metadata:帮助识别对象唯一性的数据,包括`name` `UID` `namespace`字段
+```
+kubectl config view --minify --raw
+```
 
-* `spec`字段:必须提供,用来描述该对象的期望状态,以及关于对象的基本信息 
+#### DNS解析
 
-* Annotation:可以将kubernetes资源对象关联到任意的非标识行元数据
+```
+StatefulSet中每个Pod的DNS格式为`statefulSetName-{0..N-1}.serviceName.namespace.svc.cluster.local`
+例:kubectl exec redis-cluster-0 -n wiseco -- hostname -f  # 查看pod的dns 
+```
 
 ### 常用指令
 
@@ -22,3 +27,70 @@ kubectl get pod -l 'tier in (frontend),env in (production)'
 kubectl get pod -l 'env notin (production)'
 ```
 
+```
+ kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.9.1  #更新镜像版本
+ 
+ kubectl rollout history deployment.v1.apps/nginx-deployment  #查询deployment
+ 
+ kubectl rollout undo deployment/nginx-deployment  #回滚到deployment上一个版本
+ 
+ kubectl rollout undo deployment.v1.apps/nginx-deployment --to-revision=2  #回滚到指定版本
+```
+
+
+
+#### 查看pod/service的yaml文件
+
+```
+kubectl get svc grafana -n kubesphere-monitoring-system  -o yaml
+```
+
+#### 给node添加/删除标签
+
+```
+kubectl label nodes node1 beta.kubernetes.io/fluentd-ds-ready=true   #添加
+kubectl label node node1  beta.kubernetes.io/fluentd-ds-ready-   #删除
+```
+
+#### 将本地端口9200转发到es-pod对应的端口
+
+```
+port-forward: 转发一个本地端口到容器端口
+kubectl port-forward es-0 9200:9200 -n logging
+curl http://localhost:9200/_cluster/state?pretty   # 在另一个端口测试
+```
+
+#### cp
+
+```
+kubectl cp mysql-478535978-1dnm2:/tmp/message.log message.log  # 将容器内的文件copy到本地
+kubectl cp message.log mysql-478535978-1dnm2:/tmp/message.log  # 将本地文件copy到容器内
+```
+
+#### node管理
+
+```
+# 禁止pod调度到该节点
+kubectl cordon node3
+# 取消禁止调度
+kubectl uncordon node3
+
+# 驱逐该节点上的所有pod
+kubectl drain node3
+```
+
+#### 镜像导入导出
+
+```
+docker save busybox > busybox.tar
+docker load < busybox.tar
+```
+
+#### 容器导入导出
+
+```
+docker export busybox > busybox.tar
+cat busybox.tar | docker import - busybox:latest
+```
+
+#### 
