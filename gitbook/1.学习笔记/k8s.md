@@ -87,6 +87,120 @@
 2. valueFrom:映射一个key值,与configMapKeyRef搭配使用
 3. envFrom:把ConfigMap的所有键值对都映射到Pod的环境变量中去,与configMapRef搭配使用
 
+### [三. HPA](https://zhuanlan.zhihu.com/p/368865741)
+
+* autoscaling/v1:只支持CPU一个指标的弹性伸缩
+* autoscaling/v2beta1:支持自定义指标
+* autoscaling/v2beat2:支持外部指标
+
+1. metrics指标
+   * averageUtilization:当整体资源超过这个百分比,会扩容
+   * averageValue:指标的平均值超过这个值,扩容
+   * Value:当指标的值超过这个value时,扩容
+2. HPA算法
+   * 期望副本数=当前副本数 * (当前指标 / 期望指标)
+   * 当前指标200m,目标设定100m,200/100=2,副本数翻倍
+   * 当前指标50m,目标设定100m,50/100=0.5,副本数减半
+   * 如果比例接近1.0(根据--horizontal-pod-autoscaler-tolerance参数全局配置的容忍值,默认0.1),不扩容
+
+2. 冷却/延迟支持
+   * 防抖动功能
+   * --horizontal-pod-autoscaler-downscale-stabilization:设置缩容冷却时间窗口长度.水平pod扩缩容能够记住过去建议的负载规模,并仅对此事件窗口内的最大规模执行操作.默认5min
+3. 扩所策略:平滑的操作
+   * behavior字段可以指定一个或多个扩缩策略
+
+4. HPA存在的问题:基于指标的弹性有滞后效应,因为弹性控制器操作的链路过长
+   * 应用指标数据已经超出阈值
+   * HPA定期执行指标收集滞后效应
+   * HPA控制Deployment进行扩容的时间
+   * Pod调度,运行时启动挂载存储和网络的时间
+   * 应用启动到服务就绪的时间
+   * 很可能在突发流量出现时,还没完成弹性扩容,既有的服务实例已经被流量击垮
+
+```
+apiVersion: autoscaling/v2beta2
+  kind: HorizontalPodAutoscaler
+  metadata:
+    name: web
+    namespace: default
+  spec:
+    behavior: 
+      scaleDown:   # 缩容速度策略
+        policies: 
+          periodSeconds:  15  # 每15s最多缩减currentReplicas * 100%个副本
+          type: Percent
+          value: 100
+        stabilizationWindowSeconds: 300  # 且缩容后的最终副本不得低于过去300s内计算的历史副本数的最大值
+      scaleUp: 	# 扩容速度策略
+        policies:
+        - type: Percent # 每15s翻倍
+          value: 100
+          periodSeconds: 15
+        - type: Pods	# 每15s新增4个副本
+          value: 4
+          periodSeconds: 15
+        selectPolicy: Max   # 上面2种情况取最大值:max(2* currentReplicas,4)
+        stabilizationWindowSeconds: 0
+    maxReplicas: 10   # 最大多少副本
+    minReplicas: 1		# 最少副本数
+    scaleTargetRef: 	# 需要动态伸缩的目标
+      apiVersion: apps/v1
+      kind: Deployment
+      name: d1
+    metrics: 
+    - type: Resource 
+      resource:  #伸缩对象Pod的指标.target.type只支持Utilization和AveragevALUE类型
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
+    - type: ContainerResource
+      containerResource:	# 伸缩对象下的container的cpu和memory指标,只支持Utilization和AverageValue
+        container: C1
+        name: memory
+        target:
+          type: AverageValue
+          averageValue: 300Mi
+    - type: Pods
+      pods:		# 指的是伸缩对象pod的指标,数据需要第三方的adapter指标,只允许AverageValue类型的阈值
+        metric:
+          name: Pods_second 
+          selector: 
+          - matchExpressions: 
+            - key: zone
+              operator: In
+              values: 
+              - foo
+              - bar
+        target:
+          type: AverageValue
+          averageValue: 1k
+    - type: External
+      external:	# k8s外部的指标,第三方adapter提供,只支持value和AverageValue类型的阈值
+        metric:
+          name: External_second
+          selector: "queue=worker_tasks"
+        target:
+          type: Value
+          value: 20
+    - type: Object
+      object:
+        describedObject:
+          apiVersion: networking.k8s.io/v1beta1
+          kind: Ingress
+          name: main-route
+        metric:
+          name: ingress_test
+        target:
+          type: Value
+          value: 2k
+```
+
+### 四. VPA
+
+* 纵向扩容pod,但是要重建pod
+* 社区有说法是可以修改requests,但是一直没合进去
+
 #### DNS解析方式
 
 ```

@@ -62,10 +62,12 @@ kubectl port-forward es-0 9200:9200 -n logging
 curl http://localhost:9200/_cluster/state?pretty   # 在另一个端口测试
 ```
 
-#### 查看scheduler日志
+#### 查看命令执行的日志
 
 ```
 kubectl run --image=nginx --v=10
+kubectl top pods -v 9
+kubectl get --raw "/api/v1/nodes/node1/proxy/metrics/resource"
 ```
 
 #### cp
@@ -123,4 +125,9 @@ docker export busybox > busybox.tar
 cat busybox.tar | docker import - busybox:latest
 ```
 
-### 
+### 动态监控pod状况
+
+```
+watch kubectl top pods
+```
+
