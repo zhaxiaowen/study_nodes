@@ -1,4 +1,6 @@
-# ES集群主分片未分配
+# ES
+
+### ES集群主分片未分配
 
 1.测试环境es集群red状态
 1.1 检查节点数正常
@@ -12,3 +14,23 @@
 2.1 
 2.3 解决办法: 需要重新触发分配
 POST /_cluster/reroute?retry_failed
+
+### ES hot_thread
+
+[hot_thread](https://mp.weixin.qq.com/s?__biz=MzI2NDY1MTA3OQ==&mid=2247485529&idx=1&sn=3f1b91fcd75301109e375368435fdb16&chksm=eaa82071dddfa96737cd9cc2f838f59036851e1a9d4f7f3c56edf5adf0a1b4a2c281060b7c8a&scene=21#wechat_redirect)
+
+### es+kafka堆积
+
+[ES明明还没到瓶颈，可为啥kafka中有大量消息堆积呢](https://cloud.tencent.com/developer/article/1626561)
+
+### es上云案例
+
+https://www.cnblogs.com/qcloud1001/p/13451127.html
+
+### es生产环境索引扩分片
+
+https://note.youdao.com/web/#/file/recent/note/626E40128A7F4D6E861EEB97DDA729FF/
+
+### kibana监控数据断点问题
+
+[kibana所有监控数据断点问题](https://cloud.tencent.com/developer/article/1618912)
