@@ -89,6 +89,18 @@ kubectl uncordon node3
 kubectl drain node3
 ```
 
+#### 强制删除pod
+
+```
+kubectl delete pod -n monitoring node-exporter-pvwwp --force --grace-period=0
+```
+
+
+
+
+
+
+
 ### docker
 
 ```

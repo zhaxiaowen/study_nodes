@@ -201,6 +201,37 @@ apiVersion: autoscaling/v2beta2
 * 纵向扩容pod,但是要重建pod
 * 社区有说法是可以修改requests,但是一直没合进去
 
+### 五.网络原理
+
+#### [docker](https://blog.csdn.net/qq_41688840/article/details/108708415)
+
+* 默认bridge桥接网络: docker自身生产一个veth pair(虚拟网卡对)一端放在docker0网桥上,一端放在容器内部
+* 共享宿主机Host的网络: 容器直接使用宿主机的的网络栈以及端口port范围
+* container共享模式: 指定容器与另外某个已存在的容器共享它的网络.k8s里的pause容器,其他容器通过共享pause容器的网络栈,实现与外部Pod进行通信,通过localhost进行Pod内部的container的通信
+* none模式: 此模式只给容器分配隔离的network namespace,不会分配网卡,ip地址等.k8s网络插件是基于此做的网络分配,插件分配ip地址、网卡给pause容器
+
+#### 总结
+
+* k8s网络插件负责管理ip地址分配以及veth pair(虚拟网卡对)以及网桥连接工作,pause容器采用docker的none网络模式,网络插件再将ip和veth虚拟网卡分配给pod的pause容器,其他的容器再采用共享container的网络模式来共享这个pause的网络即可与外界进行通信
+
+#### [pod内部的容器如何通信](https://blog.csdn.net/weixin_41947378/article/details/110749413?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166065926816780366590319%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=166065926816780366590319&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-8-110749413-null-null.nonecase&utm_term=k8s&spm=1018.2226.3001.4450)
+
+* 共享pause容器的网络栈,通过veth0虚拟网卡通信,直接通过localhost相互访问
+
+#### 同节点的pod是如何通信的
+
+* pod通过pause容器的veth连接到宿主机的docker0虚拟网桥上,同节点的pod就是通过docker0这个虚拟网桥通信的
+
+#### 不同节点的pod是如何通信的
+
+* pod的ip由flannel统一分配,通信也走flannal网桥
+* 每个node上都有个flannal0虚拟网卡,用于跨node通信,
+* 跨节点通信时,发送端数据会从docker0路由到flannel0虚拟网卡,接收到数据会从flannel0路由到docker0
+
+#### pod如何对外提供服务
+
+* 将物理机的端口和pod做映射,访问物理机的ip+端口,转发到pod,可以使用iptabels的配置规则实现数据包转发
+
 #### DNS解析方式
 
 ```
@@ -217,6 +248,8 @@ ${deployment-name}-${template-hash}-${random-suffix}
 
 * StatefulSet中每个Pod的DNS格式为`statefulSetName-{0..N-1}.serviceName.namespace.svc.cluster.local`
 * 例:kubectl exec redis-cluster-0 -n wiseco -- hostname -f  # 查看pod的dns 
+
+
 
 ### [k8s部署应用,故障排查思路](https://www.cnblogs.com/rancherlabs/p/12330916.html)
 
