@@ -42,7 +42,7 @@
 
 4. Headless service
 
-   * 不需要或不想要负载均衡,指定spec.ClusterIP: None来闯将Headless Service
+   * 不需要或不想要负载均衡,指定spec.ClusterIP: None来创建Headless Service
    * 对这类service不会分配ClusterIP,kube-proxy不会处理它们,不会为它们进行负载均衡和路由;DNS如何实现自动配置,依赖于Service是否定义了selector
    * 配置selector的,endpoint控制器在API中创建了endpoints记录,并且修改DNS配置返回A记录,通过这个地址直达后端Pod
 
@@ -221,6 +221,7 @@ apiVersion: autoscaling/v2beta2
 #### 同节点的pod是如何通信的
 
 * pod通过pause容器的veth连接到宿主机的docker0虚拟网桥上,同节点的pod就是通过docker0这个虚拟网桥通信的
+* flannel插件有2种网卡,**cni0** 负责本节点的,**flannel.1**负责跨节点
 
 #### 不同节点的pod是如何通信的
 
@@ -231,6 +232,12 @@ apiVersion: autoscaling/v2beta2
 #### pod如何对外提供服务
 
 * 将物理机的端口和pod做映射,访问物理机的ip+端口,转发到pod,可以使用iptabels的配置规则实现数据包转发
+
+
+
+
+
+
 
 #### DNS解析方式
 
