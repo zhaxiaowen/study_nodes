@@ -95,6 +95,16 @@ kubectl drain node3
 kubectl delete pod -n monitoring node-exporter-pvwwp --force --grace-period=0
 ```
 
+#### 查找Pod另一端的veth设备
+
+> 需要在pod所在的node上执行命令
+
+```
+docker exec -it `docker ps |grep -v POD |grep grafana0 |awk '{print $1}'` ip addr |grep eth0@ |awk -F ': <' '{print $1}' |awk -F '@if' '{print $2}'
+8
+ip addr |grep ^8 |awk -F '@if' '{print $1}'
+```
+
 
 
 

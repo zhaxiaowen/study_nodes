@@ -229,6 +229,14 @@ apiVersion: autoscaling/v2beta2
 * 每个node上都有个flannal0虚拟网卡,用于跨node通信,
 * 跨节点通信时,发送端数据会从docker0路由到flannel0虚拟网卡,接收到数据会从flannel0路由到docker0
 
+##### 路由路径
+
+1. Kubectl get pod -n monitor -o wide :查看两个通信的Pod的ip
+2. **netstat -rn** 查看路由表
+3. node间通信是通过flannel网桥处理的,flannel会在etcd中查找pod所在Node节点的ip
+4. 目的节点的flannel收到数据包后,去除flanneld加上的头部,将原始的数据包发送到宿主机的网络栈
+5. **route -n**,根据路由表将包转发给docker0网桥上,docker0网桥再将数据包转给对应pod
+
 #### pod如何对外提供服务
 
 * 将物理机的端口和pod做映射,访问物理机的ip+端口,转发到pod,可以使用iptabels的配置规则实现数据包转发
@@ -242,7 +250,7 @@ apiVersion: autoscaling/v2beta2
 #### DNS解析方式
 
 ```
-servicehname.namespace.svc.cluster.local
+servicename.namespace.svc.cluster.local
 ```
 
 #### Pod名称格式
