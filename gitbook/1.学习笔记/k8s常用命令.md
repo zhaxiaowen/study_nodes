@@ -147,9 +147,33 @@ docker export busybox > busybox.tar
 cat busybox.tar | docker import - busybox:latest
 ```
 
+#### 删除容器
+
+```
+docker stop $(docker ps -q)  # 停用全部运行中的容器
+docker rm $(docker ps -aq)   # 删除全部容器
+docker stop $(docker ps -q) & docker rm $(docker ps -aq)
+```
+
+#### 获取容器pid
+
+```
+kubectl get pod  # 拿到容器名
+docker ps |grep $name # 拿到docker name
+docker inspect --format "{{ .State.Pid }}" 6f8c58377aae
+```
+
+#### nsenter
+
+```
+nsenter -t pid -n pwd		#在容器netns下执行命令
+nsenter -n --target 910351   #进入容器netns
+```
+
 ### 动态监控pod状况
 
 ```
 watch kubectl top pods
 ```
 
+#### 
