@@ -150,6 +150,8 @@ Reassignment of partition [topicB,2] completed successfully # 转移结束
 # 查看消费者状态信息
 ./kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:9092 --describe --state --group test 
 
+# 从头重放topic的消息
+kafka-console-consumer.sh --bootstrap-server 172.19.67.2:9092  --topic wsWangYueChe-wangyueche-Map-inner --from-beginning --from-beginning
 
 # 删除group
 ./kafka-consumer-groups.sh --bootstrap-server 127.0.0.1:9092 --group ka-waybill-route --delete
