@@ -2,6 +2,8 @@
 
 * [概述](README.md)
 * [1.学习笔记](1.学习笔记/README.md)
+    * [Python学习](1.学习笔记/Python学习.md)
+    * [Python绘图代码](1.学习笔记/Python绘图代码.md)
     * [总结](1.学习笔记/总结.md)
     * [好的blog和git记录](1.学习笔记/好的blog和git记录.md)
     * [架构](1.学习笔记/公司架构.md)
