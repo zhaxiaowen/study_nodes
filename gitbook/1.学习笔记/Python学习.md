@@ -22,6 +22,40 @@ ax.set_ylabel('sine')
 plt.show()
 ```
 
+#### x,y坐标轴
+
+```
+import numpy as np
+import matplotlib.pyplot as plt
+
+plt.rcParams["font.sans-serif"] = ["SimHei"]  # 设置字体
+plt.rcParams["axes.unicode_minus"] = False  # 该语句解决图像中的“-”负号的乱码问题
+
+n = np.linspace(-5, 4, 30,endpoint=False) #在-5到4之间绘制30个点,不想包括最后一个点,通过设置endpoint=False
+m1 = 3 * n + 2
+m2 = n ** 2
+plt.plot(n, m1, 'r-.', n, m2, 'b')
+plt.xlim((-2, 4))
+plt.ylim((-5, 15))
+x_ticks = np.linspace(-5, 4, 10)
+plt.xticks(x_ticks)
+plt.yticks([-2.5, 7.5], ['hate', 'love'])
+plt.xlabel('XXX')
+plt.ylabel('YYY')
+ax = plt.gca()
+ax.xaxis.set_ticks_position('bottom')
+ax.spines['bottom'].set_position(('data', 0))
+
+ax.yaxis.set_ticks_position('left')
+ax.spines['left'].set_position(('data', 0))
+
+ax.spines['top'].set_color('none')
+ax.spines['right'].set_color('none')
+
+plt.show()
+
+```
+
 
 
 ```
@@ -67,7 +101,7 @@ axes.spines['right'].set_color(None)
 axes.spines['top'].set_color(None)
 ```
 
-
+#### [用matplotlib的Animation画动图](https://zhuanlan.zhihu.com/p/442932579)
 
 
 
