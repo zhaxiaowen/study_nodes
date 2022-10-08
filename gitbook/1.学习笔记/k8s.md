@@ -216,8 +216,6 @@ apiVersion: autoscaling/v2beta2
 
 #### [pod内部的容器如何通信](https://blog.csdn.net/weixin_41947378/article/details/110749413?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166065926816780366590319%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=166065926816780366590319&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-8-110749413-null-null.nonecase&utm_term=k8s&spm=1018.2226.3001.4450)
 
-* 共享pause容器的网络栈,通过veth0虚拟网卡通信,直接通过localhost相互访问
-
 #### 同节点的pod是如何通信的
 
 * pod通过pause容器的veth连接到宿主机的docker0虚拟网桥上,同节点的pod就是通过docker0这个虚拟网桥通信的
@@ -241,9 +239,20 @@ apiVersion: autoscaling/v2beta2
 
 * 将物理机的端口和pod做映射,访问物理机的ip+端口,转发到pod,可以使用iptabels的配置规则实现数据包转发
 
+* 共享pause容器的网络栈,通过veth0虚拟网卡通信,直接通过localhost相互访问
 
+#### 为什么NetworkPolicy不用限制serviceIP却又能生效？
 
+* 防火墙策略重来不会遇到clusterIP,因为在到达防火墙策略钱,clusterIP都已经被转成podIP了
+  * 在pod中使用clusterIP访问另一个pod时，防火墙策略的应用是在所在主机的FORWARD点，而把clusterIP转成podIP是在之前的PREROUTING点就完成了
+  * 在主机中使用clusterIP访问一个pod时，防火墙策略的应用是在主机的OUTPUT点，而把clusterIP转成podIP也是在OUTPUT点
 
+#### 误解
+
+1. 相对于直接访问podIP，使用clusterIP来访问因为多一次转发，会慢一些；
+   - 其实只是在发送的过程中修改了数据包的目标地址，两者走的转发路径是一模一样的，没有因为使用clusterIP而多一跳，当然因为要做nat会有一些些影响，但影响不大
+2. 使用nodeport因为比clusterIP又多一次转发，所以更慢；
+   - 没有，nodeport是一次直接就转成了podIP，并没有先转成clusterIP再转成podIP。
 
 
 

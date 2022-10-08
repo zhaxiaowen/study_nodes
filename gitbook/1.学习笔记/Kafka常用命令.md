@@ -9,6 +9,37 @@
 ./kafka-topics.sh --zookeeper 192.168.50.100:2181 --describe
 ```
 
+```
+#kafka常用命令
+=========================创建topic=================================
+kafka-topics.sh  --create  --bootstrap-server $1:9092   --replication-factor n --partitions n --topic name
+
+=========================删除topic=================================
+kafka-topics.sh  --delete  --bootstrap-server $1:9092  --topic name
+
+=========================topic详情=================================
+kafka-topics.sh --bootstrap-server $1:9092  --describe  --topic name
+
+=========================列出topic=================================
+kafka-topics.sh  --bootstrap-server $1:9092 --list|grep
+
+=========================查看topic消息=============================
+kafka-console-consumer.sh -bootstrap-server $1:9092  --topic name  [--from-beginning]
+
+=========================列出消费者组==============================
+kafka-consumer-groups.sh --bootstrap-server $1:9092 --list|grep
+
+=========================查看消费者组详情==========================
+kafka-consumer-groups.sh --bootstrap-server $1:9092 --describe  --group groupName
+
+=========================删除消费者组===============================
+kafka-consumer-groups.sh --bootstrap-server $1:9092  --delete --group groupName
+
+=========================生产者手动发送消息========================
+kafka-console-producer.sh --broker-list $1:9092 --topic name
+
+```
+
 
 
 #### kafka-topics.sh
