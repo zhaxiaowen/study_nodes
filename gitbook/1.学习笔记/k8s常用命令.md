@@ -74,7 +74,7 @@ kubectl get --raw "/api/v1/nodes/node1/proxy/metrics/resource"
 
 ```
 kubectl cp mysql-478535978-1dnm2:/tmp/message.log message.log  # 将容器内的文件copy到本地
-kubectl cp message.log mysql-478535978-1dnm2:/tmp/message.log  # 将本地文件copy到容器内
+kubectl cp message.log -n namespace -c mysql-478535978-1dnm2:/tmp/message.log  # 将本地文件copy到容器内
 ```
 
 #### node管理
