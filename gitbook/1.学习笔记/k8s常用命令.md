@@ -155,12 +155,17 @@ docker rm $(docker ps -aq)   # 删除全部容器
 docker stop $(docker ps -q) & docker rm $(docker ps -aq)
 ```
 
-#### 获取容器pid
+#### 获取容器pid + veth名
 
 ```
 kubectl get pod  # 拿到容器名
 docker ps |grep $name # 拿到docker name
 docker inspect --format "{{ .State.Pid }}" 6f8c58377aae
+
+# 拿到veth名
+if [ ! -d /var/run/netns ]; then sudo  mkdir -p /var/run/netns; fi
+ln -sf /proc/${pid}/ns/net /var/run/netns/ns-${pid}
+ip netns exec "ns-4012085" ip link show type veth | grep "eth0"
 ```
 
 #### nsenter
