@@ -10,46 +10,7 @@
 6. [es1](https://www.cnblogs.com/kevingrace/p/6298022.html)
 6. [es2](https://www.cnblogs.com/kevingrace/p/10682264.html)
 
-# 技能要求:
 
-- redis
-- kafka
-- elk
-- nginx
-- k8s
-
-# 加分项
-
-- python/shell
-- ansible
-- promtheus
-- CI/CD
-
-# 岗位职责
-
-* 监控:
-  * 全链路监控,skyworking,pinpoint
-  * prometheus
-* 自动化、平台化能力:
-  * 通过Jenkins的自定义Job,实现自动化部署
-  * 监控添加实现自动化
-  * 测试环境apollo配置,通过脚本实现参数自动化创建
-  * 故障分析:redis大key;cassandra数据不一致
-* 运维文档整理:
-  * 工作中常见故障处理方法
-  * 生产故障总结、复盘
-  * 规范的变更文档
-* 保证服务稳定性:
-  * 精细的监控体系
-  * 容灾
-  * 混沌工程,定期做故障演练
-  * 接口、性能优化
-
-* 推动规范、标准落地
-  * 变更规范:减少变更中可能出现的故障的概率
-  * 部署规范:集群名称,hostname等
-* 中间件部署
-  * redis,es,kafka部署标准,数据保存天数,使用规范
 
 ### SRE
 
@@ -139,3 +100,63 @@
 | 线程和进程的区别是什么？                            | https://www.zhihu.com/question/25532384                      |
 | 内存管理:虚拟内存的优点                             | 小林code                                                     |
 
+### k8s
+
+* k8s有哪些组件,具体的功能是什么
+  * master节点
+    * kubectl:客户端命令行工具,整个k8s集群的操作入口
+    * api server:资源操作的唯一入口,提供认证、授权、访问控制、API注册和发现等机制
+    * controller manager:负责维护集群的状态,故障检测、自动扩展、滚动更新
+    * scheduler:负责资源的调度,按照预定的调度策略将pod调度到响应的node节点上
+    * etcd:担任数据中心,保存了整个群集的状态
+  * node节点:
+    * kubelet:负责维护pod的声明周期,同时也负责Volume和网络的管理,运行在所有的节点上,当scheduler确定某个node上运行pod后,将pod的具体信息发送给节点的kubelet,kubelet根据信息创建和运行容器,并向master返回运行状态;容器状态不对时,kubelet会杀死pod,重新创建pod
+    * kube-proxy:为service提供cluster内部的服务发现和负载均衡(外界服务,service接收到请求后就是通过kube-proxy来转发到pod上的)
+    * container-runtime:负责管理运行容器的软件
+    * pod:集群里最小的单位,每个pod里面可以运行一个或多个container
+* pod有哪些状态
+  * pending:处在这个状态的pod可能正在写etcd,调度或者pull镜像或者启动容器
+  * running
+  * succeeded:所有的容器已经正常的执行后退出,并且不会重启
+  * failed:至少有一个容器因为失败而终止,返回状态码非0
+  * unknown:api server无法正常获取pod状态信息,可能是无法与pod所在的工作节点的kubelet通信导致的
+* pod的创建过程
+* pod的重启策略
+  * Always:容器失效时,kubelet自动重启容器
+  * OnFailure:容器终止运行,且退出码不为0时重启
+  * Nerver:永不重启
+* 资源探针:liveness probe和readiness probe
+  * ExecAction:在容器中执行一条命令,状态码为0则健康
+  * TcpSocketAction:与容器的某个pod建立连接
+  * HttpGetActopn:通过向容器IP地址的某个指定端口的指定path发送GET请求,响应码为2xx或3xx即健康
+* RBAC:
+  * role定义在一个namespace中,clusterrole可以跨namespace
+  * rolebinding适用于某个namespace授权;clusterrolebinding适用于集群范围的授权
+* ipvs为啥比iptables效率高
+  * IPVS和iptables同样基于Netfilter
+  * IPVS采用hash表;iptables采用一条条的规则列表
+  * iptables又是为防火墙设计的,集群数量越多,iptables规则就越多,而iptables的规则是从上到下匹配的,所以效率就越低
+  * 因此当service数量达到一定规模时,hash表的速度优势就显现出来了,从而提高了service的服务性能
+* storageclass,pv,pvc
+  * PVC:定义一个持久化属性,比如存储的大小,读写权限等
+  * PV:具体的Volume
+  * storageclass:充当PV的模板,不用再手动创建PV了
+  * 流程:pod-->pvc-->storageclass(provisioner)-->pv,pvc绑定pv
+* nginx ingress的原理本质是什么*(原理还不知道)*
+  * ingress controller通过和api server交互,动态的去感知集群中ingress规则变化
+  * 然后按照自定义的规则,生成一段nginx配置
+  * 再写到nginx-ingress-controller的pod里,这个pod里运行着一个nginx服务,控制器会把生成的nginx配置写入/etc/nginx.con中
+  * 然后reload一下使配置生效,以此达到域名分配和动态更新的问题
+* 不同node上的pod之间的通信流程*(待补充)*
+  * 
+* k8s集群节点需要关机维护,怎么操作
+  * pod驱逐:kubectl drain <node_name>
+  * 确认node上已无pod,并且被驱逐的pod已经正常运行在其他node上
+  * 关机维护
+  * 维护完成开机
+  * 解除node节点不可调度:kubectl uncordon node
+  * 使用节点标签测试node是否可以被正常调度
+* calico和flannel的区别
+  * flannel:简单,使用居多,基于Vxlan技术(叠加网络+二层隧道),不支持网络策略
+  * Calico:较复杂,使用率低于flannel:也可以支持隧道网络,但是是三层隧道(IPIP),支持网络策略
+  * Calico项目既能够独立的为k8s集群提供网络解决方案和网络策略,也能与flannel结合在一起,由flannel提供网络解决方案,而calico仅用于提供网络策略
