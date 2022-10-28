@@ -23,12 +23,25 @@ StatefulSet中每个Pod的DNS格式为`statefulSetName-{0..N-1}.serviceName.name
 例:kubectl exec redis-cluster-0 -n wiseco -- hostname -f  # 查看pod的dns 
 ```
 
-#### lable selector
+#### 标签操作
 
 ```
 kubectl get pod -l tier=frontend
 kubectl get pod -l 'tier in (frontend),env in (production)'
 kubectl get pod -l 'env notin (production)'
+kubectl get pod --show-labels # 查看pod,并线上标签内容
+kubectl get pod -L env,tier  #显示所有资源对象标签的值
+kubectl get pod -l env,tier  #只显示符合键值对象的pod
+
+kubectl label pod grafana abc=123 给grafana pod添加标签
+kubectl label pod grafana abc=456  --overwrite 修改标签名
+kubectl label pod grafana abc- 删除标签
+
+kubectl label nodes node01 disk=ssd      #给节点node01添加disk标签
+kubectl label nodes node01 disk=sss –overwrite    #修改节点node01的标签
+kubectl label nodes node01 disk-         #删除节点node01的disk标签
+
+
 ```
 
 #### rollout回滚
