@@ -100,7 +100,7 @@
 | 线程和进程的区别是什么？                            | https://www.zhihu.com/question/25532384                      |
 | 内存管理:虚拟内存的优点                             | 小林code                                                     |
 
-### k8s
+## k8s
 
 #### 容器和主机部署的区别--(待完善)
 
@@ -127,6 +127,8 @@
 * IfNotPresent:仅本地没有对应镜像时,才下载
 * 默认的镜像策略:当镜像标签是latest时,默认策略是Always;当镜像标签是自定义时,默认策略是IfNotPresent
 
+### Pod相关
+
 #### pod有哪些状态
 
 * pending:处在这个状态的pod可能正在写etcd,调度或者pull镜像或者启动容器
@@ -134,6 +136,32 @@
 * succeeded:所有的容器已经正常的执行后退出,并且不会重启
 * failed:至少有一个容器因为失败而终止,返回状态码非0
 * unknown:api server无法正常获取pod状态信息,可能是无法与pod所在的工作节点的kubelet通信导致的
+
+#### Pod的详细状态说明
+
+| 状态                                  | 描述                          |
+| ------------------------------------- | ----------------------------- |
+| CrashLoopBackOff                      | 容器退出,kubelet正在将它重启  |
+| InvalidImageName                      | 无法解析镜像名称              |
+| ImageInspectError                     | 无法校验镜像                  |
+| ErrImageNeverPull                     | 策略禁止拉取镜像              |
+| ImagePullBackOff                      | 正在重试拉取镜像              |
+| RegistryUnavailable                   | 连接不到镜像中心              |
+| ErrImagePull                          | 通用的拉取镜像出错            |
+| CreateContainerConfigError            | 不能创建kubelet使用的容器配置 |
+| CreateContainerError                  | 创建容器失败                  |
+| m.internalLifecycle.PreStartContainer | 执行hook报错                  |
+| ContainersNotInitialized              | 容器没有初始化完毕            |
+| ContainersNotRead                     | 容器没有准备完毕              |
+| ContainerCreating                     | 容器创建中                    |
+| PodInitializing                       | pod 初始化中                  |
+| DockerDaemonNotReady                  | docker还没有完全启动          |
+| NetworkPluginNotReady                 | 网络插件还没有完全启动        |
+|                                       |                               |
+|                                       |                               |
+|                                       |                               |
+
+
 
 #### pod的创建过程
 
@@ -160,6 +188,8 @@
     * RC和DaemonSet:必须设置为Aalways,需要保证容器持续运行
     * Job:OnFailure或Never:确保容器执行完后不再重启
 
+### Service相关
+
 #### Service是什么 
 
 * pod每次重启,其IP地址都会变化,这使得pod间通信,或者外部通信变得困难,service提供一个访问pod的固定入口
@@ -167,8 +197,67 @@
 
 #### Service负载均衡策略
 
-* RoundRobin:默认轮训模式
+* RoundRobin:默认轮询模式
 * SessionAffinity:基于客户端ip地址进行会话保持
+
+#### Service应用
+
+* endpoint
+
+  * 用来记录一个service对应的所有pod的访问地址,存储在etcd中,就是service关联的pod的ip地址和端口
+  * service配置了selector,endpoint controller才会自动创建对应的endpoint对象,否则不会生产endpoint对象
+
+* 没有selector的Service
+
+  * 使用k8s集群外部的数据库
+  * 希望服务执行另一个namespace中或其他集群中的服务
+  * 正在将工作负载迁移到k8s集群
+
+* ExternalName
+
+  * 没有selector,也没有定义port和endpoint,对于运行在集群外的服务,通过返回该外部服务的别名这种方式来提供服务
+
+  * ```
+    kind: Service
+    apiVersion: v1
+    metadata:
+      name: my-service
+      namespace: prod
+    spec:
+      type: ExternalName
+      externalName: my.database.example.com
+      
+    当请求my-service.prod.svc.cluster时,集群的DNS服务将返回一个my.database.example.com的CNAME记录
+    ```
+
+* Headless service
+
+  * 不需要或不想要负载均衡,指定spec.ClusterIP: None来创建Headless Service
+  * 对这类service不会分配ClusterIP,kube-proxy不会处理它们,不会为它们进行负载均衡和路由;DNS如何实现自动配置,依赖于Service是否定义了selector
+  * 配置selector的,endpoint控制器在API中创建了endpoints记录,并且修改DNS配置返回A记录,通过这个地址直达后端Pod
+
+* externalIPs
+
+  * *my-service*可以在80.11.12.10:80上被客户端访问
+
+  * ```
+    kind: Service
+    apiVersion: v1
+    metadata:
+      name: my-service
+    spec:
+      selector:
+        app: MyApp
+      ports:
+        - name: http
+          protocol: TCP
+          port: 80
+          targetPort: 9376
+      externalIPs: 
+        - 80.11.12.10
+    ```
+
+### Ingress
 
 #### Ingress --(待完善)
 
@@ -176,13 +265,14 @@
 * ingress controller基于ingress规则将客户端请求直接转发到service对应的后端endpoint上,从而跳过了kube-proxy的转发功能
 * ingress controller+ingress规则--->service
 
-#### k8s是怎么进行注册的 --(待完善)
+#### nginx ingress的原理本质是什么*(原理还不知道)*
 
-* pod启动后会加载当前环境所有service的信息,以便不通pod根据service名进行通信
+* ingress controller通过和api server交互,动态的去感知集群中ingress规则变化
+* 然后按照自定义的规则,生成一段nginx配置
+* 再写到nginx-ingress-controller的pod里,这个pod里运行着一个nginx服务,控制器会把生成的nginx配置写入/etc/nginx.conf中
+* 然后reload一下使配置生效,以此达到域名分配和动态更新的问题
 
-#### k8s集群外流量怎么访问pod --(待完善)
-
-* NodePort:会在所有节点上监听同一个端口,比如30000,访问节点的流量都会被重定向到对应的service上
+### 健康检查
 
 #### 健康检查--资源探针:
 
@@ -212,20 +302,14 @@
   * Failure:探测到服务不正常
   * Unknown:通常是没有定义探针检测,默认成功
 
-#### RBAC:
+### 权限管理和安全
+
+#### RBAC
 
 * role定义在一个namespace中,clusterrole可以跨namespace
 * rolebinding适用于某个namespace授权;clusterrolebinding适用于集群范围的授权
 
-#### 更新策略
-
-* Recreate Deployment:在创建出新的pod前杀掉所有已存在的pod
-
-* Rolling Update Deployment:
-
-  * MaxSurge:用来指定升级过程中可以超过期望pod数量的最大个数,可以是一个绝对值(5),或者Pod数量的百分比(10%),默认值是1;启动更新时,会立即扩容10%,待新Pod ready后,旧的pod缩容
-
-  * MaxUnavailable:指定升级过程中不可用Pod的最大数量,可以是一个绝对值(5),或者Pod数量的百分比(10%),计算百分比的绝对值向下取整,为0时,默认为1;启动更新时,会先缩容到90%,新的Pod ready后,旧的副本再缩容,确保在升级时所有时刻可以用的Pod数量至少是90%
+### 网络
 
 #### kube-proxy iptables原理
 
@@ -235,7 +319,6 @@
 
 * IPVS用于高性能负载均衡,使用更高效的Hash表,允许几乎无限的规模扩张,被kube-proxy采纳为最新模式
 * IPVS使用iptables的扩展ipset,而不是直接调用iptables来生产规则链,iptable规则链是一个线性的数据结构,ipset是带索引的数据结构,因此当规则多时,可以高效的查找和匹配
-* 
 
 #### ipvs为啥比iptables效率高
 
@@ -249,6 +332,30 @@
   * 支持服务器健康检查和连接重试等功能
   * 可以统统修改ipset的集合
 
+#### calico和flannel的区别--(待完善)
+
+* flannel:简单,使用居多,基于Vxlan技术(叠加网络+二层隧道),不支持网络策略
+* Calico:较复杂,使用率低于flannel:也可以支持隧道网络,但是是三层隧道(IPIP),支持网络策略
+* Calico项目既能够独立的为k8s集群提供网络解决方案和网络策略,也能与flannel结合在一起,由flannel提供网络解决方案,而calico仅用于提供网络策略
+
+#### 不同node上的pod之间的通信流程*--(待完善)*
+
+* pod的ip由flannel统一分配,通信也走flannal网桥
+* 每个node上都有个flannal0虚拟网卡,用于跨node通信,
+* 跨节点通信时,发送端数据会从docker0路由到flannel0虚拟网卡,接收到数据会从flannel0路由到docker0
+
+#### k8s集群外流量怎么访问pod --(待完善)
+
+* NodePort:会在所有节点上监听同一个端口,比如30000,访问节点的流量都会被重定向到对应的service上
+
+#### 为什么NetworkPolicy不用限制serviceIP却又能生效？
+
+* 防火墙策略重来不会遇到clusterIP,因为在到达防火墙策略前,clusterIP都已经被转成podIP了
+  * 在pod中使用clusterIP访问另一个pod时，防火墙策略的应用是在所在主机的FORWARD点，而把clusterIP转成podIP是在之前的PREROUTING点就完成了
+  * 在主机中使用clusterIP访问一个pod时，防火墙策略的应用是在主机的OUTPUT点，而把clusterIP转成podIP也是在OUTPUT点
+
+### 存储
+
 #### storageclass,pv,pvc
 
 * PVC:定义一个持久化属性,比如存储的大小,读写权限等
@@ -256,22 +363,26 @@
 * storageclass:充当PV的模板,不用再手动创建PV了
 * 流程:pod-->pvc-->storageclass(provisioner)-->pv,pvc绑定pv
 
-#### nginx ingress的原理本质是什么*(原理还不知道)*
+#### PV的生命周期
 
-* ingress controller通过和api server交互,动态的去感知集群中ingress规则变化
-* 然后按照自定义的规则,生成一段nginx配置
-* 再写到nginx-ingress-controller的pod里,这个pod里运行着一个nginx服务,控制器会把生成的nginx配置写入/etc/nginx.conf中
-* 然后reload一下使配置生效,以此达到域名分配和动态更新的问题
+* Available:可用状态,还未绑定PVC
+* Bound:已绑定PVC
+* Released:绑定的PVC已经删除,资源已释放,但还没被集群回收
+* Failed:资源回收失败
 
-#### 不同node上的pod之间的通信流程*--(待完善)*
+#### k8s数据持久化
 
-* 
+* EmptyDir:yaml没有指定要挂载宿主机的哪个目录,直接由pod内部映射到宿主机上.同个pod里的不同contianer共享同一个持久化目录,
+* HostPath:将宿主机的目录挂载到容器内部,增加了pod与节点的耦合度
+* PV
 
-#### Scheduler
+### Scheduler
 
 * 调度算法
   * 预选:输入所有节点,输出满足预选条件的节点,过滤掉不符合的node.节点的资源不足或者不满足预选策略则无法通过预选
   * 优选:根据优先策略为通过预选的Node进行打分排名,选择得分最高的Node:例如:资源越服务员,负载越小的node可能具有越高的排名
+
+### 工作原理
 
 #### k8s集群节点需要关机维护,怎么操作
 
@@ -282,11 +393,15 @@
 * 解除node节点不可调度:kubectl uncordon node
 * 使用节点标签测试node是否可以被正常调度
 
-#### calico和flannel的区别--(待完善)
+#### 更新策略
 
-* flannel:简单,使用居多,基于Vxlan技术(叠加网络+二层隧道),不支持网络策略
-* Calico:较复杂,使用率低于flannel:也可以支持隧道网络,但是是三层隧道(IPIP),支持网络策略
-* Calico项目既能够独立的为k8s集群提供网络解决方案和网络策略,也能与flannel结合在一起,由flannel提供网络解决方案,而calico仅用于提供网络策略
+* Recreate Deployment:在创建出新的pod前杀掉所有已存在的pod
+
+* Rolling Update Deployment:
+
+  * MaxSurge:用来指定升级过程中可以超过期望pod数量的最大个数,可以是一个绝对值(5),或者Pod数量的百分比(10%),默认值是1;启动更新时,会立即扩容10%,待新Pod ready后,旧的pod缩容
+
+  * MaxUnavailable:指定升级过程中不可用Pod的最大数量,可以是一个绝对值(5),或者Pod数量的百分比(10%),计算百分比的绝对值向下取整,为0时,默认为1;启动更新时,会先缩容到90%,新的Pod ready后,旧的副本再缩容,确保在升级时所有时刻可以用的Pod数量至少是90%
 
 
 
@@ -299,13 +414,75 @@
 * 分区标签（partition）：customerA（客户A）、customerB（客户B）；
 * 品控级别（Track）：daily（每天）、weekly（每周）。
 
-#### k8s数据持久化
-
-* EmptyDir:yaml没有指定要挂载宿主机的哪个目录,直接由pod内部映射到宿主机上.同个pod里的不同contianer共享同一个持久化目录,
-* HostPath:将宿主机的目录挂载到容器内部,增加了pod与节点的耦合度
-* PV
-
 #### k8s的RC机制
 
 * replication controller用来管理Pod的副本,保证集群中存在指定数量的pod,当定义了RC后,master节点上的controller manager组件会巡检系统中存活的目标pod,并确保pod数量与期望的RC值一致
 * Replica set和replication controller类似,都是指定pod的副本数;不同在于RS使用基于集合的选择器,replication cotroller是基于权限的选择器
+
+#### k8s是怎么进行注册的 --(待完善)
+
+* pod启动后会加载当前环境所有service的信息,以便不同pod根据service名进行通信
+* 服务发现是根据DNS服务实现的
+
+
+
+
+
+### [灰度](https://cloud.tencent.com/document/product/457/48877)
+
+#### Nginx ingress实现金丝雀发布
+
+> 金丝雀发布场景主要取决于业务流量切分的策略,Ningx Ingress支持基于Header,Cookie,和服务权重3种流量切分的策略,都需要部署2个版本的service和deployment
+
+##### 基于Header的流量切分
+
+```
+ # 仅将带有名为Region且值为cd或sz的请求头的请求转发给当前的Canary Ingress
+ # curl -H "Host: canary.example.com" -H "Region: cd" http://EXTERNAL-IP
+ annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-header: "Region"
+    nginx.ingress.kubernetes.io/canary-by-header-pattern: "cd|sz"
+  name: nginx-canary
+```
+
+##### 基于Cookie的流量切分
+
+```
+ # 仅将带有名为"user_from_cd"的Cookie的请求转发给当前Canary Ingress
+ # curl -s -H "Host: canary.example.com" --cookie "user_from_cd=always" http://EXTERNAL-IP
+ annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-cookie: "user_from_cd"
+```
+
+##### 基于服务权重的流量切分
+
+```
+ # for i in {1..10}; do curl -H "Host: canary.example.com" http://EXTERNAL-IP; done;
+ annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "10"
+```
+
+#### 蓝绿发布和灰度发布
+
+> 蓝绿发布:给2个集群的deployment设置不同的labels标签(version=v1 / version=v2),通过service选择对应的labels,切换流量到对应的集群
+>
+> 灰度发布:2个集群部署不同的deployment,service同时选中2个版本的deployment,然后通过控制deployment的副本数(类似副本多的权重就搞),来控制流量
+
+
+
+
+
+
+
+### 容器化遇到的问题
+
+#### Nginx
+
+* keepalived字段未设置
+* work对应的cpu设置有问题,资源隔离问题

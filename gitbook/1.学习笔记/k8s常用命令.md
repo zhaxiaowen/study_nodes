@@ -118,6 +118,13 @@ docker exec -it `docker ps |grep -v POD |grep grafana0 |awk '{print $1}'` ip add
 ip addr |grep ^8 |awk -F '@if' '{print $1}'
 ```
 
+#### 查看所有api资源
+
+```
+kubectl api-resources  #可以看到资源的对象名称
+kubectl api-versions # 查看api的版本
+```
+
 
 
 

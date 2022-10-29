@@ -243,7 +243,7 @@ apiVersion: autoscaling/v2beta2
 
 #### 为什么NetworkPolicy不用限制serviceIP却又能生效？
 
-* 防火墙策略重来不会遇到clusterIP,因为在到达防火墙策略钱,clusterIP都已经被转成podIP了
+* 防火墙策略重来不会遇到clusterIP,因为在到达防火墙策略前,clusterIP都已经被转成podIP了
   * 在pod中使用clusterIP访问另一个pod时，防火墙策略的应用是在所在主机的FORWARD点，而把clusterIP转成podIP是在之前的PREROUTING点就完成了
   * 在主机中使用clusterIP访问一个pod时，防火墙策略的应用是在主机的OUTPUT点，而把clusterIP转成podIP也是在OUTPUT点
 
