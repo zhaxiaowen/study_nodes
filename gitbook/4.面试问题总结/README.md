@@ -157,9 +157,6 @@
 | PodInitializing                       | pod 初始化中                  |
 | DockerDaemonNotReady                  | docker还没有完全启动          |
 | NetworkPluginNotReady                 | 网络插件还没有完全启动        |
-|                                       |                               |
-|                                       |                               |
-|                                       |                               |
 
 
 
@@ -171,13 +168,31 @@
 * kube-secheduler检测到pod信息会开始调度预选,先过滤掉不符合pod资源需求的node,然后开始调度调优,然后将pod的资源配置发送给node的kubelet
 * kubelet根据scheduler发来的资源配置创建pod,pod创建成功后,将pod的运行信息返回给scheduler,scheduler将返回的pod状态信息存储到etcd
 
-#### 删除pod的过程 --(还是有点不清晰)
+#### pod优雅关闭的过程
 
-* kube-apiserver接收到client的删除指令,默认有30s时间等待优雅退出,超过30s被标记为死亡状态,此时pod状态为Terminating,kubelet看到pod标记为Terminating就开始关闭pod的工作,流程如下:
-  * pod从service的endpoint列表中被移除
-  * 如果pod定义了停止前的钩子,钩子会在pod内部被调用,停止钩子一般定义了如何优雅结束进程
-  * 进程被发送TERM信号(kill -14)
-  * 当超过优雅退出时间后,Pod中的所有进程会被发送SIGKILL信号(kill -9)
+1. 用户发出删除 pod 命令
+2. K8S 会给旧POD发送SIGTERM信号；将 pod 标记为“Terminating”状态；pod 被视为“dead”状态，此时将不会有新的请求到达旧的pod；
+3. 并且等待宽限期（terminationGracePeriodSeconds 参数定义，默认情况下30秒）这么长的时间
+4. 第三步同时运行，监控到 pod 对象为“Terminating”状态的同时启动 pod 关闭过程
+5. 第三步同时进行，endpoints 控制器监控到 pod 对象关闭，将pod与service匹配的 endpoints 列表中删除
+6. 如果 pod 中定义了 preStop 处理程序，则 pod 被标记为“Terminating”状态时以同步的方式启动执行；若宽限期结束后，preStop 仍未执行结束，第二步会重新执行并额外获得一个2秒的小宽限期(最后的宽限期，所以定义prestop 注意时间,和terminationGracePeriodSeconds 参数配合使用),
+7. Pod 内对象的容器收到 TERM 信号
+8. 宽限期结束之后，若存在任何一个运行的进程，pod 会收到 SIGKILL 信号
+9. Kubelet 请求 API Server 将此 Pod 资源宽限期设置为0从而完成删除操作
+
+
+
+* 发起删除一个Pod命令(发送**TERM**信号给pod)后系统默认给30s的宽限期,API-server标记这个pod对象为**Terminating**状态
+* kubectl发下pod状态为**Terminating**则尝试关闭pod,如果有定义的**preStop**钩子,可多给2s宽限期
+* Controller Manager将Pod从svc的endpoint移除
+* 宽限期到则发送**TERM**信号,API server删除pod的API对象,同时告诉kubectl删除pod资源对象
+* pod在宽限期还未关闭,则再发送SIGKILL强制关闭
+* 执行强制删除后,API server不再等待来自kubelet终止Pod的确认信号
+
+#### 强制删除StatefulSet的Pod,可能会出现什么问题:
+
+* 强制删除不会等待kubelet对Pod已终止的确认消息,无论强制删除是否成功杀死pod,都会立即从API server中释放该pod名字
+* 从而可能导致正在运行pod的重复
 
 #### pod的重启策略
 
@@ -187,6 +202,54 @@
   * 不同控制器的重启策略限制如下:
     * RC和DaemonSet:必须设置为Aalways,需要保证容器持续运行
     * Job:OnFailure或Never:确保容器执行完后不再重启
+
+#### 静态Pod
+
+> 正常情况Pod是由Master统一管理,指定,分配的.静态Pod就是不接收Master的管理,在指定node上当**kuelet**启动时,会自动启动所定义的静态Pod
+>
+> 静态Pod由特定节点上的kubelet进程管理,不通过**apiserver**,无法与常用的**deployment**或者**Daemonset**关联
+
+* 为什么能看到静态Pod:
+  * **kubelet**会为每个它管理的静态Pod,调用api-server在k8s的apiserver上创建一个镜像Pod,所以可查询,进入pod,但是不能通过apiserver控制pod(例如不能删除)
+* 普通pod失败自愈和静态pod有什么区别
+  * 普通pod用工作负载资源来创建和管理多个pod.资源的控制器能处理副本的管理、上线,并在pod失效时提供自愈能力
+  * 静态pod在特定的节点运行,完全由kubelet进行监督自愈
+* 删除静态pod:只能再配置目录下删除yaml文件,如果用kubectl删除,静态pod会进入pending,然后被kubelet重启
+* 静态pod的作用
+  * 可以预防误删除,可以用来部署一些核心组件,保障应用服务总是运行稳定数量和提供稳定服务
+  * **kube-scheduler** **kube-apiserver** **kube-controller-manager** **etcd**都是用静态pod部署的
+
+### RC和RS
+
+#### 作用:
+
+* 用来控制副本数量,保证pod以我们指定的副本数运行
+* 确保pod健康:当pod不健康或无法提供服务时,RC会杀死不健康的pod,重新创建
+* 弹性伸缩:通过RC动态扩缩容
+* 滚动升级
+
+#### RC和RS的区别:
+
+* RS支持集合式的selector,RC只支持等式
+* RS比RC有更强大的筛选能力
+
+#### 注意事项
+
+* 要确保RS标签选择器的唯一性;如果多个RS的标签选择规则重复,可能导致RS无法判断pod是否为自己创建,造成同一个pod被多个RS接管
+* .spec.template.metadata.labels的值必须与spec.selector值相匹配,否则会被API拒绝
+
+#### 标签Pod和可识别标签副本集ReplicaSet先后创建顺序不同,会造成什么影响
+
+* 无论RS何时创建,一旦创建,会将自己标签能识别的所有Pod纳入管理,遵循RS规约定义的副本数,开启平衡机制
+
+#### RS缩容算法策略
+
+> 缩容时,rs会对所有可用的pod进行一次权重排序,剔除最不利于系统高可用、稳定运行的Pod
+
+1. 优先剔除peding且不可调度的pod
+2. 如果设置了**controller.kubernetes.io/pod-deletion-cost**注解,则注解值较小的优先被剔除
+3. 所处节点上副本个数较多的pod优先于所处节点上副本较少者被剔除
+4. 如果Pod创建时间不同,最近创建的pod优先于早前创建的pod被剔除
 
 ### Service相关
 
@@ -280,7 +343,7 @@
 
 * ReadinessProbe:可读性探针,ready检测,失败的话从service的endpoint列表中删除pod的ip
 
-* startupProbe:为了防止服务因初始化时间较长,被上面2种探针kill调,用来定义初始化时间的
+* startupProbe:为了防止服务因初始化时间较长,被上面2种探针kill,用来定义初始化时间的
 
 * 设置控制时间
 
@@ -414,11 +477,6 @@
 * 分区标签（partition）：customerA（客户A）、customerB（客户B）；
 * 品控级别（Track）：daily（每天）、weekly（每周）。
 
-#### k8s的RC机制
-
-* replication controller用来管理Pod的副本,保证集群中存在指定数量的pod,当定义了RC后,master节点上的controller manager组件会巡检系统中存活的目标pod,并确保pod数量与期望的RC值一致
-* Replica set和replication controller类似,都是指定pod的副本数;不同在于RS使用基于集合的选择器,replication cotroller是基于权限的选择器
-
 #### k8s是怎么进行注册的 --(待完善)
 
 * pod启动后会加载当前环境所有service的信息,以便不同pod根据service名进行通信
@@ -486,3 +544,11 @@
 
 * keepalived字段未设置
 * work对应的cpu设置有问题,资源隔离问题
+
+#### uat环境资源配置问题:
+
+* cmdb上配置的cpu:memory,有1:1,1:2,或者其他配置,而服务器购买的配置也混乱,集群资源使用不合理,cpu使用率已经90%,而内存还有20G左右
+
+#### 服务无法及时下线:
+
+* pod优雅关闭时调用prestop钩子,从注册中心及时下线
