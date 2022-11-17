@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  namespace: thanos
+spec:
+  type: ClusterIP
+  ports:
+  - port: 3000
+    targetPort: 3000
+  selector:
+    name: grafana
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: grafana
+  namespace: thanos
+spec:
+  serviceName: grafana
+  replicas: 1
+  selector:
+    matchLabels:
+      name: grafana
+  template:
+    metadata:
+      labels:
+        name: grafana
+    spec:
+      containers:
+      - name: grafana
+        image: grafana/grafana:8.1.3
+        resources:
+          limits:
+            memory: "1024Mi"
+            cpu: "1000m"
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+        readinessProbe:
+          failureThreshold: 10
+          httpGet:
+            path: /api/health
+            port: 3000
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 30
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /api/health
+            port: 3000
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /var/lib/grafana
+          name: grafana-storage
+        env:
+        - name: GF_SECURITY_ADMIN_USER
+          value: zhaoxw
+        - name: GF_SECURITY_ADMIN_PASSWORD
+          value: qwe123qwe?
+          
+  volumeClaimTemplates:
+  - metadata:
+      name: grafana-storage
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "course-nfs-storage"
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi          

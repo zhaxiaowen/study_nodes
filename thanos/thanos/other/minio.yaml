@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: minio
+  namespace: thanos
+spec:
+  serviceName: "minio"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minio
+  template:
+    metadata:
+      labels:
+        app: minio
+    spec:
+      containers:
+        - name: minio
+          volumeMounts:
+            - name: data
+              mountPath: "/data"
+          image: minio/minio:latest
+          args: ["server", "--console-address", ":9001", "/data"]
+          env:
+            - name: MINIO_ACCESS_KEY
+              value: "zhaoxw"
+            - name: MINIO_SECRET_KEY
+              value: "qwe123qwe?"
+          ports:
+            - containerPort: 9000
+            - containerPort: 9001
+          readinessProbe:
+            httpGet:
+              path: /minio/health/ready
+              port: 9000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /minio/health/live
+              port: 9000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "course-nfs-storage"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 100Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio
+  namespace: thanos
+spec:
+  ports:
+    - name: console
+      port: 9001
+      targetPort: 9001
+    - name: api
+      port: 9000
+      targetPort: 9000
+  selector:
+    app: minio
+  type: ClusterIP
