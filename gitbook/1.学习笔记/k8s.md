@@ -8,14 +8,14 @@
 
 * `spec`字段:必须提供,用来描述该对象的期望状态,以及关于对象的基本信息 
 
-* Annotation:可以将kubernetes资源对象关联到任意的非标识行元数据
+* Annotation:可以将kubernetes资源对象关联到任意的非标识性元数据
 
 ### 一. service
 
 1. endpoint
 
    * 用来记录一个service对应的所有pod的访问地址,存储在etcd中,就是service关联的pod的ip地址和端口
-   * service配置了selector,endpoint controller才会自动创建对应的endpoint对象,否则不会生产endpoint对象
+   * service配置了selector,endpoint controller才会自动创建对应的endpoint对象,否则不会生成endpoint对象
 
 2. 没有selector的Service
 
