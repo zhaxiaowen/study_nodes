@@ -125,6 +125,31 @@ kubectl api-resources  #可以看到资源的对象名称
 kubectl api-versions # 查看api的版本
 ```
 
+#### 修改config view
+
+```
+export KUBE_APISERVER="https://192.168.50.201:6443"
+kubectl config set-cluster kubernetes \
+--certificate-authority=/etc/kubernetes/pki/ca.crt \
+--embed-certs=true \
+--server=${KUBE_APISERVER} \
+--kubeconfig=/etc/kubernetes/admin.conf 
+kubectl config set-credentials kubernetes-admin \
+--client-certificate=/etc/kubernetes/pki/admin.crt \
+--client-key=/etc/kubernetes/pki/admin.key \
+--embed-certs=true \
+--kubeconfig=/etc/kubernetes/admin.conf 
+kubectl config set-context kubernetes-admin@kubernetes \
+--cluster=kubernetes \
+--user=kubernetes-admin \
+--kubeconfig=/etc/kubernetes/admin.conf 
+kubectl config use-context \
+kubernetes-admin@kubernetes \
+--kubeconfig=/etc/kubernetes/admin.conf
+
+#操作完后,把admin.conf 拷贝到/root/.kube/config  即可
+```
+
 
 
 
