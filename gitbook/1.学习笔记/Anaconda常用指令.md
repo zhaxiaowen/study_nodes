@@ -45,5 +45,12 @@ conda env export > environment.yaml
 conda env create -f environment.yaml 
 ```
 
+#### 8.关闭虚拟环境
+```
+source deactivate
+```
 
-
+#### 9.激活虚拟环境
+```
+source ~/.bashrc
+```
