@@ -45,9 +45,20 @@ conda env export > environment.yaml
 conda env create -f environment.yaml 
 ```
 
-#### 8.关闭虚拟环境
+#### 8.进入/退出base环境
 ```
-source deactivate
+#取消自动进入base环境
+conda config --set auto_activate_base false
+#自动进入base环境
+conda config --set auto_activate_base True
+```
+
+#### 9.退出或者进入base环境
+```
+#进入base环境
+conda activate
+#退出base环境
+conda deactivate
 ```
 
 #### 9.激活虚拟环境
