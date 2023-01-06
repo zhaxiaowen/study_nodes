@@ -242,11 +242,14 @@ spec:
 wget https://mirrors.aliyun.com/alpine/edge/testing/x86_64/font-wqy-zenhei-0.9.45-r2.apk 
 apk add --allow-untrusted font-wqy-zenhei-0.9.45-r2.apk 
 ---
-
+# Dockerfile
 # Version: 0.0.1
 FROM romancin/tinymediamanager
 COPY font-wqy-zenhei-0.9.45-r2.apk /tmp/font-wqy-zenhei-0.9.45-r2.apk
 RUN ["apk","add","--allow-untrusted","/tmp/font-wqy-zenhei-0.9.45-r2.apk"]
+
+# 构建镜像
+docker build -t tinymediamanager:v2 .
 ```
 
 #### storageclass部署
