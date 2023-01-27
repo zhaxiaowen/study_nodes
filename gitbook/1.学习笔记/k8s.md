@@ -10,6 +10,12 @@
 
 * Annotation:可以将kubernetes资源对象关联到任意的非标识性元数据
 
+
+#### metadata.label和template.metadata.label:
+
+* metadata.label是作用在kind对象上的,比如说deployment,那这个标签是打在deployment上的
+* template.metadata.label是打在pod上的,
+
 ### 一. service
 
 1. endpoint
