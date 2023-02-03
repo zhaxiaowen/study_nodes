@@ -89,6 +89,7 @@
 * [6.工作技巧总结](6.工作技巧总结/README.md)
     * [工作方式](6.工作技巧总结/工作方式.md)
     * [问题总结](6.工作技巧总结/问题总结.md)
+    * [interview知识点总结](6.工作技巧总结/interview知识点总结.md)
 * [7.脚本](7.脚本/README.md)
     * [paramiko](7.脚本/paramiko.py)
     * [python3调用ansible](7.脚本/python3调用ansible.md)

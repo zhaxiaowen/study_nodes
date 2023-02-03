@@ -18,6 +18,16 @@
 
 ### 一. service
 
+> 为什么service ip不能ping?
+
+* 来源:
+  * serviceIP是serviceController生成的,参数--service-cluster-ip-range string 会配置在controller-manager上,serviceController会在这个参数指定的cidr范围内取一个ip
+* 原因:
+  * serviceIP是虚拟的地址,没有分配给任何网络接口,当数据包传输时不会把这个IP作为数据包的源IP和目的IP
+  * kube-proxy在iptables模式下,这个IP没有被设置在任何的网络设备上,ping这个IP的时候,没有任何的网络协议栈会回应这个IP
+  * 在iptables模式时,clusterIP会在iptables的PREROUTING链里面用于nat转换规则中,而在ipvs模式下,会使用ipvs模式的ipvs规则转换中
+  * 在ipvs模式下,所有的clusterIP会被设置在node上的kube-ipvs0的虚拟网卡上,所以是ping通
+
 1. endpoint
 
    * 用来记录一个service对应的所有pod的访问地址,存储在etcd中,就是service关联的pod的ip地址和端口

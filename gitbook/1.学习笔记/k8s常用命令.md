@@ -150,6 +150,24 @@ kubernetes-admin@kubernetes \
 #操作完后,把admin.conf 拷贝到/root/.kube/config  即可
 ```
 
+#### pod的veth_pair网卡对
+
+```
+在pod中,ethtool -S eth0:
+[root@node2 ~]# ethtool -S eth0
+NIC statistics:
+     peer_ifindex: 8  #8就是另一端的设备号
+     rx_queue_0_xdp_packets: 0
+     rx_queue_0_xdp_bytes: 0
+     rx_queue_0_xdp_drops: 0
+
+ip a:
+8: cali4dbb7a2e80c@if3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1480 qdisc noqueue state UP group default
+    link/ether ee:ee:ee:ee:ee:ee brd ff:ff:ff:ff:ff:ff link-netnsid 4
+    inet6 fe80::ecee:eeff:feee:eeee/64 scope link
+       valid_lft forever preferred_lft forever
+```
+
 
 
 
