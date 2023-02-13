@@ -755,5 +755,11 @@ kubeadm-ha-master-->roles-->tasks-->common.yml
 
 
 
+#### k8s部署harbor
+
+```
+https://cloud.tencent.com/developer/article/1754686
+```
+
 
 
