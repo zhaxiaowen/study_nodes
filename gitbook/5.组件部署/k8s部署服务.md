@@ -774,5 +774,11 @@ kubectl apply -f 1.yaml --v=9 (日志等级)
 
 
 
+#### k8s部署harbor
+
+```
+https://cloud.tencent.com/developer/article/1754686
+```
+
 
 
