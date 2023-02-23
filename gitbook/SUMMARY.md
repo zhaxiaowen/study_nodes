@@ -24,6 +24,7 @@
     * [Elasticsearch常见故障处理方法总结](1.学习笔记/Elasticsearch常见故障处理方法总结.md)
     * [Elasticsearch常见变更](1.学习笔记/Elasticsearch常见变更.md)
     * [FileBeat](1.学习笔记/FileBeat.md)
+    * [GO](1.学习笔记/go语言.md)
     * [Grafana变量](1.学习笔记/Grafana变量.md)
     * [Gitbook](1.学习笔记/Gitbook.md)
     * [Git](1.学习笔记/Git.md)
